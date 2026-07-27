@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nemesis: Lockdown — Setup, Teach & FAQ</title>
+<meta name="description" content="Unofficial table aid for Nemesis: Lockdown: fast setup, a teach script, and a searchable FAQ.">
+<meta name="theme-color" content="#101013">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Lockdown">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23101013'/><circle cx='50' cy='50' r='24' fill='none' stroke='%23b47cff' stroke-width='9'/></svg>">
+<style>
+:root{--accent:#b47cff;--accent-ink:#100620;--bg:#101013;--bg-2:#16161b;--panel:#1b1b22;--panel-2:#22222b;--line:#353543;--ink:#eae9ef;--ink-2:#a5a3b4;--warn:#e0a03a;--danger:#e2574c;--radius:16px;--radius-sm:10px;--maxw:52rem;--tap:44px;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.3)}
+html[data-theme="light"]{--bg:#f7f6f6;--bg-2:#efeef0;--panel:#fff;--panel-2:#f2f1f4;--line:#d8d6dc;--ink:#1b1b20;--ink-2:#5f5d68;--warn:#a85b12;--danger:#b3261e;--accent:#6b3fc4;--accent-ink:#fff;--shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px rgba(0,0,0,.07)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+html{background:var(--bg);-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;padding-bottom:env(safe-area-inset-bottom);transition:background .3s ease,color .3s ease}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 96px}
+a{color:var(--accent)}
+h1{font-size:clamp(28px,5.4vw,38px);margin:0 0 8px;line-height:1.15;letter-spacing:-.02em}
+h2{font-size:clamp(21px,3.4vw,26px);margin:42px 0 12px;line-height:1.25;letter-spacing:-.01em}
+h2:first-child{margin-top:26px}
+h3{font-size:18px;margin:28px 0 8px;line-height:1.3}
+h4{font-size:16px;margin:24px 0 4px}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+code{background:var(--panel-2);border:1px solid var(--line);padding:1px 6px;border-radius:6px;font-size:.88em}
+.topbar{position:sticky;top:0;z-index:40;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.topbar__in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 20px;min-height:56px}
+.topbar__title{font-weight:800;font-size:16px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar__spacer{flex:1 1 auto}
+.iconbtn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;min-height:var(--tap);min-width:var(--tap);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 13px;font-size:14px;font-weight:650;cursor:pointer;text-decoration:none;flex:0 0 auto;font-family:inherit}
+.iconbtn:active{transform:scale(.97)}
+.iconbtn svg{width:18px;height:18px;display:block}
+.tabs{position:sticky;z-index:30;top:calc(56px + env(safe-area-inset-top));background:var(--bg);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.tabs__in{max-width:var(--maxw);margin:0 auto;padding:8px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs__in::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);border-radius:999px;padding:0 16px;min-height:40px;font-size:14.5px;font-weight:650;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;flex:0 0 auto;font-family:inherit}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.panel[hidden]{display:none}
+.hero{padding:24px 0 6px}
+.hero__art{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-bottom:18px}
+.hero__art svg{display:block;width:100%;height:auto}
+.eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 8px}
+.lede{color:var(--ink-2);font-size:17px;margin:0 0 8px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px;padding:0;list-style:none}
+.meta li{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13.5px;color:var(--ink-2)}
+.meta li b{color:var(--ink);font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0}
+.card>:first-child{margin-top:0}.card>:last-child{margin-bottom:0}
+.callout{border-left:4px solid var(--accent);background:var(--panel);border-radius:var(--radius-sm);padding:14px 18px;margin:18px 0}
+.callout--warn{border-left-color:var(--warn)}
+.callout--danger{border-left-color:var(--danger)}
+.callout>:last-child{margin-bottom:0}
+.callout__label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:6px}
+.callout--warn .callout__label{color:var(--warn)}
+.callout--danger .callout__label{color:var(--danger)}
+.say{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius-sm);padding:15px 18px;margin:14px 0;font-size:17.5px;font-weight:600}
+.say+.say{margin-top:-4px}
+.why{color:var(--ink-2);font-size:15px;font-style:italic;margin:8px 0 18px}
+ol.steps{counter-reset:step;list-style:none;padding:0;margin:16px 0}
+ol.steps>li{counter-increment:step;position:relative;padding:0 0 0 44px;margin:0 0 16px}
+ol.steps>li::before{content:counter(step);position:absolute;left:0;top:1px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+ul.checklist{list-style:none;padding:0;margin:14px 0}
+ul.checklist>li{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius-sm);margin-bottom:8px}
+ul.checklist>li>button{appearance:none;background:none;border:0;color:inherit;font:inherit;text-align:left;width:100%;display:flex;gap:12px;align-items:flex-start;padding:13px 15px;min-height:var(--tap);cursor:pointer;line-height:1.5}
+ul.checklist .box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--line);margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:transparent}
+ul.checklist>li.done{border-color:var(--accent)}
+ul.checklist>li.done .box{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+ul.checklist>li.done .txt{color:var(--ink-2);text-decoration:line-through}
+.lane{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:16px 18px;margin:12px 0}
+.lane__head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.lane__n{background:var(--accent);color:var(--accent-ink);font-weight:800;border-radius:8px;padding:2px 9px;font-size:13px;flex:0 0 auto}
+.lane__title{font-weight:750}
+.lane p{margin:6px 0 0}
+.lane__who{color:var(--ink-2);font-size:14.5px;font-style:italic}
+.tablewrap{overflow-x:auto;margin:16px 0;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--panel)}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+thead th{background:var(--panel-2);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+tr.hl td{background:var(--panel-2);background:color-mix(in srgb,var(--accent) 16%,transparent);font-weight:700}
+.pills{display:flex;flex-wrap:wrap;gap:7px;padding:0;margin:12px 0;list-style:none}
+.pills li{background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:6px 13px;font-size:14px}
+.faqbar{margin:18px 0 6px}
+.faqbar input{width:100%;padding:13px 16px;font-size:16px;min-height:var(--tap);border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:inherit}
+.faqbar input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.faqmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.faqcount{font-size:14px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.chip{appearance:none;background:var(--panel);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:0 14px;min-height:38px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;font-family:inherit}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.qcard.open{border-color:var(--accent);background:var(--panel-2)}
+.qcard>button{appearance:none;width:100%;text-align:left;background:none;border:0;color:var(--ink);font:inherit;font-weight:650;font-size:16px;padding:14px 16px;min-height:var(--tap);cursor:pointer;display:flex;gap:12px;justify-content:space-between;align-items:center}
+.qcard .caret{flex:0 0 auto;color:var(--ink-2);font-size:20px;line-height:1}
+.qcard.open .caret{color:var(--accent)}
+.qbody{display:none;padding:0 16px 16px}
+.qcard.open .qbody{display:block}
+.ruling{color:var(--accent);font-weight:700;font-size:15.5px;border-left:3px solid var(--accent);background:var(--panel-2);background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:6px;padding:9px 12px;margin:0 0 10px}
+.qbody p{font-size:16px;margin:0 0 8px}
+.qbody p:last-child{margin-bottom:0}
+.qbody em{font-style:normal;font-weight:700;color:var(--warn)}
+mark{background:var(--accent);color:var(--accent-ink);border-radius:3px;padding:0 2px}
+.sectionhead{font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2);font-weight:800;margin:26px 0 10px}
+.empty{display:none;text-align:center;color:var(--ink-2);padding:40px 10px}
+.empty.show{display:block}
+.ticker{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0}
+.ticker h3{margin:0 0 4px}
+.ticker__step{margin-top:14px;padding:16px 18px;border-radius:var(--radius-sm);background:var(--panel-2);border:1px solid var(--accent);min-height:132px}
+.ticker__n{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:800}
+.ticker__t{font-size:20px;font-weight:800;margin:4px 0 8px;letter-spacing:-.01em}
+.ticker__d{color:var(--ink-2);font-size:15.5px;margin:0}
+.ticker__ctrl{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.ticker__ctrl button{appearance:none;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:999px;padding:0 20px;min-height:48px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;flex:1 1 auto}
+.ticker__ctrl button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+footer.sitefoot{border-top:1px solid var(--line);margin-top:48px;padding:22px 0 8px;color:var(--ink-2);font-size:14px;text-align:center}
+footer.sitefoot strong{color:var(--ink)}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:45;opacity:0;pointer-events:none;transition:opacity .2s ease;box-shadow:var(--shadow)}
+.totop.show{opacity:1;pointer-events:auto}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 16px;z-index:100}
+.skip:focus{left:8px;top:8px}
+@media print{.topbar,.tabs,.totop,.faqbar,.chips,.faqmeta{display:none!important}.panel[hidden]{display:block!important}.qbody{display:block!important}body{background:#fff;color:#000;font-size:11pt}}
+</style>
+</head>
+<body data-game="nemesis-lockdown">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar__in">
+    <a class="iconbtn" href="index.html" aria-label="Back to all games">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
+    <p class="topbar__title">Nemesis: Lockdown</p>
+    <span class="topbar__spacer"></span>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Switch theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+  <header class="hero">
+    <div class="hero__art">
+      <svg viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A Mars research facility under a red sky with a lurking creature">
+        <defs>
+          <linearGradient id="nmSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#140b1e"/><stop offset=".6" stop-color="#3a1630"/><stop offset="1" stop-color="#7a2b34"/></linearGradient>
+          <radialGradient id="nmGlow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#b47cff" stop-opacity=".55"/><stop offset="1" stop-color="#b47cff" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="800" height="240" fill="url(#nmSky)"/>
+        <circle cx="150" cy="62" r="46" fill="#c9614f" opacity=".5"/>
+        <g fill="#e8e4da" opacity=".55"><circle cx="330" cy="30" r="2"/><circle cx="420" cy="56" r="1.6"/><circle cx="510" cy="26" r="2.2"/><circle cx="600" cy="50" r="1.6"/><circle cx="690" cy="24" r="2"/><circle cx="260" cy="66" r="1.6"/></g>
+        <ellipse cx="400" cy="400" rx="620" ry="250" fill="#5c2029"/>
+        <ellipse cx="400" cy="418" rx="620" ry="250" fill="#2e1119"/>
+        <g transform="translate(440 84)">
+          <rect x="-10" y="52" width="270" height="66" fill="#171523"/>
+          <path d="M40 52 a68 56 0 0 1 136 0 z" fill="#1e1b2e"/>
+          <rect x="196" y="22" width="9" height="30" fill="#171523"/><circle cx="200" cy="18" r="7" fill="#b47cff"/>
+          <g fill="#b47cff" opacity=".75"><rect x="20" y="70" width="25" height="15" rx="4"/><rect x="58" y="70" width="25" height="15" rx="4"/><rect x="136" y="70" width="25" height="15" rx="4"/><rect x="174" y="70" width="25" height="15" rx="4"/></g>
+          <rect x="94" y="68" width="34" height="50" rx="4" fill="#0d0a14"/><rect x="94" y="68" width="34" height="50" rx="4" fill="url(#nmGlow)"/>
+        </g>
+        <g opacity=".5">
+          <rect x="0" y="216" width="800" height="11" fill="#2a1119"/>
+          <g fill="#b47cff" opacity=".5">
+            <path d="M0 216 l15 0 -15 11 z"/><path d="M40 216 l15 0 -15 11 z"/><path d="M80 216 l15 0 -15 11 z"/><path d="M120 216 l15 0 -15 11 z"/><path d="M160 216 l15 0 -15 11 z"/><path d="M200 216 l15 0 -15 11 z"/><path d="M240 216 l15 0 -15 11 z"/><path d="M280 216 l15 0 -15 11 z"/><path d="M320 216 l15 0 -15 11 z"/><path d="M360 216 l15 0 -15 11 z"/><path d="M400 216 l15 0 -15 11 z"/><path d="M440 216 l15 0 -15 11 z"/><path d="M480 216 l15 0 -15 11 z"/><path d="M520 216 l15 0 -15 11 z"/><path d="M560 216 l15 0 -15 11 z"/><path d="M600 216 l15 0 -15 11 z"/><path d="M640 216 l15 0 -15 11 z"/><path d="M680 216 l15 0 -15 11 z"/><path d="M720 216 l15 0 -15 11 z"/><path d="M760 216 l15 0 -15 11 z"/>
+          </g>
+        </g>
+        <g fill="#0b0710" transform="translate(120 108) scale(.92)">
+          <path d="M0 132 c6 -30 22 -44 40 -52 l-14 -30 c-6 -12 -2 -22 10 -26 l44 -16 c14 -5 26 2 30 14 l6 18 34 10 c10 3 12 12 4 17 l-32 18 -6 26 c-3 14 -14 21 -28 21 z"/>
+          <path d="M116 26 l52 -18 c9 -3 14 4 8 11 l-42 30 z"/>
+        </g>
+      </svg>
+    </div>
+    <p class="eyebrow">Table Reference · Unofficial</p>
+    <h1>Nemesis: Lockdown</h1>
+    <p class="lede">Semi-cooperative survival horror in a Mars facility that's already lost. Noise brings monsters, the lights are going out on a timer, and only some of you are getting home.</p>
+    <ul class="meta">
+      <li><b>1–5</b> players</li>
+      <li><b>90–180</b> min</li>
+      <li>Awaken Realms</li>
+      <li>Guides written for <b>5 players</b></li>
+    </ul>
+  </header>
+</main>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="tabs__in" role="tablist">
+    <button class="tab" role="tab" id="tab-setup" aria-controls="panel-setup" aria-selected="true">Setup</button>
+    <button class="tab" role="tab" id="tab-play" aria-controls="panel-play" aria-selected="false">How to play</button>
+    <button class="tab" role="tab" id="tab-faq" aria-controls="panel-faq" aria-selected="false">FAQ</button>
+    <button class="tab" role="tab" id="tab-ref" aria-controls="panel-ref" aria-selected="false">Quick ref</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= SETUP ================= -->
+<section class="panel" id="panel-setup" role="tabpanel" aria-labelledby="tab-setup">
+
+  <h2>Fast setup</h2>
+  <p>Two things make Lockdown slow: <strong>re-sorting components every game</strong>, and <strong>one person doing 21 sequential steps</strong> while everyone watches. This kills both. Do Part 1 once; do Part 2 every game.</p>
+  <p><strong>Target: under 10 minutes to table</strong>, down from the usual 25–30.</p>
+
+  <h3>Part 1 — the one-time bagging pass</h3>
+  <p>The rulebook has you fish loose tokens out of a shared pool every game. Bag by type a single time instead, and setup becomes <em>grab bag → dump → shuffle</em>, never <em>sort</em>. Small ziplocks are enough; a foamcore or plastic insert (Folded Space and Feldherr both make a Lockdown tray) does the same job and holds the sort.</p>
+
+  <ul class="checklist" data-checklist="nl-prep">
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Room tiles "I" (all 10)</strong> in one bag — used every game. <strong>Room tiles "II" (all 9)</strong> in another — you'll draw 6 at random each game.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Fixed special rooms together:</strong> Isolation Room, Repository, Backup Power Supply. These go to the same three slots every game.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>The never-mix pair: Exploration tokens.</strong> The 20 <em>Underground</em> tokens go in their own bag. Keep the 10 <em>Surface</em> tokens OUT — they're only for the alternate board, and mixing them in is the classic setup snag.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Intruder bag — base 10.</strong> Pre-count and bag <code>1 Blank + 4 Larvae + 1 Creeper + 1 Queen + 3 Adults</code>. This is the fixed core every game. Keep the remaining Adults and all other Night Stalker tokens in a separate "reserve" bag.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Eggs + Carcasses + Injury/Ammo markers</strong> together — they all live next to the Intruder and Lab area.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Marker pool together:</strong> Fire, Malfunction, Noise, Status and Door tokens.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Big board tokens together:</strong> Time, Alert Procedure, Autodestruction, Venting, First Player, Main Gate, Elevator, Rover, the 4 Power tokens, the CSS tokens.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Each deck banded or bagged separately</strong> so none ever need re-sorting: 3 Item decks (red/yellow/green), Crafted Item, Event, Attack, Contamination, Serious Wound, Computer Action, Weakness, Help, Contingency Reference, Night Stalker Reference. <strong>Contingency tokens</strong> in their own small bag.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Six pre-built player kits — the biggest single win.</strong> For each character, bag together: character board, that character's Action deck, Starting Item, Quest Item, Inventory holder, and a Knowledge token. Now the draft is "grab your kit," not "assemble a kit."</span></button></li>
+  </ul>
+
+  <div class="callout">
+    <span class="callout__label">If you always play 5</span>
+    <p>Also pre-trim both Objective decks once — remove cards showing a player count above 5 — and band them. If your count varies, skip this and trim per game in Lane 5.</p>
+  </div>
+
+  <h3>Part 2 — parallel setup <span style="color:var(--ink-2);font-weight:400">(~8 min with 5 players)</span></h3>
+  <p>One lane per player, all five running at the same time. Lanes are ordered so nothing waits on anything else — the only dependency is that Lane 1 places the fixed rooms early, which it does first.</p>
+
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 1</span><span class="lane__title">Map</span><span class="lane__who">longest lane — give your fastest sorter</span></div>
+    <p><strong>Steps 1–6.</strong> Board out, <strong>basic side</strong> (red arrow, top-left). Place the 3 fixed rooms: Isolation Room <em>no-action side up</em>, Repository, Backup Power Supply. Shuffle "II" tiles face-down and place one on each <strong>II</strong> slot. Shuffle "I" tiles face-down and place one on each <strong>I</strong> slot. Place one Underground Exploration token face-down on every unrevealed tile. Place the Elevator, Main Gate and Rover.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 2</span><span class="lane__title">Power &amp; clock</span></div>
+    <p><strong>Steps 7, 8, 13, 14.</strong> Shuffle Power tokens: 3 into the Section slots + 1 on the Elevator; tokens 1 &amp; 2 <strong>blue side up</strong>, 3 &amp; 4 <strong>red side up</strong>. Shuffle CSS tokens, one face-down on each CSS slot of the Time track (one token back to the box). Set Alert, Autodestruction and Venting tokens beside the board. Place the <strong>Time token red-side up on the 15th (green) slot</strong>.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 3</span><span class="lane__title">Intruders &amp; lab</span></div>
+    <p><strong>Steps 9, 10.</strong> Lab board out: 5 Eggs in the Nest; 3 random Weakness cards — reveal the leftmost, others face-down. Build the Intruder bag: <strong>base-10 bag + 1 Adult per player</strong> from reserve. Set the reserve tokens and Carcasses beside the board.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 4</span><span class="lane__title">Decks</span></div>
+    <p><strong>Step 11.</strong> Shuffle and set out: 3 Item decks, Event, Attack, Contamination, Serious Wound. Shuffle the Computer Action deck into its slot and <strong>reveal the top card</strong> — if it's a "Lock-down," reveal the next and shuffle Lock-down back in. Set the Crafted Item deck by the Item decks and the Scanner by the Contamination deck.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 5</span><span class="lane__title">Supply &amp; kits</span></div>
+    <p><strong>Steps 12, 15–18.</strong> Set the marker pool and dice beside the board (Fire, Malfunction, Noise, Ammo/Injury, Status, Doors, Corpses, 2 Combat + 2 Noise + 2 Advantage dice). Deal 1 Help card + matching Inventory to each player (Help cards numbered 1–5). Trim and shuffle both Objective decks, deal each player <strong>1 Corporate + 1 Personal</strong> (kept secret). Shuffle Contingency tokens: 1 to each player (secret), <strong>1 face-down on the Active Contingency slot</strong>, the rest to the Neutral Pool by the Alert Room.</p>
+  </div>
+
+  <div class="callout">
+    <span class="callout__label">Then together — about 90 seconds</span>
+    <ol style="margin:0;padding-left:20px">
+      <li><strong>Character draft (step 19).</strong> Shuffle the 6 Character Draft cards. Player 1 flips 2, keeps 1, shuffles the other back; then Player 2, and so on. This one must be sequential.</li>
+      <li><strong>Grab your kit (step 20).</strong> Everyone takes their character's pre-built kit at once: board, shuffled Action deck to the left, Starting Item in a hand slot with ammo markers equal to its capacity, Quest Item set inactive beside the board, Knowledge token inactive-side up on the Lab board. Place your miniature — <strong>Nemesis Survivors (Survivor, Lab Rat) start in the Isolation Room; Facility Workers start in the Repository.</strong> Knowledge token starts on slot 1 for Facility Workers, slot 3 for everyone else.</li>
+      <li><strong>First Player token</strong> to Player 1 (step 21). Done.</li>
+    </ol>
+  </div>
+
+  <h3>Player-count quick reference</h3>
+  <p>The Intruder bag is the base-10 bag <code>1 Blank, 4 Larvae, 1 Creeper, 1 Queen, 3 Adults</code> <strong>plus 1 Adult per player</strong>:</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Players</th><th>Adults added</th><th>Total tokens in bag</th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td>+2</td><td>12</td></tr>
+        <tr><td>3</td><td>+3</td><td>13</td></tr>
+        <tr><td>4</td><td>+4</td><td>14</td></tr>
+        <tr class="hl"><td>5</td><td>+5</td><td>15</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p><strong>Objective decks:</strong> remove every card showing a player-count symbol <em>higher</em> than your player count, from <strong>both</strong> the Corporate and Personal decks, before dealing.<br>
+  <strong>Help / Inventory numbers:</strong> deal cards numbered 1 through your player count.</p>
+
+  <h3>Fast teardown</h3>
+  <p>Setup only stays fast if teardown respects the bags. Reverse Part 1: decks back to their bands, tokens back to their type-bags, the six player kits reassembled into their character bags, exploration tokens kept <strong>Underground separate from Surface</strong>, and the Intruder base-10 counted back into its bag (pull the per-player Adults back to reserve). Two minutes of discipline here is what buys the sub-10-minute setup next time.</p>
+
+</section>
+
+<!-- ================= PLAY ================= -->
+<section class="panel" id="panel-play" role="tabpanel" aria-labelledby="tab-play" hidden>
+
+  <h2>How to play — teach script</h2>
+  <p>A 12–15 minute table teach for 5 players. Read the bold lines aloud or paraphrase; italics are notes for you. The golden rule of teaching heavy games: <strong>teach the skeleton, let the organs reveal themselves in play.</strong></p>
+
+  <h3>0 · Before you start talking</h3>
+  <p>Make sure everyone can see the board with its rooms, the <strong>Intruder bag</strong>, the <strong>Time track</strong> (token on the 15th/green slot), and the deck row. Each player should already have their character board, Action deck, starting item, two secret Objectives, and a Contingency token.</p>
+  <p class="say">"This is a semi-co-op survival horror game. We're employees trapped in a Mars facility that's been overrun. We help each other because the monsters will kill us — but each of you has a <em>secret</em> goal, and only some of us will make it out. You can win alone, win together, or all die. Expect your best plan to fall apart. That's the game working, not the game breaking."</p>
+  <p class="why">This buy-in matters. People need to know up front it's not pure co-op and that death and failure are normal and fun.</p>
+
+  <h3>1 · How you win <span style="color:var(--ink-2);font-weight:400">(give them the target first)</span></h3>
+  <p class="say">"To win, you need TWO things. One: complete your secret objective. Two: survive — which means getting out one of three ways: lock yourself in the Isolation Room, launch out in a Cargo Pod, or reach the Bunker. If you die, you can't win, no matter what your objective was."</p>
+  <p class="why">Don't explain the escape routes in detail yet — just plant that there are three exits and survival is mandatory. Details come when someone heads for one.</p>
+
+  <h3>2 · The round — two phases</h3>
+  <p class="say">"Each round has two phases. First the Player Phase — we take our turns. Then the Event Phase — the facility fights back: monsters attack and move, the clock ticks, and a new monster may wake up. Then repeat."</p>
+  <p class="why">That's all they need on structure. You'll walk the Event Phase live the first time it happens.</p>
+
+  <h3>3 · Your turn = 2 actions</h3>
+  <p class="say">"At the start of the round you draw up to 5 cards. On your turn you take TWO actions, then it passes left. Here's the twist that makes this game tick: your cards ARE your actions AND your fuel. Most actions cost cards — you pay by discarding cards from your hand. So your hand is your clock. Spend it fast and you're helpless when a monster shows up."</p>
+  <p>Then teach the core actions only:</p>
+  <ul>
+    <li><strong>Move</strong> — go to a neighbouring room. If it's unexplored, flip the tile and resolve its token. If you enter an empty room, roll the Noise die.</li>
+    <li><strong>Careful Move</strong> — same, but instead of rolling for noise you <em>choose</em> a corridor to put a noise marker in. Safer, more predictable.</li>
+    <li><strong>Search</strong> — dig for items in the room, using the room's item counter.</li>
+    <li><strong>Shoot / Melee</strong> — attack a monster in your room.</li>
+  </ul>
+  <p class="say">"There are more actions — on your cards, your items, and printed on rooms — but you'll read those as they come up. Move, search and fight are 90% of it."</p>
+  <p class="why">Do NOT enumerate every action card. Let them read their own deck.</p>
+
+  <h3>4 · Noise is the monster spawner <span style="color:var(--ink-2);font-weight:400">(the heart of the game)</span></h3>
+  <p class="say">"When you enter an empty room, you roll the Noise die. On a 1–4, you put a noise marker in the matching corridor. Here's the danger: a corridor can only hold ONE noise marker. If you'd put noise where there's already noise — that's an Encounter. You reach into the bag and pull out whatever's been lurking."</p>
+  <p class="say">"Some results say 'Danger' — that pulls nearby monsters toward you. 'Silence' means you got lucky, nothing happens. So: moving is loud, and noise you leave behind is a trap for the next person who makes more of it. Quiet and careful beats fast and reckless."</p>
+  <p class="why">Emphasise the emotional takeaway: noise accumulates and bites you. This is what makes the game tense. Everything else is detail.</p>
+  <p class="say">"On an Encounter you draw a monster token, put that monster in your room, then compare the number on the token to how many cards are in your hand. Fewer cards than the number = it gets a free surprise attack. So an empty hand in a dark corner is how people die."</p>
+
+  <h3>5 · Fighting <span style="color:var(--ink-2);font-weight:400">(and why you usually shouldn't)</span></h3>
+  <p class="say">"You can Shoot — spend ammo, roll the combat die — or Melee with your bare hands. But melee is desperate: you draw a Contamination card just for trying, and if you miss you take a Serious Wound. And here's the horror-movie part: you never know how much health a monster has. You hit it, then draw a card to see if that was enough. It often isn't."</p>
+  <p class="say">"The lesson: this isn't a game about killing monsters. It's about avoiding them and getting your job done. Fight when cornered, not for sport."</p>
+  <p class="why">Set this expectation hard or your group will waste ammo and die trying to clear rooms.</p>
+
+  <h3>6 · The two ways the facility kills you</h3>
+  <p class="say">"Two damage tracks. Wounds: light wounds pile up, three light equals one serious, three serious plus any more and you're dead. Straightforward."</p>
+  <p class="say">"Contamination is the scary one. Some attacks give you Contamination cards. They clog your hand — you can't spend them — and each one hides whether you're INFECTED. You use the red Scanner to check. Get infected and a parasite goes on your board; get infected again while it's there and you're dead. Even if you survive to the end, there's a final contamination check — if you never cleaned yourself up, you can lose at the finish line. There are rooms and items that cure it."</p>
+  <p class="why">Don't teach every cure method. Just: contamination is a slow poison, the Scanner reveals it, and there are ways to purge it. They'll find the Decon Room and Surgery when they need them.</p>
+
+  <h3>7 · What Lockdown adds — Power &amp; Darkness</h3>
+  <p class="say">"The facility is split into three Sections, each with its own power, and power is draining as the clock ticks. A powered section is 'safe-ish': you shoot with a better die, you can use Computers, and it's lit. A section with NO power is Darkness — and monsters are deadlier in the dark: those monster tokens have a second, higher number that gets used when you're in Darkness. There's a Backup Power room and a generator to fight the blackout. So there's a constant tug-of-war between the lights going out and you keeping them on."</p>
+  <p class="why">If someone's eyes glaze, cut it to: "Powered = better, Dark = scarier, and the lights are going out over time." Teach the Computer and generator specifics when a player stands in one of those rooms.</p>
+
+  <h3>8 · The clock and the exits <span style="color:var(--ink-2);font-weight:400">(keep it brief)</span></h3>
+  <p class="say">"The Time token marches right every Event Phase. When it runs out, the corporation purges the facility — anyone still inside dies. So you're on a timer to finish your objective AND get to an exit. The three exits again: the Cargo Pods launch on certain marked turns, the Bunker needs the main gate open and a way across the surface, and the Isolation Room seals you in but only opens partway through the game."</p>
+  <p class="why">That's enough. The exact requirements are printed and you'll cover them the first time someone makes a break for it.</p>
+
+  <h3>9 · The secret layer <span style="color:var(--ink-2);font-weight:400">(save this for last so it lands)</span></h3>
+  <p class="say">"You each have TWO objective cards right now — a Corporate one and a Personal one. The first time ANY of us meets a monster, everyone secretly picks one and burns the other. From then on, that hidden goal is what you're actually playing for — and some objectives put you against the rest of us."</p>
+  <p class="say">"You also each hold a secret Contingency token. At the very end, one hidden 'corporate code' gets revealed and it can execute some survivors. During the game you can trade, hint at, and lie about this info to figure out which code is live and protect yourself. That's the paranoia engine. You don't have to lean into it hard your first game — but know that not everyone at this table is your friend."</p>
+  <p class="why">For a first game, tell them it's fine to play mostly cooperatively and just get a feel for survival. The knives can come out next time.</p>
+
+  <h3>10 · Four "the game changes" moments</h3>
+  <p>Tell them these exist so nobody's blindsided; resolve them when they happen.</p>
+  <ol class="steps">
+    <li><strong>First monster encounter</strong> → everyone locks in one objective, discards the other.</li>
+    <li><strong>First character death</strong> → the Main Gate opens, unlocking a path to the Bunker.</li>
+    <li><strong>Isolation Room opens</strong> partway through the timer.</li>
+    <li><strong>Autodestruction goes red</strong> → if someone starts the self-destruct and it can't be stopped, the clock to detonation is on.</li>
+  </ol>
+
+  <h3>First-game recommendations</h3>
+  <ul>
+    <li><strong>Play it loose and survival-focused.</strong> Let people learn the noise / combat / contamination loop before anyone tries hard to sabotage a rival.</li>
+    <li><strong>Three mantras</strong> to repeat whenever someone forgets: <em>noise is the enemy</em>, <em>don't melee unless desperate</em>, <em>watch your hand size near monsters</em>.</li>
+    <li><strong>Let the room sheets and cards do the talking.</strong> When a player enters the Laboratory, Decon Room or Power Generator, read that room's action <em>then</em> — not up front.</li>
+    <li><strong>Appoint a clock watcher</strong> — one player who reminds the table each Event Phase to advance the Time token and check power. It's the most-forgotten step.</li>
+    <li>Expect the <strong>first Event Phase to be your real teaching moment.</strong> Slow-walk it together the first time, then it's muscle memory. There's a step-by-step caller in the Quick ref tab.</li>
+  </ul>
+
+  <h3>Defer these — do not front-load</h3>
+  <ul class="pills">
+    <li>Technical Corridors / vents</li><li>Every exploration-token symbol</li><li>Slime</li>
+    <li>Malfunctions &amp; Fire spread</li><li>Door states</li><li>Knowledge &amp; Weaknesses</li>
+    <li>Crafting</li><li>The Nest &amp; Eggs</li><li>Alert Procedure</li><li>CSS pod exact timing</li>
+    <li>Enviro-Suit / Rover</li><li>The full Computer action list</li><li>Retreat rules</li>
+  </ul>
+  <p class="why">Each is one sentence when it's relevant on the board — a paragraph of confusion if you say it now.</p>
+
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="panel" id="panel-faq" role="tabpanel" aria-labelledby="tab-faq" hidden>
+  <h2>FAQ</h2>
+  <p>The rules groups actually get wrong, plus the official errata. Type a couple of words from the argument you're having.</p>
+  <div class="faqbar">
+    <input id="faqSearch" type="search" placeholder="Search a question or answer…" autocomplete="off" aria-label="Search the FAQ">
+    <div class="faqmeta">
+      <span class="faqcount" id="faqCount"></span>
+      <span>
+        <button class="chip" id="expandAll" type="button">Expand all</button>
+        <button class="chip" id="collapseAll" type="button">Collapse all</button>
+      </span>
+    </div>
+    <div class="chips" id="faqChips"></div>
+  </div>
+  <div id="faqResults"></div>
+  <div class="empty" id="faqEmpty">No entries match that search. Try a shorter word, or clear the topic filter above.</div>
+</section>
+
+<!-- ================= QUICK REF ================= -->
+<section class="panel" id="panel-ref" role="tabpanel" aria-labelledby="tab-ref" hidden>
+
+  <h2>Quick reference</h2>
+
+  <div class="ticker">
+    <h3>Event Phase caller</h3>
+    <p style="color:var(--ink-2);font-size:15px;margin:0">The most-forgotten sequence in the game. Hand this to your clock watcher and tap through it.</p>
+    <div class="ticker__step">
+      <p class="ticker__n" id="tkN">Step 1 of 7</p>
+      <p class="ticker__t" id="tkT">Launch CSS Pods</p>
+      <p class="ticker__d" id="tkD">Is there a CSS token under the Time token? Reveal it and check which pods launch this round.</p>
+    </div>
+    <div class="ticker__ctrl">
+      <button type="button" id="tkPrev">← Back</button>
+      <button type="button" id="tkNext" class="primary">Next →</button>
+      <button type="button" id="tkReset">Reset</button>
+    </div>
+  </div>
+
+  <h3>Player Phase</h3>
+  <ol class="steps">
+    <li><strong>Draw Action cards</strong> — all players draw up to a hand of 5. Empty deck? Shuffle your discard pile first.</li>
+    <li><strong>Pass the First Player token</strong> one seat left — every round except the first.</li>
+    <li><strong>Player turns</strong> — starting with the first player, clockwise, each player takes a turn of <strong>2 actions</strong>. Continue until all have passed. Passing counts as a turn; once you pass you're done for the round.</li>
+  </ol>
+
+  <h3>The six that break games</h3>
+  <div class="card">
+    <ol>
+      <li><strong>You do NOT roll for Noise when you enter a room that already has a Character or an Intruder in it.</strong> Only empty rooms.</li>
+      <li><strong>Noise where there is already Noise = an Encounter</strong>, not a second marker. A corridor holds one marker, ever.</li>
+      <li><strong>Surprise attacks compare the token number to your HAND SIZE</strong> — Contamination cards count. An empty hand in the dark is how people die.</li>
+      <li><strong>In Darkness you use the higher red number</strong> on the Night Stalker token, not the lower blue one.</li>
+      <li><strong>Leaving a room with an Intruder is an Escape</strong> — the Intruder attacks you first, once per Intruder in the room.</li>
+      <li><strong>Surviving isn't winning.</strong> Contingency check, then contamination check, then objective check — you can die at the very last step.</li>
+    </ol>
+  </div>
+
+  <h3>The three exits</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Exit</th><th>What it needs</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Isolation Room</strong></td><td>Time token has reached a white (number 8) slot — or the Alert Procedure has been activated. Multiple characters can each lock into their own chamber.</td></tr>
+        <tr><td><strong>CSS Cargo Pod</strong></td><td>Be in a Cargo Sending System room with the Time token on a slot marked with a CSS token. One character per pod. You launch during the Event Phase.</td></tr>
+        <tr><td><strong>Bunker</strong></td><td>Be in the Exit Room (002), Main Gate open, no Intruder in the room, and either the Rover present <em>or</em> you carry an Enviro-Suit.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Wounds &amp; death, exactly</h3>
+  <div class="card">
+    <ul>
+      <li>1st light wound → marker on the upper space. 2nd → move it to the lower space.</li>
+      <li>3rd light wound → discard the marker and take a <strong>Serious Wound</strong> card.</li>
+      <li>At <strong>3 Serious Wounds</strong>, any further wound of any kind <strong>kills you</strong>.</li>
+      <li><strong>Dressing</strong> a Serious Wound flips it and cancels its effect, but it still counts toward the limit of 3.</li>
+      <li>Scan an INFECTED card → Larva on your board. Scan another while a Larva is there → <strong>you die</strong>, and a Creeper appears where you fell.</li>
+    </ul>
+  </div>
+
+  <h3>Intruder bag development <span style="color:var(--ink-2);font-weight:400">(Event Phase, step 7)</span></h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Token drawn</th><th>What happens</th></tr></thead>
+      <tbody>
+        <tr><td>Larva</td><td>Remove it from the bag, add 1 Adult token.</td></tr>
+        <tr><td>Creeper</td><td>Remove it from the bag, add 1 Breeder token.</td></tr>
+        <tr><td>Adult</td><td>All players in order perform a Noise roll — unless in combat with an Intruder. Token returns to the bag.</td></tr>
+        <tr><td>Breeder</td><td>As Adult. Token returns to the bag.</td></tr>
+        <tr class="hl"><td>Queen</td><td><strong>Errata:</strong> if there are Characters in the Nest, place the Queen there and resolve an Encounter. <em>Otherwise</em>, or if the Nest is undiscovered, add an Egg token to the Laboratory board and return the Queen token to the bag.</td></tr>
+        <tr><td>Blank</td><td>Add 1 Adult token to the bag if any are available. Return the Blank to the bag.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<footer class="sitefoot">
+  <p><strong>Unofficial, player-made table aid for Nemesis: Lockdown</strong> (Awaken Realms).</p>
+  <p>Sourced from the official English rulebook and the official Lockdown FAQ (25.03.2022). The rulebook always wins. <a href="index.html">← All games</a></p>
+</footer>
+
+</div>
+
+<button class="iconbtn totop" id="toTop" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+var EVENT_STEPS = [
+  { t: 'Launch CSS Pods', d: 'Is there a CSS token under the Time token? Reveal it and check which pods launch this round. Characters who fail to evacuate return to their Cargo Sending System room and suffer 1 Serious Wound.' },
+  { t: 'Advance the Time token', d: 'Move the Time token 1 slot right. Check the Autodestruction sequence and the Alert Procedure. On a power threshold, check whether power has to be reduced — flip the active Power token with the highest number to its red side.' },
+  { t: 'Noise removal', d: 'In sections WITH power, remove all Noise markers from corridors not connected to rooms containing Characters. Never remove Noise from the Technical Corridors space.' },
+  { t: 'Intruder attacks', d: 'Each Intruder in the same room as a Character attacks. Intruders target the Character with the fewest Action cards in hand; ties go to the First Player token, then turn order.' },
+  { t: 'Intruder fire damage', d: 'Each Intruder in a room with a Fire marker suffers 1 Injury. Spore markers in rooms with Fire are also removed.' },
+  { t: 'Resolve an Event card', d: 'Draw 1 Event card. First resolve Intruder movement — matching Intruders not sharing a room with a Character move through the numbered corridor. Then resolve the card effect, including any extra effect for sections without power.' },
+  { t: 'Intruder bag development', d: 'Draw 1 token from the Intruder bag and resolve it. Larva → swap for an Adult. Creeper → swap for a Breeder. Adult or Breeder → everyone rolls Noise (unless in combat), token returns. Queen → see the errata table below. Blank → add an Adult, return the Blank.' }
+];
+
+var FAQ_DATA = [
+ {c:"Setup gotchas", items:[
+   {q:"Which side of the board do we use, and where does the Time token start?", r:"Basic side (red arrow, top-left). The Time token starts red-side up on the 15th, green slot.", a:"<p>The alternate Surface board has its own setup and its own exploration tokens; ignore it entirely for a standard game.</p>"},
+   {q:"How do we build the Intruder bag at 5 players?", r:"The base 10 tokens — 1 Blank, 4 Larvae, 1 Creeper, 1 Queen, 3 Adults — plus 1 extra Adult per player. That's 15 at five players.", a:"<p>Everything left over goes into a reserve pile beside the board, since several effects pull more tokens in during the game.</p>"},
+   {q:"Do we use the Surface exploration tokens?", r:"No — the 10 Surface tokens are only for the alternate board side. Use the 20 Underground tokens.", a:"<p>This is the single most common setup mistake. Keep the two sets in separate bags permanently.</p>"},
+   {q:"How many Power tokens are placed, and which side up?", r:"Four — three in the Section slots and one on the Elevator. Tokens 1 and 2 start blue side up, 3 and 4 start red side up.", a:"<p>Blue means that section has power; red means it's already dark. So two of the four areas start in Darkness before anyone has moved.</p>"},
+   {q:"What if the first revealed Computer Action card is a Lock-down?", r:"Reveal the next card instead and shuffle the Lock-down back into the deck.", a:"<p>The game is meant to start with a usable Computer Action available.</p>"},
+   {q:"Where does everyone's miniature start?", r:"Nemesis Survivors — the Survivor and the Lab Rat — start in the Isolation Room. Facility Workers start in the Repository.", a:"<p>Knowledge tokens start on slot 1 for Facility Workers and slot 3 for everyone else, inactive side up on the Lab board.</p>"},
+   {q:"The rulebook says 18 Status markers but our box has 15.", r:"15 is correct — the rulebook has a misprint.", a:"<p>Confirmed in the official FAQ. Same story with the Aftermath rulebook's Crafted Items: 6 is correct, not 9.</p>"}
+ ]},
+ {c:"Turns & actions", items:[
+   {q:"How many cards do we draw and how many actions do we get?", r:"Draw up to a hand of 5 at the start of each round; take 2 actions on your turn.", a:"<p>Most actions also cost you cards from hand on top of the action itself, which is what makes hand size the real resource.</p>"},
+   {q:"What does 'Action Cost' actually mean on a card?", r:"The number of extra Action cards you must discard from your hand, in addition to the card you're playing.", a:"<p>A cost of 0 means the card itself is the whole price.</p>"},
+   {q:"Can I take only 1 action and keep the other?", r:"No — if you perform only 1 action instead of 2, you must pass.", a:"<p>Once you pass you cannot act again that round. When you pass you may discard any number of cards from your hand, then flip your Help card to the Pass side.</p>"},
+   {q:"If I end my turn in a room that's on fire, when do I take the wound?", r:"At the end of your turn — 1 Light Wound — even if you passed.", a:"<p>Once you've passed you don't take further Fire damage that round, even if other players take turns after you.</p>"},
+   {q:"Does an Action card that needs a Computer also need the Section to have power?", r:"No — unless the card says so.", a:"<p>Official FAQ ruling. For example, the Sentry's Quarantine only requires a room with a Computer symbol, regardless of power. The generic <em>Computer Action</em>, however, does require power.</p>"},
+   {q:"Can I use a Medkit, Clothes or Fire Blanket on another Character?", r:"No — in Lockdown you must trade the item to them and they use it themselves.", a:"<p>Official FAQ ruling, and a deliberate change from the original Nemesis. Items can't be used on other Characters unless the item explicitly says otherwise.</p>"}
+ ]},
+ {c:"Movement, noise & exploration", items:[
+   {q:"When exactly do I have to roll the Noise die?", r:"Only when you enter a room that is empty — no other Character and no Intruder in it.", a:"<p>Moving into a room that already contains someone, friend or monster, means no Noise roll at all. That's why moving in pairs is safer — though it also means a single 'all players roll noise' effect hits your whole group at once.</p>"},
+   {q:"What happens on each Noise die result?", r:"1–4 places a Noise marker in that numbered corridor. Danger pulls nearby Intruders to you. Silence does nothing.", a:"<p>On Danger, any Intruder in a neighbouring room that isn't already in Combat moves to your room — all of them, if several qualify. If there are none, you instead place a Noise marker in <em>every</em> connected corridor that doesn't already have one.</p>"},
+   {q:"What happens if I have to place Noise in a corridor that already has a marker?", r:"That's an Encounter — resolve it immediately instead of placing a second marker.", a:"<p>A corridor never holds more than one Noise marker. This is the central pressure of the whole game.</p>"},
+   {q:"Does a closed door stop noise from affecting the whole corridor?", r:"No — a Noise marker affects the WHOLE corridor, doors or not.", a:"<p>Noise markers are never 'on one side of the door'. Doors also don't affect resolving Encounters in any way.</p>"},
+   {q:"Where does noise go if the roll points at a Technical Corridor entrance?", r:"On the Technical Corridors space — and a marker there is treated as if it were in every Technical Corridor entrance on the board.", a:"<p>Which makes the Technical Corridors an extremely dangerous shared fuse. Noise there is also never removed by the Event Phase noise-removal step.</p>"},
+   {q:"If I use Careful Movement and reveal a Danger exploration token, do I still resolve Danger?", r:"Yes — the Lockdown ruling is that you still apply the Danger result.", a:"<p>Official FAQ, and it explicitly overrides the earlier original-Nemesis ruling. Same for a Silence token revealed by Careful Movement: you still place your chosen Noise marker.</p>"},
+   {q:"What does a Slime marker do to my noise rolls?", r:"Every Silence result — die or exploration token — is treated as Danger instead.", a:"<p>You can only ever have one Slime marker. Get rid of it with the Clothes item or a Decon Room action.</p>"}
+ ]},
+ {c:"Encounters & surprise attacks", items:[
+   {q:"What are the exact steps of an Encounter?", r:"Clear all Noise from connected corridors → draw an Intruder token → place the matching miniature → compare the token number to your hand size.", a:"<p>If your hand has fewer cards than that number, a Surprise Attack happens. Equal or higher and nothing happens. Keep the drawn token aside — it may go back in the bag if that Intruder later hides.</p>"},
+   {q:"Which of the two numbers on the Intruder token do I use?", r:"The lower blue number if you're in a powered section; the higher red number if you're in Darkness.", a:"<p>These are the Night Stalker tokens unique to Lockdown, and it's the main reason Darkness is genuinely frightening rather than just flavour.</p>"},
+   {q:"Do Contamination cards count toward my hand size for a Surprise Attack?", r:"Yes — every card in your hand counts, including Contamination.", a:"<p>Slightly counter-intuitive, since Contamination cards are useless for everything else. Here, holding junk actually protects you.</p>"},
+   {q:"I drew a Blank token during an Encounter. What now?", r:"Place a Noise marker in every corridor connected to this room, return the Blank to the bag, and the Encounter ends.", a:"<p>If the Blank was the last token in the bag, also add 1 Adult Intruder token to the bag if one is available.</p>"},
+   {q:"Does an Intruder walking into my room count as an Encounter?", r:"No — you're simply in Combat immediately, with no token draw and no surprise attack.", a:"<p>The same applies in reverse: entering a room that already contains an Intruder is not an Encounter either.</p>"},
+   {q:"What if we're told to place an Adult but all 8 miniatures are already out?", r:"The Adults retreat — remove every Adult not in Combat, return that many tokens to the bag, then place one Adult in the Encounter room.", a:"<p>This keeps the miniature supply honest without stopping the Encounter from resolving.</p>"}
+ ]},
+ {c:"Combat & intruders", items:[
+   {q:"How does shooting work?", r:"Choose a weapon and target, discard 1 Ammo, roll the combat die — or the Advantage die if your section has power.", a:"<p>The Advantage die adds two results that let you discard an Action card to convert a near-miss into damage. It cannot be used for melee.</p>"},
+   {q:"Why is melee so much worse than shooting?", r:"You draw a Contamination card just for attempting it, and most misses give you a Serious Wound.", a:"<p>Melee also can't use the Advantage die, and its best result deals only 1 Injury. Fight bare-handed only when genuinely cornered.</p>"},
+   {q:"How do I know if an Intruder is dead?", r:"You don't, until you check — draw 1 Intruder Attack card and compare its blood symbol to the Injury markers on that Intruder.", a:"<p>Equal or lower means it dies and leaves a Carcass token. Higher means it's still alive. A new card is drawn after <em>each</em> successful attack, so its effective toughness changes every time.</p>"},
+   {q:"Are the Queen and Breeders tougher?", r:"Yes — draw 2 Intruder Attack cards and add their blood values together.", a:"<p>They also retreat if <em>either</em> of those two cards shows the Retreat arrow.</p>"},
+   {q:"What happens when an Intruder retreats?", r:"Draw an Event card and move the Intruder through the corridor number shown in its Intruder Movement section, then discard the card.", a:"<p>Injury markers travel with it — unless it retreats into a Technical Corridor, in which case the miniature is removed, its injuries are cleared, and its token goes back in the bag.</p>"},
+   {q:"How do I leave a room that has an Intruder in it?", r:"That's an Escape — resolve an Intruder Attack for each Intruder in the room before you move.", a:"<p>If you survive, you complete the move; if the destination room is empty you then roll Noise as normal. If you die, your Corpse token is placed in the room you tried to leave.</p>"}
+ ]},
+ {c:"Wounds, contamination & death", items:[
+   {q:"How do light wounds turn into serious ones?", r:"Third light wound converts into a Serious Wound card.", a:"<p>First light wound goes on the upper space of your track, the second moves it to the lower space, and a third discards the marker and gives you a Serious Wound card instead.</p>"},
+   {q:"How many Serious Wounds kill me?", r:"With 3 Serious Wounds, any further wound of any type kills you.", a:"<p>Identical Serious Wound cards aren't cumulative in effect, but they all count toward the limit of 3.</p>"},
+   {q:"Does dressing a wound remove it?", r:"No — dressing flips the card and cancels its effect, but it still counts against the limit of 3.", a:"<p>Only a Heal effect actually discards a dressed Serious Wound or removes a light wound.</p>"},
+   {q:"What do Contamination cards actually do to me?", r:"They sit in your hand, can't be spent on anything, and secretly may say INFECTED.", a:"<p>They go on top of your Action discard pile when gained, so they cycle into your hand later. You can discard them when passing, but that doesn't remove them from your deck.</p>"},
+   {q:"What happens when I scan an INFECTED card?", r:"Place a Larva on your character board — and keep the Contamination card.", a:"<p>If a Larva is already on your board, your character dies immediately and a Creeper is placed in that room. Caffeine Pills don't save you from this; the official FAQ confirms the normal rule applies.</p>"},
+   {q:"What kills an Intruder Egg?", r:"Any single Injury from any source — including grenades and Thermite Charges.", a:"<p>Official FAQ: each Injury of any type destroys 1 Egg. The exception is the Vent Control Room used on the Nest, which deals no Injuries and leaves every Egg intact.</p>"}
+ ]},
+ {c:"Power & darkness", items:[
+   {q:"What does a section having power actually give me?", r:"The Advantage die when shooting, access to Computer Actions, no Darkness, and Noise removal during the Event Phase.", a:"<p>All four disappear the moment that section's Power token flips to red.</p>"},
+   {q:"How does power drain over the game?", r:"Power thresholds are printed on the Time track. When one activates, the active Power token with the highest number flips to its inactive red side.", a:"<p>Red thresholds only reduce power if backup power isn't running (Time token red side up); blue thresholds always reduce power.</p>"},
+   {q:"What counts as being 'in Darkness'?", r:"Being in a section whose Power token is on its red side — plus Emergency Staircases, which are always dark.", a:"<p>Emergency Staircases are the rooms between sections. They're treated as black rooms with no action, and they don't belong to any section for effect purposes.</p>"},
+   {q:"Does Darkness change anything besides the Intruder token number?", r:"Yes — some Intruder Attack cards and Event cards have an extra effect that only applies in sections without power.", a:"<p>They're marked with a distinct Darkness layout on the card. The Intruder symbol still has to match for an attack card to hit at all.</p>"},
+   {q:"Does a Malfunction marker stop a Computer working?", r:"Yes — treat that room as if it had no Computer symbol at all.", a:"<p>A Malfunction blocks a room's Action generally, though the Search Action still works normally. It can never be placed in the Nest or the Contaminated Room.</p>"}
+ ]},
+ {c:"Objectives, contingency & escape", items:[
+   {q:"When do we lock in our objective?", r:"The first time any Intruder miniature appears on the board, everyone discards one Objective face down.", a:"<p>Eggs are not Intruders, so revealing the Nest doesn't trigger it. Nobody may look at the discarded objectives afterwards.</p>"},
+   {q:"What opens the Main Gate?", r:"The first Character death, certain Items or Actions used in the Exit Room, or the Autodestruction token flipping to red.", a:"<p>Once open it can never be closed again, and generic 'open doors' actions never affect it.</p>"},
+   {q:"What exactly do I need to escape to the Bunker?", r:"Be in the Exit Room (002), Main Gate open, no Intruder in the room, and either the Rover present or an Enviro-Suit in hand.", a:"<p>With the Rover you simply drive off — only one Character fits. With an Enviro-Suit you must first perform a Noise roll; if any Intruder shows up, the escape attempt fails.</p>"},
+   {q:"If a CSS pod launches early, is that route closed for the rest of the game?", r:"No — the same pod can launch multiple times in one game.", a:"<p>Official FAQ. A pod launches when its own token (A or B) is revealed, and again on a 'Launch ALL' result, in either order.</p>"},
+   {q:"Once someone locks themselves in the Isolation Room, can others still use it?", r:"Yes — there are multiple chambers.", a:"<p>Official FAQ. A Malfunction marker placed on the Isolation Room also has no effect on Characters already locked inside.</p>"},
+   {q:"What's the Contingency actually for?", r:"At the end of the game one hidden Active Contingency is revealed and applied to every living Character — and it can kill some of them.", a:"<p>You can secretly look at your own token any time but must never show it. Trade, hint and lie about the information to deduce which code is live. When a Character dies, their tokens go back to the Neutral Pool.</p>"},
+   {q:"How do I find out what other people's Contingencies are?", r:"Computer Actions peek at all Contingencies of a player in your section; the Archive and Alert Room actions peek at one from the Neutral Pool and let you take it.", a:"<p>Official FAQ on the Archive: you may peek at any Contingency token except the Active one, gain 2 Knowledge, and flip your Knowledge token to active — which means each Character can only ever use the Archive once.</p>"}
+ ]},
+ {c:"Ending the game & victory", items:[
+   {q:"What are the ways the game can end?", r:"The Time token reaches the final red slot, the facility explodes, or the last active Character leaves or dies.", a:"<p>The facility explodes if the Time token has to advance past a red Autodestruction token, or if you're told to place a 13th Fire marker or an 11th Malfunction marker.</p>"},
+   {q:"Does the Isolation Room save me from everything?", r:"No — it saves you from the corporate purge, but not from the facility exploding.", a:"<p>If the Time track simply runs out, everyone not in the Isolation Room dies and the Intruders survive. If the facility explodes, everyone dies including the people in Isolation — and the Queen dies too, which can matter for objectives.</p>"},
+   {q:"What happens if the game ends via the Alert Procedure?", r:"Resolve it exactly as if the Time token had reached the end of the track.", a:"<p>Official FAQ. That also means an active Autodestruction still destroys the facility.</p>"},
+   {q:"What order does the Victory Check happen in?", r:"Contingency check first, then contamination check, then objective check.", a:"<p>You can survive the whole game and still lose at any of those three gates. Multiple players can win the same game.</p>"},
+   {q:"How does the final contamination check work?", r:"Scan every Contamination card in your deck, discard pile and hand. Any INFECTED card sends you to the second step.", a:"<p>In that step you shuffle all your cards together and draw the top 4. If any of them is a Contamination card, infected or not, your Character dies. A Larva already on your board skips the scan and goes straight to the draw.</p>"}
+ ]}
+];
+</script>
+<script>
+/* ---------- theme ---------- */
+(function () {
+  var KEY = 'tableaids-theme', root = document.documentElement, btn = document.getElementById('themeBtn');
+  var saved; try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (!saved) saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  root.setAttribute('data-theme', saved);
+  if (btn) btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(KEY, next); } catch (e) {}
+  });
+})();
+
+/* ---------- tabs ---------- */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var bar = document.querySelector('.tabs');
+  function set(id) {
+    tabs.forEach(function (t) {
+      var on = t.id === 'tab-' + id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      if (p) p.hidden = !on;
+    });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var id = t.id.replace('tab-', '');
+      set(id);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+      var y = bar.getBoundingClientRect().top + window.scrollY - 56;
+      if (window.scrollY > y) window.scrollTo(0, y);
+    });
+  });
+  var h = (location.hash || '').replace('#', '');
+  if (h && document.getElementById('tab-' + h)) set(h);
+})();
+
+/* ---------- checklists ---------- */
+(function () {
+  document.querySelectorAll('ul.checklist').forEach(function (list) {
+    var key = 'tableaids-chk-' + list.dataset.checklist, state = {};
+    try { state = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) {}
+    Array.prototype.forEach.call(list.children, function (li, i) {
+      if (state[i]) li.classList.add('done');
+      var b = li.querySelector('button');
+      b.setAttribute('aria-pressed', state[i] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        li.classList.toggle('done');
+        var on = li.classList.contains('done');
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        state[i] = on;
+        try { localStorage.setItem(key, JSON.stringify(state)); } catch (e) {}
+      });
+    });
+  });
+})();
+
+/* ---------- FAQ ---------- */
+(function () {
+  if (typeof FAQ_DATA === 'undefined') return;
+  var chipsEl = document.getElementById('faqChips'),
+      resEl = document.getElementById('faqResults'),
+      searchEl = document.getElementById('faqSearch'),
+      countEl = document.getElementById('faqCount'),
+      emptyEl = document.getElementById('faqEmpty');
+  var active = null;
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function hi(text, term) {
+    if (!term) return text;
+    try {
+      var re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      return text.replace(re, '<mark>$1</mark>');
+    } catch (e) { return text; }
+  }
+  function buildChips() {
+    var all = document.createElement('button');
+    all.className = 'chip'; all.type = 'button'; all.textContent = 'All topics';
+    all.setAttribute('aria-pressed', 'true');
+    all.addEventListener('click', function () { pick(null, all); });
+    chipsEl.appendChild(all);
+    FAQ_DATA.forEach(function (sec) {
+      var c = document.createElement('button');
+      c.className = 'chip'; c.type = 'button'; c.textContent = sec.c;
+      c.setAttribute('aria-pressed', 'false');
+      c.addEventListener('click', function () { pick(sec.c, c); });
+      chipsEl.appendChild(c);
+    });
+  }
+  function pick(sec, el) {
+    active = sec;
+    Array.prototype.forEach.call(chipsEl.children, function (c) { c.setAttribute('aria-pressed', 'false'); });
+    el.setAttribute('aria-pressed', 'true');
+    render();
+  }
+  function render() {
+    var term = searchEl.value.trim(), tl = term.toLowerCase();
+    resEl.innerHTML = ''; var shown = 0;
+    FAQ_DATA.forEach(function (sec) {
+      if (active && sec.c !== active) return;
+      var hits = sec.items.filter(function (it) {
+        if (!tl) return true;
+        return (it.q + ' ' + it.r + ' ' + it.a).toLowerCase().indexOf(tl) !== -1;
+      });
+      if (!hits.length) return;
+      var h = document.createElement('p');
+      h.className = 'sectionhead'; h.textContent = sec.c;
+      resEl.appendChild(h);
+      hits.forEach(function (it) {
+        shown++;
+        var card = document.createElement('div');
+        card.className = 'qcard' + (tl ? ' open' : '');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerHTML = '<span>' + hi(esc(it.q), term) + '</span><span class="caret">' + (tl ? '−' : '+') + '</span>';
+        btn.addEventListener('click', function () {
+          card.classList.toggle('open');
+          btn.querySelector('.caret').textContent = card.classList.contains('open') ? '−' : '+';
+        });
+        var body = document.createElement('div');
+        body.className = 'qbody';
+        body.innerHTML = '<p class="ruling">' + hi(esc(it.r), term) + '</p>' + it.a;
+        card.appendChild(btn); card.appendChild(body);
+        resEl.appendChild(card);
+      });
+    });
+    countEl.textContent = shown + (shown === 1 ? ' entry' : ' entries') + ((tl || active) ? ' matching' : '');
+    emptyEl.classList.toggle('show', shown === 0);
+  }
+  document.getElementById('expandAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) { c.classList.add('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '−'; });
+  });
+  document.getElementById('collapseAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) { c.classList.remove('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '+'; });
+  });
+  searchEl.addEventListener('input', render);
+  buildChips(); render();
+})();
+
+/* ---------- event phase caller ---------- */
+(function () {
+  var n = document.getElementById('tkN'), t = document.getElementById('tkT'), d = document.getElementById('tkD');
+  if (!n) return;
+  var i = 0;
+  function draw() {
+    n.textContent = 'Step ' + (i + 1) + ' of ' + EVENT_STEPS.length;
+    t.textContent = EVENT_STEPS[i].t;
+    d.textContent = EVENT_STEPS[i].d;
+  }
+  document.getElementById('tkNext').addEventListener('click', function () { i = (i + 1) % EVENT_STEPS.length; draw(); });
+  document.getElementById('tkPrev').addEventListener('click', function () { i = (i - 1 + EVENT_STEPS.length) % EVENT_STEPS.length; draw(); });
+  document.getElementById('tkReset').addEventListener('click', function () { i = 0; draw(); });
+  draw();
+})();
+
+/* ---------- back to top ---------- */
+(function () {
+  var b = document.getElementById('toTop');
+  if (!b) return;
+  b.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  window.addEventListener('scroll', function () { b.classList.toggle('show', window.scrollY > 700); }, { passive: true });
+})();
+</script>
+</body>
+</html>

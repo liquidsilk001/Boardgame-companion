@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>World Wonders — Setup, Teach & FAQ</title>
+<meta name="description" content="Unofficial table aid for World Wonders (Arcane Wonders): fast setup, a teach script, and a searchable FAQ.">
+<meta name="theme-color" content="#101310">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="World Wonders">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23101310'/><path d='M50 22 L80 76 H20 Z' fill='%23e3b23c'/></svg>">
+<style>
+:root{--accent:#e3b23c;--accent-ink:#171204;--bg:#101310;--bg-2:#171b16;--panel:#1c1e1a;--panel-2:#242720;--line:#3a3a30;--ink:#eceee4;--ink-2:#adaa99;--warn:#e08b3a;--danger:#e2574c;--radius:16px;--radius-sm:10px;--maxw:52rem;--tap:44px;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.28)}
+html[data-theme="light"]{--bg:#f7f6f1;--bg-2:#efeee7;--panel:#fff;--panel-2:#f2f1ea;--line:#d9d7cc;--ink:#1c1e18;--ink-2:#5f6357;--warn:#a85b12;--danger:#b3261e;--accent:#96660a;--accent-ink:#fff;--shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px rgba(0,0,0,.07)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+html{background:var(--bg);-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;padding-bottom:env(safe-area-inset-bottom);transition:background .3s ease,color .3s ease}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 96px}
+a{color:var(--accent)}
+h1{font-size:clamp(28px,5.4vw,38px);margin:0 0 8px;line-height:1.15;letter-spacing:-.02em}
+h2{font-size:clamp(21px,3.4vw,26px);margin:42px 0 12px;line-height:1.25;letter-spacing:-.01em}
+h2:first-child{margin-top:26px}
+h3{font-size:18px;margin:28px 0 8px;line-height:1.3}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+code{background:var(--panel-2);border:1px solid var(--line);padding:1px 6px;border-radius:6px;font-size:.88em}
+.topbar{position:sticky;top:0;z-index:40;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.topbar__in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 20px;min-height:56px}
+.topbar__title{font-weight:800;font-size:16px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar__spacer{flex:1 1 auto}
+.iconbtn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;min-height:var(--tap);min-width:var(--tap);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 13px;font-size:14px;font-weight:650;cursor:pointer;text-decoration:none;flex:0 0 auto;font-family:inherit}
+.iconbtn:active{transform:scale(.97)}
+.iconbtn svg{width:18px;height:18px;display:block}
+.tabs{position:sticky;z-index:30;top:calc(56px + env(safe-area-inset-top));background:var(--bg);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.tabs__in{max-width:var(--maxw);margin:0 auto;padding:8px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs__in::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);border-radius:999px;padding:0 16px;min-height:40px;font-size:14.5px;font-weight:650;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;flex:0 0 auto;font-family:inherit}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.panel[hidden]{display:none}
+.hero{padding:24px 0 6px}
+.hero__art{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-bottom:18px}
+.hero__art svg{display:block;width:100%;height:auto}
+.eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 8px}
+.lede{color:var(--ink-2);font-size:17px;margin:0 0 8px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px;padding:0;list-style:none}
+.meta li{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13.5px;color:var(--ink-2)}
+.meta li b{color:var(--ink);font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0}
+.card>:first-child{margin-top:0}.card>:last-child{margin-bottom:0}
+.callout{border-left:4px solid var(--accent);background:var(--panel);border-radius:var(--radius-sm);padding:14px 18px;margin:18px 0}
+.callout--warn{border-left-color:var(--warn)}
+.callout--danger{border-left-color:var(--danger)}
+.callout>:last-child{margin-bottom:0}
+.callout__label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:6px}
+.callout--warn .callout__label{color:var(--warn)}
+.callout--danger .callout__label{color:var(--danger)}
+.say{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius-sm);padding:15px 18px;margin:14px 0;font-size:17.5px;font-weight:600}
+.say+.say{margin-top:-4px}
+.why{color:var(--ink-2);font-size:15px;font-style:italic;margin:8px 0 18px}
+ol.steps{counter-reset:step;list-style:none;padding:0;margin:16px 0}
+ol.steps>li{counter-increment:step;position:relative;padding:0 0 0 44px;margin:0 0 16px}
+ol.steps>li::before{content:counter(step);position:absolute;left:0;top:1px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+ul.checklist{list-style:none;padding:0;margin:14px 0}
+ul.checklist>li{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius-sm);margin-bottom:8px}
+ul.checklist>li>button{appearance:none;background:none;border:0;color:inherit;font:inherit;text-align:left;width:100%;display:flex;gap:12px;align-items:flex-start;padding:13px 15px;min-height:var(--tap);cursor:pointer;line-height:1.5}
+ul.checklist .box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--line);margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:transparent}
+ul.checklist>li.done{border-color:var(--accent)}
+ul.checklist>li.done .box{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+ul.checklist>li.done .txt{color:var(--ink-2);text-decoration:line-through}
+.lane{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:16px 18px;margin:12px 0}
+.lane__head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.lane__n{background:var(--accent);color:var(--accent-ink);font-weight:800;border-radius:8px;padding:2px 9px;font-size:13px;flex:0 0 auto}
+.lane__title{font-weight:750}
+.lane p{margin:6px 0 0}
+.lane__who{color:var(--ink-2);font-size:14.5px;font-style:italic}
+.tablewrap{overflow-x:auto;margin:16px 0;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--panel)}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+thead th{background:var(--panel-2);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+tr.hl td{background:var(--panel-2);background:color-mix(in srgb,var(--accent) 16%,transparent);font-weight:700}
+.pills{display:flex;flex-wrap:wrap;gap:7px;padding:0;margin:12px 0;list-style:none}
+.pills li{background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:6px 13px;font-size:14px}
+.faqbar{margin:18px 0 6px}
+.faqbar input{width:100%;padding:13px 16px;font-size:16px;min-height:var(--tap);border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:inherit}
+.faqbar input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.faqmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.faqcount{font-size:14px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.chip{appearance:none;background:var(--panel);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:0 14px;min-height:38px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;font-family:inherit}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.qcard.open{border-color:var(--accent);background:var(--panel-2)}
+.qcard>button{appearance:none;width:100%;text-align:left;background:none;border:0;color:var(--ink);font:inherit;font-weight:650;font-size:16px;padding:14px 16px;min-height:var(--tap);cursor:pointer;display:flex;gap:12px;justify-content:space-between;align-items:center}
+.qcard .caret{flex:0 0 auto;color:var(--ink-2);font-size:20px;line-height:1}
+.qcard.open .caret{color:var(--accent)}
+.qbody{display:none;padding:0 16px 16px}
+.qcard.open .qbody{display:block}
+.ruling{color:var(--accent);font-weight:700;font-size:15.5px;border-left:3px solid var(--accent);background:var(--panel-2);background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:6px;padding:9px 12px;margin:0 0 10px}
+.qbody p{font-size:16px;margin:0 0 8px}
+.qbody p:last-child{margin-bottom:0}
+.qbody em{font-style:normal;font-weight:700;color:var(--warn)}
+mark{background:var(--accent);color:var(--accent-ink);border-radius:3px;padding:0 2px}
+.sectionhead{font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2);font-weight:800;margin:26px 0 10px}
+.empty{display:none;text-align:center;color:var(--ink-2);padding:40px 10px}
+.empty.show{display:block}
+.ledger{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0}
+.ledger h3{margin:0 0 6px}
+.ledger__grid{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.loanchip{appearance:none;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:999px;padding:0 16px;min-height:46px;font-size:15px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:9px;font-family:inherit}
+.loanchip .swatch{width:14px;height:14px;border-radius:50%;border:1px solid rgba(128,128,128,.6)}
+.loanchip .n{background:var(--line);color:var(--ink);border-radius:999px;min-width:24px;text-align:center;font-size:13px;padding:1px 7px}
+.loanchip.owing{border-color:var(--danger)}
+.loanchip.owing .n{background:var(--danger);color:#fff}
+.ledger__total{margin-top:14px;font-weight:700;color:var(--danger);min-height:24px}
+footer.sitefoot{border-top:1px solid var(--line);margin-top:48px;padding:22px 0 8px;color:var(--ink-2);font-size:14px;text-align:center}
+footer.sitefoot strong{color:var(--ink)}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:45;opacity:0;pointer-events:none;transition:opacity .2s ease;box-shadow:var(--shadow)}
+.totop.show{opacity:1;pointer-events:auto}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 16px;z-index:100}
+.skip:focus{left:8px;top:8px}
+@media print{.topbar,.tabs,.totop,.faqbar,.chips,.faqmeta{display:none!important}.panel[hidden]{display:block!important}.qbody{display:block!important}body{background:#fff;color:#000;font-size:11pt}}
+</style>
+</head>
+<body data-game="world-wonders">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar__in">
+    <a class="iconbtn" href="index.html" aria-label="Back to all games">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </a>
+    <p class="topbar__title">World Wonders</p>
+    <span class="topbar__spacer"></span>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Switch theme">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+  <header class="hero">
+    <div class="hero__art">
+      <svg viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ancient monuments on a desert horizon at sunset">
+        <defs><linearGradient id="wwSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2440"/><stop offset=".5" stop-color="#8b5a3c"/><stop offset="1" stop-color="#e0a253"/></linearGradient></defs>
+        <rect width="800" height="240" fill="url(#wwSky)"/>
+        <circle cx="400" cy="168" r="76" fill="#f6d489" opacity=".95"/><circle cx="400" cy="168" r="112" fill="#f6d489" opacity=".13"/>
+        <g fill="#3d2a2a">
+          <path d="M60 190 l80 -118 80 118 z"/><path d="M140 72 l80 118 -80 0 z" opacity=".5"/>
+          <path d="M268 190 l0 -122 12 -20 12 20 0 122 z"/>
+          <path d="M470 190 v-62 a52 38 0 0 1 104 0 v62 z"/>
+          <g fill="#e0a253" opacity=".45"><rect x="484" y="142" width="13" height="24" rx="6"/><rect x="506" y="138" width="13" height="28" rx="6"/><rect x="528" y="138" width="13" height="28" rx="6"/><rect x="550" y="142" width="13" height="24" rx="6"/></g>
+          <path d="M624 190 v-54 h128 v54 z"/><path d="M614 136 l74 -40 74 40 z"/>
+          <g fill="#e0a253" opacity=".33"><rect x="640" y="144" width="12" height="46"/><rect x="665" y="144" width="12" height="46"/><rect x="690" y="144" width="12" height="46"/><rect x="715" y="144" width="12" height="46"/></g>
+          <path d="M330 190 v-18 h96 v18 z M342 172 v-18 h72 v18 z M356 154 v-18 h44 v18 z"/>
+        </g>
+        <rect y="190" width="800" height="50" fill="#2a1c20"/>
+        <path d="M0 208 C160 200 240 218 400 212 C560 206 660 222 800 214 L800 240 L0 240 Z" fill="#1c1216"/>
+      </svg>
+    </div>
+    <p class="eyebrow">Table Reference · Unofficial</p>
+    <h1>World Wonders</h1>
+    <p class="lede">Raise an ancient city tile by tile, spending a fixed handful of gold each round. A tight, gold-starved builder where the resource you neglect is the one that scores you.</p>
+    <ul class="meta">
+      <li><b>1–5</b> players</li>
+      <li><b>60–90</b> min</li>
+      <li>Arcane Wonders</li>
+      <li>Guides written for <b>5 players</b></li>
+    </ul>
+    <div class="callout callout--warn">
+      <span class="callout__label">Name check</span>
+      <p>This is Arcane Wonders' <strong>World Wonders</strong>, a city-building game about buying tiles and monuments onto a personal map. It is not related to, and shares no rules with, <em>7 Wonders</em>. Don't let anyone import rules from memory of a similarly named game.</p>
+    </div>
+  </header>
+</main>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="tabs__in" role="tablist">
+    <button class="tab" role="tab" id="tab-setup" aria-controls="panel-setup" aria-selected="true">Setup</button>
+    <button class="tab" role="tab" id="tab-play" aria-controls="panel-play" aria-selected="false">How to play</button>
+    <button class="tab" role="tab" id="tab-faq" aria-controls="panel-faq" aria-selected="false">FAQ</button>
+    <button class="tab" role="tab" id="tab-ref" aria-controls="panel-ref" aria-selected="false">Quick ref</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= SETUP ================= -->
+<section class="panel" id="panel-setup" role="tabpanel" aria-labelledby="tab-setup">
+
+  <h2>Fast setup</h2>
+  <p>Roughly 12–15 minutes cold, 6–8 minutes once your group has bagged components per Part 1 and run it twice. Step letters (A–L) match the "Game Setup" section of the official English rulebook.</p>
+
+  <h3>Part 1 — the one-time bagging pass</h3>
+  <p>The goal: setup becomes <em>grab bag → dump → shuffle</em>, never <em>sort</em>. A dozen sandwich bags cover it.</p>
+
+  <ul class="checklist" data-checklist="ww-prep">
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>The never-mix pair — Map Board sides.</strong> Every Map Board has a Side A (lake in the middle) and a Side B (a different river each). All players must use the <em>same</em> side. Band all 5 boards together with a sticky note naming your group's default, so nobody flips one by accident.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Same problem, Resource Boards.</strong> They also have A/B sides and all players must match. Band the 5 together, same side out.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Building Tiles banded by shape.</strong> The rulebook has you shuffle tiles "by shape" into separate stacks — that's a permanent sort, not a per-game one. Keep each shape in its own band forever; you only ever reshuffle within a bag.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Per-player kits — the biggest win.</strong> Bag each colour's Map Board + matching Resource Board (same side!) + Player Marker + 1 Gold marker + 1 Population marker + 3 Resource markers. Setup becomes "grab your colour."</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Pre-count a 5-player road reserve.</strong> 3 Long Roads + 2 Short Road sets in their own bag; keep the rest loose as extras for other counts.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Decks banded separately, always.</strong> Monument Cards (21), Public Objective Cards (15, Advanced only), Solo Play Cards (14, solo only). Loan Tiles (5) and Towers (10) get their own small bags — they're shared central pools, not player kit.</span></button></li>
+  </ul>
+
+  <h3>Part 2 — parallel setup</h3>
+  <p>One lane per player. Lanes 1–4 have no dependency on each other and run fully in parallel.</p>
+
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 1</span><span class="lane__title">Main board &amp; tiles</span></div>
+    <p class="lane__who">Longest lane — give it your fastest sorter</p>
+    <p><strong>Steps A, B.</strong> Place the Main Board plus the 4th and 5th Player Expansion Boards (both needed at 5 players) with their Building Tiles. Shuffle each shape-stack, place it face down on its marked spot, and reveal the top tile of each stack below it.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 2</span><span class="lane__title">Turn order</span></div>
+    <p><strong>Steps C, D.</strong> Place the 1st and 2nd Player Turn Order Pedestals on the Main Board. Everyone draws a Player Marker at random and lines up on the Turn Order track in that order.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 3</span><span class="lane__title">Roads &amp; Tower</span></div>
+    <p><strong>Steps E, F.</strong> Place Road Tiles below the revealed Building Tiles per the 5-player count — 3 Long Roads, 2 Short Road sets. Place 1 Tower alongside the starting roads.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 4</span><span class="lane__title">Monuments &amp; Loans</span></div>
+    <p><strong>Steps G, H.</strong> Shuffle the Monument deck, reveal 3 cards, and place their matching wooden Monuments on top of each. Set the Loan Tiles face up in a pile beside the Main Board.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 5</span><span class="lane__title">Player kits</span></div>
+    <p class="lane__who">Everyone, simultaneously</p>
+    <p><strong>Steps I–L.</strong> Grab your pre-bagged kit. Place your Map Board (matching everyone else's side), your Resource Board (matching side), and set Gold, Population and 3 Resource markers to 0. Keep your free Long Road tile in hand — it gets placed on your first turn, at no cost.</p>
+  </div>
+
+  <div class="callout callout--warn">
+    <span class="callout__label">The one genuinely sequential step</span>
+    <p>Drawing Player Markers for initial turn order (step D). Do that together once Lane 2's pedestals are placed, since everyone needs to see the draw.</p>
+  </div>
+
+  <div class="callout">
+    <span class="callout__label">Then together — about 90 seconds</span>
+    <p>Confirm everyone agrees on Map Board side and Resource Board side. Confirm the starting turn-order line-up. Remind everyone to place their free Long Road tile on turn one.</p>
+  </div>
+
+  <h3>Player-count quick reference</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Players</th><th>Expansion boards</th><th>Long Roads</th><th>Short Road sets</th><th>Monuments revealed</th></tr></thead>
+      <tbody>
+        <tr><td>1–2</td><td>Main board only</td><td>1</td><td>1</td><td>3 (2 in solo)</td></tr>
+        <tr><td>3</td><td>Main board only</td><td>2</td><td>1</td><td>3</td></tr>
+        <tr><td>4</td><td>+ 4th board</td><td>2</td><td>2</td><td>3</td></tr>
+        <tr class="hl"><td>5</td><td>+ 4th and 5th</td><td>3</td><td>2</td><td>3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Advanced Play (Public Objective Cards) and Solo Play (Automaton Cards) are optional layers on top of the above.</p>
+
+  <h3>Fast teardown</h3>
+  <p>Monument, Public Objective and Solo Play decks each go back into their own band. Loan Tiles and Towers return to their central pools. <strong>Building Tiles get re-sorted by shape back into their permanent stacks</strong> — don't let this one slide; re-sorting 80 mixed tiles by hand is the slowest recovery job in the game. Each player's kit — Map Board, Resource Board (same side!), Player Marker, and 5 markers — goes back into that colour's bag together.</p>
+
+</section>
+
+<!-- ================= PLAY ================= -->
+<section class="panel" id="panel-play" role="tabpanel" aria-labelledby="tab-play" hidden>
+
+  <h2>How to play — teach script</h2>
+  <p>Teach after setup, with everyone's Map Board and Resource Board visible. Bold lines are for reading aloud; italics are notes to you.</p>
+
+  <h3>0 · Buy-in <span style="color:var(--ink-2);font-weight:400">(30 sec)</span></h3>
+  <p class="say">"This is a tight, ancient-world city-building game. You're each raising your own city from scratch, spending gold every round to buy roads, buildings, and eventually monuments onto your personal map. Expect a slow burn — early rounds feel gold-starved, and the game rewards patience and balance over rushing any one thing."</p>
+  <p class="why">Sets the expectation that early rounds feel constrained by design. New players often think they're doing it wrong when gold runs out fast. It's normal.</p>
+
+  <h3>1 · How you win</h3>
+  <p class="say">"Most Victory Points when the game ends wins. Points come from five different places — how big your population got, your worst-performing resource, your monuments, uncovered natural resources on your map, and fully-surrounded City Districts. We'll cover what each of those means as they come up — for now, just know points come from several directions, not one."</p>
+  <p class="why">Don't detail the five categories yet. Just that they exist, and that balance matters more than any single one.</p>
+
+  <h3>2 · The round structure</h3>
+  <p class="say">"The game runs in rounds — up to 10 of them. Each round, everyone gets 7 Gold. Going around the table, each player spends their gold one action at a time, buying things for their city, until they're out. Once everyone's out of gold, the round resets: new tiles come up, everyone's Gold refills to 7, and turn order gets rearranged."</p>
+
+  <h3>3 · Your turn — the action economy</h3>
+  <p class="say">"On your turn you must buy exactly one item, spending Gold from your 7 (or up to 9 if you've taken a loan). The twist: nobody's out of the round until they've spent it all — so someone with 1 Gold left keeps taking cheap turns long after someone who blew everything on a Monument sits out."</p>
+  <p>The five things you can buy with your action:</p>
+  <ul>
+    <li><strong>A Road tile</strong> (1 Gold) — extends your street network.</li>
+    <li><strong>A Building Tile</strong> (cost printed on the stack) — advances your resource tracks.</li>
+    <li><strong>The Tower</strong> (2 Gold) — one available per round.</li>
+    <li><strong>A Turn Order Pedestal</strong> (1 Gold) — locks in 1st or 2nd position for next round.</li>
+    <li><strong>A Monument</strong> (all your remaining Gold) — big scoring pieces, and buying one ends your round on the spot.</li>
+  </ul>
+  <p class="say">"You can also take out or pay off a Loan on your turn — that's a free action alongside your required buy, and we'll cover it when it's relevant."</p>
+  <p class="why">Enumerating every placement rule up front guarantees none stick. Five purchase options is learnable; adjacency rules get read off the board as they come up.</p>
+
+  <h3>4 · The core loop <span style="color:var(--ink-2);font-weight:400">— teach this one properly</span></h3>
+  <p class="say">"Every tile and monument you buy advances one or more of your three Resource tracks — Food, Ceramics and Gears. Whenever one of those tracks crosses a Population marker on its own scale, your Population advances too. More Population usually means more points — but here's the catch: at the end of the game, you only score points equal to your <em>lowest</em> resource track. Spend the whole game maxing out Gears while ignoring Food and Ceramics, and Food is what you get scored on."</p>
+  <p class="say">"So: build wide, not tall. The resource you neglect is the resource that scores."</p>
+  <p class="why">This is the rule that shapes every purchase decision. Everything else can be looked up mid-game; this one drives strategy from turn one.</p>
+
+  <h3>5 · What hurts you</h3>
+  <p class="say">"The one real punishment: if you take out a Loan for extra Gold and haven't paid it back by the time the game ends, that's minus 2 Victory Points. It's a real option, not a trap — just don't forget it's there at the final scoring."</p>
+  <p class="why">A delayed, easy-to-forget consequence. Flag it now so nobody feels blindsided at the scoresheet.</p>
+
+  <h3>6 · The clock and the exits</h3>
+  <p class="say">"The game ends one of two ways: after 10 full rounds, when there are no more Building Tiles left to reveal — or immediately at the end of any round where someone's Population reaches the very last space on their track. Either way, once that trigger hits, everyone finishes the current round and then you flip to scoring."</p>
+
+  <h3>7 · "The game changes now" moments</h3>
+  <ul>
+    <li><strong>Someone buys a Turn Order Pedestal:</strong> they lock in 1st or 2nd position for next round regardless of Population — this can flip the normal "lowest Population goes first" catch-up order.</li>
+    <li><strong>Someone buys a Monument:</strong> it costs <em>everything</em> they have left, and their round ends immediately.</li>
+    <li><strong>A player runs out of Gold:</strong> they're done for the round but stay visible on the Turn Order track. New players sometimes think a player who's "out" has left the game state entirely; they haven't.</li>
+    <li><strong>Someone reaches the last Population space:</strong> the game is now ending at the close of this round.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="callout__label">Not applicable here</span>
+    <p><strong>No predecessor</strong> whose rules bleed in. <strong>No hidden information</strong> in a standard game either — every player's city, gold and resources are visible the whole time. If you're adding Public Objective Cards for Advanced Play, mention only that 3 get revealed and pay out bonus points at the end.</p>
+  </div>
+
+  <h3>First-game recommendations</h3>
+  <ul>
+    <li><strong>Mantra 1:</strong> "The resource you neglect is the resource that scores." Watch your lowest track, not your highest.</li>
+    <li><strong>Mantra 2:</strong> "Being behind in Population buys you turn order." Lowest Population goes first next round — a built-in catch-up mechanic, not a reason to panic.</li>
+    <li><strong>Let the components teach.</strong> Monument placement and adjacency rules are unique per Monument — read the card when you're actually buying one.</li>
+    <li><strong>Appoint a round-reset owner.</strong> At the end of every round someone has to discard unbought tiles, reveal fresh ones, refill roads and the Tower, reset Gold, and re-sort the Turn Order track. It's the step every group forgets first.</li>
+    <li>The real teaching moment is the first round-reset — walk through all five sub-steps together, out loud.</li>
+  </ul>
+
+  <h3>Defer these — do not front-load</h3>
+  <ul class="pills">
+    <li>Loan mechanics in detail</li>
+    <li>Road/Tower/Building adjacency</li>
+    <li>Monument-specific placement</li>
+    <li>Natural Resource &amp; City District scoring</li>
+    <li>Turn-order tiebreakers</li>
+    <li>Public Objective Cards</li>
+    <li>Solo Automaton rules</li>
+  </ul>
+
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="panel" id="panel-faq" role="tabpanel" aria-labelledby="tab-faq" hidden>
+  <h2>FAQ</h2>
+  <p>The rules groups actually get wrong. Type a couple of words from the argument you're having.</p>
+  <div class="faqbar">
+    <input id="faqSearch" type="search" placeholder="Search a question or answer…" autocomplete="off" aria-label="Search the FAQ">
+    <div class="faqmeta">
+      <span class="faqcount" id="faqCount"></span>
+      <span>
+        <button class="chip" id="expandAll" type="button">Expand all</button>
+        <button class="chip" id="collapseAll" type="button">Collapse all</button>
+      </span>
+    </div>
+    <div class="chips" id="faqChips"></div>
+  </div>
+  <div id="faqResults"></div>
+  <div class="empty" id="faqEmpty">No entries match that search. Try a shorter word, or clear the topic filter above.</div>
+</section>
+
+<!-- ================= QUICK REF ================= -->
+<section class="panel" id="panel-ref" role="tabpanel" aria-labelledby="tab-ref" hidden>
+
+  <h2>Quick reference</h2>
+
+  <div class="ledger">
+    <h3>Loan ledger</h3>
+    <p style="color:var(--ink-2);font-size:15px;margin:0">Tap a colour when that player takes a Loan; tap again as they repay. Unpaid Loans cost −2 VP each at final scoring — the delayed penalty everyone forgets.</p>
+    <div class="ledger__grid" id="ledger"></div>
+    <div class="ledger__total" id="ledgerTotal"></div>
+  </div>
+
+  <h3>The round, in five lines</h3>
+  <ol class="steps">
+    <li>Everyone starts the round with 7 Gold (up to 9 with a Loan).</li>
+    <li>In turn order, each player buys exactly one item — Road / Building / Tower / Pedestal / Monument — plus an optional free Loan action.</li>
+    <li>Buying a Monument spends all remaining Gold and ends that player's round on the spot; otherwise a round ends once they've spent down to 0.</li>
+    <li>Once everyone's round is over: discard unbought tiles, reveal new ones, refill Roads and the Tower per player count, reset Gold to 0, re-sort Turn Order by Population (lowest first, Pedestal-holders exempted).</li>
+    <li>The game ends after round 10, or immediately at the end of the round in which any player's Population hits the final space.</li>
+  </ol>
+
+  <h3>The handful that break games</h3>
+  <div class="card">
+    <ol>
+      <li><strong>Buying a Monument spends every last Gold you have</strong> and ends your round immediately, no matter how much you had left.</li>
+      <li><strong>You score points equal to your LOWEST resource track</strong> — Food, Ceramics or Gears, whichever is smallest. Not your total, not your highest.</li>
+      <li><strong>An unpaid Loan costs 2 Victory Points at game end</strong>, per Loan outstanding.</li>
+      <li><strong>Next round's turn order sorts by lowest Population first</strong> — a built-in catch-up mechanic, except for whoever bought a Turn Order Pedestal.</li>
+      <li><strong>The game can end early</strong> — the instant a player's Population marker reaches the final space, the current round finishes and then it's over.</li>
+      <li><strong>Natural Resources can be built over</strong> — but leaving them visible is what scores you points, not covering them.</li>
+    </ol>
+  </div>
+
+  <h3>Final scoring — five categories</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Category</th><th>What you count</th></tr></thead>
+      <tbody>
+        <tr><td>Population</td><td>1 point per ring your marker reached or passed</td></tr>
+        <tr class="hl"><td>Least-produced resource</td><td>Points equal to your <strong>lowest</strong> of Food / Ceramics / Gears</td></tr>
+        <tr><td>Monuments</td><td>As printed on each Monument card</td></tr>
+        <tr><td>Natural Resources</td><td>1 point per <strong>visible</strong> Natural Resource adjacent to a piece you placed</td></tr>
+        <tr><td>City Districts</td><td>Each Building Tile with no side touching open green space</td></tr>
+        <tr><td>Loans</td><td><strong>−2</strong> per unpaid Loan</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Overall tie is broken by <strong>most Monuments</strong>. If that's also tied, the rulebook doesn't specify further.</p>
+
+</section>
+
+<footer class="sitefoot">
+  <p><strong>Unofficial, player-made table aid for World Wonders</strong> (Arcane Wonders).</p>
+  <p>The official rulebook always wins any disagreement. <a href="index.html">← All games</a></p>
+</footer>
+
+</div>
+
+<button class="iconbtn totop" id="toTop" type="button" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+var FAQ_DATA = [
+ {c:"Setup gotchas", items:[
+   {q:"Do all players need to use the same side of the Map Board?", r:"Yes — everyone uses Side A or everyone uses Side B, never mixed.", a:"<p>Side A has a lake in the middle of the map; Side B gives each player a different river. The rulebook states all players must use the same side as each other, so agree on one before dealing boards out.</p>"},
+   {q:"Same question for the Resource Boards — does everyone need to match?", r:"Yes — everyone uses the same side, A or B, matching each other.", a:"<p>Like the Map Boards, mixing sides across players isn't intended. Keep every Resource Board on the same side.</p>"},
+   {q:"How many Player Expansion Boards do we use at 5 players?", r:"Both the 4th and 5th expansion boards, plus the Main Board and its tiles.", a:"<p>At 1–3 players you use only the Main Board. The 4th Expansion Board joins at 4 players, and the 5th joins at 5.</p>"},
+   {q:"How many Long Roads and Short Road sets start on the table at 5 players?", r:"3 Long Roads and 2 sets of Short Roads.", a:"<p>The full scaling: 1–2 players get 1 Long Road / 1 Short Road set; 3 players get 2/1; 4 players get 2/2; 5 players get 3/2. The rest stay in reserve for later rounds.</p>"},
+   {q:"Does the free starting Long Road tile get placed during setup?", r:"No — it's free, but it's placed during your first turn, not during setup.", a:"<p>Each player receives 1 Long Road Tile at setup to hold. You place it on your map during your first turn, at no cost, alongside whatever you buy that turn.</p>"},
+   {q:"How many Monument Cards are revealed at setup?", r:"3 face up, for a standard game.", a:"<p>Solo Play only reveals 2 Monument Cards instead of 3 — everything else about setup for a 2-player game applies to solo, with that one exception.</p>"}
+ ]},
+ {c:"Turn & gold economy", items:[
+   {q:"How much Gold does everyone get at the start of a round?", r:"7 Gold, or up to 9 if they've taken out a Loan.", a:"<p>Every round resets each player's Gold to 0 at the reset step, then effectively refills to the 7 (or 9) they get to spend as the round begins.</p>"},
+   {q:"Do I have to spend all my Gold in a single turn?", r:"No — you spend only what your one required action costs, then it's the next player's turn.", a:"<p>Play continues around the table, each player taking one action per turn, until everyone has spent all their Gold for the round.</p>"},
+   {q:"What happens once I've spent all my Gold?", r:"You're automatically out of the round and stop taking turns until it resets.", a:"<p>Other players keep taking turns without you until they, too, run out — the round only ends once <em>everyone</em> is out of Gold.</p>"},
+   {q:"If I run out of Gold early, does the round end right then for everyone?", r:"No — the round only ends once every player has spent all their Gold.", a:"<p>Being 'out' just means you personally stop taking actions; the table keeps going.</p>"},
+   {q:"Can I take more than one action on my turn?", r:"No — exactly one required purchase per turn, plus an optional free Loan action.", a:"<p>The Loan action (taking one out, or repaying one) doesn't count as your turn's required buy — it's bundled in alongside it for free.</p>"},
+   {q:"Does taking or repaying a Loan use up my turn?", r:"No — it's a free action, but you still must make your turn's required purchase unless repaying used your last Gold.", a:"<p>You can't spend a whole turn only on Loan bookkeeping unless doing so leaves you with literally nothing left to spend.</p>"}
+ ]},
+ {c:"Placement rules", items:[
+   {q:"What can a Road Tile be placed next to?", r:"Another Road Tile, the Sidewalk running along the base of the map, or a Tower — nothing else.", a:"<p>Roads can't be started from thin air; they always need to connect to one of those three things.</p>"},
+   {q:"Can two Short Road Tiles bought on the same turn be placed apart from each other?", r:"Yes, as long as each one individually satisfies the normal adjacency rule.", a:"<p>They don't need to connect to each other — each Short Road Tile just needs its own valid adjacency.</p>"},
+   {q:"What does a Tower need to be adjacent to?", r:"Something you've already placed on your map, and it must sit on a land space.", a:"<p>A Tower can't be your very first placement — you need at least one existing piece on your map for it to connect to.</p>"},
+   {q:"What does a Building Tile need to be adjacent to?", r:"A Road Tile, or another Building Tile of the same type (colour).", a:"<p>You can't drop a Building Tile onto an isolated land space with no road access or matching neighbour.</p>"},
+   {q:"Can Building Tiles be rotated when placed?", r:"Yes, freely — as long as they still land on land spaces.", a:"<p>Orientation is entirely up to you; only the underlying terrain (land vs. water) is restricted.</p>"},
+   {q:"Can I place a tile on top of a Natural Resource space?", r:"Yes — Natural Resources count as land spaces and can be built over.", a:"<p>The tradeoff: covering one removes it from being <em>visible</em>, and only visible Natural Resources score points at game end, so covering them costs you that point.</p>"}
+ ]},
+ {c:"Monuments", items:[
+   {q:"What does buying a Monument actually cost?", r:"All of your remaining Gold for that round — whatever amount that happens to be.", a:"<p>There's no fixed price in that sense; the cost is simply 'everything you have left.'</p>"},
+   {q:"Does buying a Monument end my round?", r:"Yes, immediately — since it takes every last Gold you have.", a:"<p>The instant you buy a Monument you're out of Gold, which is the same condition that ends anyone's round.</p>"},
+   {q:"Do Monuments have their own placement rules separate from roads and buildings?", r:"Yes — each Monument has unique terrain, orientation and adjacency requirements printed on its own card.", a:"<p>Read the specific Monument Card at the moment you buy it; don't assume normal Road/Building adjacency rules apply.</p>"},
+   {q:"Can a Monument be placed on water?", r:"Only if its card explicitly allows or requires it.", a:"<p>Some Monuments can or must sit on water spaces (with their own start/end-on-land nuances, like the Aqueduct needing adjacency to water); others can't touch water at all. Check the individual card.</p>"},
+   {q:"If a Monument has multiple pieces, do they all need to touch each other?", r:"Yes — multi-component Monuments must be arranged adjacent to one another.", a:"<p>In some cases a space or another piece can sit between components, per that specific card's diagram — treat the card's own illustration as the final word.</p>"},
+   {q:"What happens once one of the 3 face-up Monument Cards is bought?", r:"Reveal a new one from the deck to replace it, while supplies last.", a:"<p>The display stays at 3 face-up Monument Cards for as long as the deck has cards left to reveal.</p>"}
+ ]},
+ {c:"Loans", items:[
+   {q:"How much extra Gold does taking a Loan give me?", r:"2 extra Gold for that round — up to 9 total instead of 7.", a:"<p>This lets you take more or bigger actions in a single round than your base 7 Gold would allow.</p>"},
+   {q:"How much does it cost to repay a Loan?", r:"3 Gold, paid on a later turn.", a:"<p>You're paying back more than you borrowed — 3 back for 2 borrowed. It's a real cost, not a wash.</p>"},
+   {q:"Is repaying a Loan a free action, or does it use my turn?", r:"It's free, but if you still have Gold left afterward you must also make your turn's required purchase.", a:"<p>The only way repaying a Loan <em>is</em> your whole turn is if it uses up every last bit of Gold you had.</p>"},
+   {q:"What happens if I never pay off a Loan?", r:"−2 Victory Points at final scoring, per unpaid Loan.", a:"<p>The classic delayed, easy-to-forget penalty — it doesn't hurt until the very last tally, so remind your table before scoring, not after.</p>"},
+   {q:"Can I take out more than one Loan over the course of the game?", r:"The rulebook doesn't cap it — each Loan is tracked by its own face-down tile.", a:"<p>Nothing in the printed rules explicitly forbids stacking multiple Loans across different rounds; treat each one independently unless your specific printing says otherwise.</p>"},
+   {q:"Do I have to repay an existing Loan before taking out a new one?", r:"Not stated as a restriction in the rulebook we sourced.", a:"<p><em>Flagged as uncertain.</em> This isn't explicitly addressed either way in the rules text we verified. If it matters to your group, agree on a house ruling before it comes up, and check your printing's FAQ if one exists.</p>"}
+ ]},
+ {c:"Turn order", items:[
+   {q:"How is turn order decided at the very start of the game?", r:"Randomly — draw Player Markers and line up in that order.", a:"<p>The rulebook suggests putting less-experienced players toward the front for a first game, but the draw itself is random.</p>"},
+   {q:"How does turn order get rearranged between rounds?", r:"Pedestal-holders take 1st/2nd position; everyone else sorts by Population, lowest to highest.", a:"<p>Whoever bought the 1st Player or 2nd Player Turn Order Pedestal that round locks in that exact slot for the next round, ahead of the Population sort.</p>"},
+   {q:"If two players are tied on Population, what breaks the tie?", r:"Fewer Monuments goes first; if still tied, last round's relative order is kept.", a:"<p>A two-step tiebreaker: Monument count first, then whichever order they were already in relative to each other.</p>"},
+   {q:"Does buying a Turn Order Pedestal lock in that position for the rest of the game?", r:"No — only for the next round; you'd need to buy it again to keep the position after that.", a:"<p>Pedestals return to the Main Board each round and must be repurchased to hold a guaranteed slot again.</p>"},
+   {q:"Why would anyone want to be behind in Population?", r:"Because lower Population goes earlier in turn order next round — a built-in catch-up mechanic.", a:"<p>Going first next round means first pick of newly revealed tiles, a real advantage for whoever's currently behind.</p>"},
+   {q:"Do the Turn Order Pedestals cost Gold like anything else?", r:"Yes — 1 Gold each, the same as a single Road Tile.", a:"<p>Buying one is just another one-Gold action choice on your turn, competing with Roads for that cheap slot.</p>"}
+ ]},
+ {c:"Scoring", items:[
+   {q:"How is the Population score calculated?", r:"1 point for every ring your marker reached or passed on the Population track.", a:"<p>It's cumulative progress along the track, not just your final resting space.</p>"},
+   {q:"How is the 'least-produced resource' category actually scored?", r:"You score points equal to whichever of your three resource tracks — Food, Ceramics, Gears — is lowest.", a:"<p>Example from the rulebook: Food at 8, Ceramics at 9, Gears at 11 scores you 8 points for this category. Your worst track, not your best or your total.</p>"},
+   {q:"So is it a bad idea to max out one resource and ignore the others?", r:"Yes — your score in this category is capped by your weakest track, so balance beats specialisation.", a:"<p>This is the game's core tension: buildings push whichever resources they're printed with, and you have to watch your lagging track, not just your leading one.</p>"},
+   {q:"How do Natural Resources score at game end?", r:"1 point for every visible (uncovered) Natural Resource adjacent to at least one piece you've placed.", a:"<p>A Natural Resource that's been built over doesn't count — and one that's never had anything placed near it doesn't count either.</p>"},
+   {q:"What exactly counts as a scoring City District?", r:"A Building Tile completely surrounded on all sides by anything other than green (empty) spaces.", a:"<p>Valid neighbours on every side include other Building Tiles, Roads, Monuments, Towers, Natural Resource spaces, Water spaces, the Sidewalk, or a map edge — as long as no side touches open green space.</p>"},
+   {q:"What breaks a tie for the overall win?", r:"Whoever has the most Monuments.", a:"<p>If Monuments are also tied, the rulebook doesn't specify further — agree on a shared win or a secondary house tiebreaker with your group.</p>"}
+ ]},
+ {c:"End of game", items:[
+   {q:"What are the two ways the game can end?", r:"After 10 full rounds (no tiles left to reveal), or immediately at the end of the round where any player's Population hits the final space.", a:"<p>Either trigger leads to the same result — flip the board and score.</p>"},
+   {q:"If someone hits max Population mid-round, does the game stop right then?", r:"No — the current round finishes first, then the game ends.", a:"<p>Every player still gets to finish out their turns for that round before scoring begins.</p>"},
+   {q:"Do we need to manually track rounds to know when we've hit 10?", r:"Not really — the game naturally runs out of Building Tiles to reveal at that point.", a:"<p>The board itself signals the end; you don't need a separate round counter unless you want one for pacing.</p>"},
+   {q:"What's the very first thing we do at final scoring?", r:"Flip the Main Board to its reverse (scoring) side and tally each of the five categories per player.", a:"<p>Population, least-produced Resource, Monuments, Natural Resources and City Districts — add them all up per player, then subtract 2 per unpaid Loan.</p>"},
+   {q:"Are Public Objective Cards part of a standard game?", r:"No — they're an Advanced Play option layered on top of the base rules.", a:"<p>If you want them, shuffle the 15-card deck, reveal the top 3 at setup, and score them at game end alongside the normal five categories. Skip this entirely for a standard game.</p>"},
+   {q:"Does the Automaton / Solo Play material apply to our 5-player game?", r:"No — that's exclusively for solo play.", a:"<p>Ignore all Automaton cards, easy/hard mode scoring, and solo-specific setup differences in any multiplayer game.</p>"}
+ ]}
+];
+</script>
+<script>
+/* ---------- theme ---------- */
+(function () {
+  var KEY = 'tableaids-theme', root = document.documentElement, btn = document.getElementById('themeBtn');
+  var saved; try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (!saved) saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  root.setAttribute('data-theme', saved);
+  if (btn) btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(KEY, next); } catch (e) {}
+  });
+})();
+
+/* ---------- tabs ---------- */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var bar = document.querySelector('.tabs');
+  function set(id) {
+    tabs.forEach(function (t) {
+      var on = t.id === 'tab-' + id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      if (p) p.hidden = !on;
+    });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var id = t.id.replace('tab-', '');
+      set(id);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+      var y = bar.getBoundingClientRect().top + window.scrollY - 56;
+      if (window.scrollY > y) window.scrollTo(0, y);
+    });
+  });
+  var h = (location.hash || '').replace('#', '');
+  if (h && document.getElementById('tab-' + h)) set(h);
+})();
+
+/* ---------- checklists ---------- */
+(function () {
+  document.querySelectorAll('ul.checklist').forEach(function (list) {
+    var key = 'tableaids-chk-' + list.dataset.checklist, state = {};
+    try { state = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) {}
+    Array.prototype.forEach.call(list.children, function (li, i) {
+      if (state[i]) li.classList.add('done');
+      var b = li.querySelector('button');
+      b.setAttribute('aria-pressed', state[i] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        li.classList.toggle('done');
+        var on = li.classList.contains('done');
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        state[i] = on;
+        try { localStorage.setItem(key, JSON.stringify(state)); } catch (e) {}
+      });
+    });
+  });
+})();
+
+/* ---------- FAQ ---------- */
+(function () {
+  if (typeof FAQ_DATA === 'undefined') return;
+  var chipsEl = document.getElementById('faqChips'),
+      resEl = document.getElementById('faqResults'),
+      searchEl = document.getElementById('faqSearch'),
+      countEl = document.getElementById('faqCount'),
+      emptyEl = document.getElementById('faqEmpty');
+  var active = null;
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function hi(text, term) {
+    if (!term) return text;
+    try {
+      var re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      return text.replace(re, '<mark>$1</mark>');
+    } catch (e) { return text; }
+  }
+  function buildChips() {
+    var all = document.createElement('button');
+    all.className = 'chip'; all.type = 'button'; all.textContent = 'All topics';
+    all.setAttribute('aria-pressed', 'true');
+    all.addEventListener('click', function () { pick(null, all); });
+    chipsEl.appendChild(all);
+    FAQ_DATA.forEach(function (sec) {
+      var c = document.createElement('button');
+      c.className = 'chip'; c.type = 'button'; c.textContent = sec.c;
+      c.setAttribute('aria-pressed', 'false');
+      c.addEventListener('click', function () { pick(sec.c, c); });
+      chipsEl.appendChild(c);
+    });
+  }
+  function pick(sec, el) {
+    active = sec;
+    Array.prototype.forEach.call(chipsEl.children, function (c) { c.setAttribute('aria-pressed', 'false'); });
+    el.setAttribute('aria-pressed', 'true');
+    render();
+  }
+  function render() {
+    var term = searchEl.value.trim(), tl = term.toLowerCase();
+    resEl.innerHTML = ''; var shown = 0;
+    FAQ_DATA.forEach(function (sec) {
+      if (active && sec.c !== active) return;
+      var hits = sec.items.filter(function (it) {
+        if (!tl) return true;
+        return (it.q + ' ' + it.r + ' ' + it.a).toLowerCase().indexOf(tl) !== -1;
+      });
+      if (!hits.length) return;
+      var h = document.createElement('p');
+      h.className = 'sectionhead'; h.textContent = sec.c;
+      resEl.appendChild(h);
+      hits.forEach(function (it) {
+        shown++;
+        var card = document.createElement('div');
+        card.className = 'qcard' + (tl ? ' open' : '');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerHTML = '<span>' + hi(esc(it.q), term) + '</span><span class="caret">' + (tl ? '−' : '+') + '</span>';
+        btn.addEventListener('click', function () {
+          card.classList.toggle('open');
+          btn.querySelector('.caret').textContent = card.classList.contains('open') ? '−' : '+';
+        });
+        var body = document.createElement('div');
+        body.className = 'qbody';
+        body.innerHTML = '<p class="ruling">' + hi(esc(it.r), term) + '</p>' + it.a;
+        card.appendChild(btn); card.appendChild(body);
+        resEl.appendChild(card);
+      });
+    });
+    countEl.textContent = shown + (shown === 1 ? ' entry' : ' entries') + ((tl || active) ? ' matching' : '');
+    emptyEl.classList.toggle('show', shown === 0);
+  }
+  document.getElementById('expandAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) { c.classList.add('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '−'; });
+  });
+  document.getElementById('collapseAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) { c.classList.remove('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '+'; });
+  });
+  searchEl.addEventListener('input', render);
+  buildChips(); render();
+})();
+
+/* ---------- loan ledger ---------- */
+(function () {
+  var host = document.getElementById('ledger');
+  if (!host) return;
+  var total = document.getElementById('ledgerTotal');
+  var colours = [
+    { name: 'Yellow', hex: '#e3c33c' }, { name: 'Red', hex: '#d2543f' },
+    { name: 'Blue', hex: '#4a8fd0' }, { name: 'Green', hex: '#5aa353' },
+    { name: 'White', hex: '#e8e6dc' }
+  ];
+  var counts = {};
+  function refresh() {
+    var sum = 0;
+    for (var k in counts) sum += counts[k];
+    total.textContent = sum ? ('Outstanding: ' + sum + ' loan' + (sum === 1 ? '' : 's') + ' · ' + (sum * -2) + ' VP if unpaid') : '';
+  }
+  colours.forEach(function (c) {
+    counts[c.name] = 0;
+    var b = document.createElement('button');
+    b.className = 'loanchip'; b.type = 'button';
+    b.innerHTML = '<span class="swatch" style="background:' + c.hex + '"></span>' + c.name + ' <span class="n">0</span>';
+    b.addEventListener('click', function () {
+      counts[c.name] = (counts[c.name] + 1) % 4;
+      b.querySelector('.n').textContent = counts[c.name];
+      b.classList.toggle('owing', counts[c.name] > 0);
+      refresh();
+    });
+    host.appendChild(b);
+  });
+})();
+
+/* ---------- back to top ---------- */
+(function () {
+  var b = document.getElementById('toTop');
+  if (!b) return;
+  b.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  window.addEventListener('scroll', function () { b.classList.toggle('show', window.scrollY > 700); }, { passive: true });
+})();
+</script>
+</body>
+</html>
