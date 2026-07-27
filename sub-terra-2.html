@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sub Terra II: Inferno's Edge — Setup, Teach &amp; FAQ</title>
+<meta name="description" content="Unofficial table aid for Sub Terra II: Inferno's Edge (with Typhaon Wakes): setup lanes, a teach script, and a searchable FAQ.">
+<meta name="theme-color" content="#120f0e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sub Terra II">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23120f0e'/><path d='M20 78 L38 40 L52 56 L64 30 L80 78 Z' fill='%231c100c'/><path d='M60 30 l-6 20 8 12 -5 16' stroke='%23e8692b' stroke-width='5' fill='none' stroke-linecap='round'/></svg>">
+<style>
+:root{--accent:#e8692b;--accent-ink:#1c0d06;--bg:#120f0e;--bg-2:#191412;--panel:#201814;--panel-2:#2a201a;--line:#3d2e24;--ink:#efe7e0;--ink-2:#b6a599;--warn:#e0a03a;--danger:#e2574c;--radius:16px;--radius-sm:10px;--maxw:52rem;--tap:44px;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.3)}
+html[data-theme="light"]{--bg:#f7f4f1;--bg-2:#efeae5;--panel:#fff;--panel-2:#f4efe9;--line:#ddd4ca;--ink:#1d1510;--ink-2:#665d54;--warn:#a85b12;--danger:#b3261e;--accent:#c14a12;--accent-ink:#fff;--shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px rgba(0,0,0,.07)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+html{background:var(--bg);-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;padding-bottom:env(safe-area-inset-bottom);transition:background .3s ease,color .3s ease}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 96px}
+a{color:var(--accent)}
+h1{font-size:clamp(28px,5.4vw,38px);margin:0 0 8px;line-height:1.15;letter-spacing:-.02em}
+h2{font-size:clamp(21px,3.4vw,26px);margin:42px 0 12px;line-height:1.25;letter-spacing:-.01em}
+h2:first-child{margin-top:26px}
+h3{font-size:18px;margin:28px 0 8px;line-height:1.3}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+code{background:var(--panel-2);border:1px solid var(--line);padding:1px 6px;border-radius:6px;font-size:.88em}
+.topbar{position:sticky;top:0;z-index:40;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.topbar__in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 20px;min-height:56px}
+.topbar__title{font-weight:800;font-size:16px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar__spacer{flex:1 1 auto}
+.iconbtn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;min-height:var(--tap);min-width:var(--tap);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 13px;font-size:14px;font-weight:650;cursor:pointer;text-decoration:none;flex:0 0 auto;font-family:inherit}
+.iconbtn:active{transform:scale(.97)}
+.iconbtn svg{width:18px;height:18px;display:block}
+.tabs{position:sticky;z-index:30;top:calc(56px + env(safe-area-inset-top));background:var(--bg);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.tabs__in{max-width:var(--maxw);margin:0 auto;padding:8px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs__in::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);border-radius:999px;padding:0 16px;min-height:40px;font-size:14.5px;font-weight:650;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;flex:0 0 auto;font-family:inherit}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.panel[hidden]{display:none}
+.hero{padding:24px 0 6px}
+.hero__art{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-bottom:18px}
+.hero__art svg{display:block;width:100%;height:auto}
+.eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 8px}
+.lede{color:var(--ink-2);font-size:17px;margin:0 0 8px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px;padding:0;list-style:none}
+.meta li{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13.5px;color:var(--ink-2)}
+.meta li b{color:var(--ink);font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0}
+.card>:first-child{margin-top:0}.card>:last-child{margin-bottom:0}
+.callout{border-left:4px solid var(--accent);background:var(--panel);border-radius:var(--radius-sm);padding:14px 18px;margin:18px 0}
+.callout--warn{border-left-color:var(--warn)}
+.callout--danger{border-left-color:var(--danger)}
+.callout>:last-child{margin-bottom:0}
+.callout__label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:6px}
+.callout--warn .callout__label{color:var(--warn)}
+.callout--danger .callout__label{color:var(--danger)}
+.say{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius-sm);padding:15px 18px;margin:14px 0;font-size:17.5px;font-weight:600}
+.say+.say{margin-top:-4px}
+.why{color:var(--ink-2);font-size:15px;font-style:italic;margin:8px 0 18px}
+ol.steps{counter-reset:step;list-style:none;padding:0;margin:16px 0}
+ol.steps>li{counter-increment:step;position:relative;padding:0 0 0 44px;margin:0 0 16px}
+ol.steps>li::before{content:counter(step);position:absolute;left:0;top:1px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+ul.checklist{list-style:none;padding:0;margin:14px 0}
+ul.checklist>li{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius-sm);margin-bottom:8px}
+ul.checklist>li>button{appearance:none;background:none;border:0;color:inherit;font:inherit;text-align:left;width:100%;display:flex;gap:12px;align-items:flex-start;padding:13px 15px;min-height:var(--tap);cursor:pointer;line-height:1.5}
+ul.checklist .box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--line);margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:transparent}
+ul.checklist>li.done{border-color:var(--accent)}
+ul.checklist>li.done .box{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+ul.checklist>li.done .txt{color:var(--ink-2);text-decoration:line-through}
+.lane{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:16px 18px;margin:12px 0}
+.lane__head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.lane__n{background:var(--accent);color:var(--accent-ink);font-weight:800;border-radius:8px;padding:2px 9px;font-size:13px;flex:0 0 auto}
+.lane__title{font-weight:750}
+.lane p{margin:6px 0 0}
+.lane__who{color:var(--ink-2);font-size:14.5px;font-style:italic}
+.tablewrap{overflow-x:auto;margin:16px 0;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--panel)}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+thead th{background:var(--panel-2);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+tr.hl td{background:var(--panel-2);background:color-mix(in srgb,var(--accent) 16%,transparent);font-weight:700}
+.pills{display:flex;flex-wrap:wrap;gap:7px;padding:0;margin:12px 0;list-style:none}
+.pills li{background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:6px 13px;font-size:14px}
+.faqbar{margin:18px 0 6px}
+.faqbar input{width:100%;padding:13px 16px;font-size:16px;min-height:var(--tap);border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:inherit}
+.faqbar input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.faqmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.faqcount{font-size:14px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.chip{appearance:none;background:var(--panel);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:0 14px;min-height:38px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;font-family:inherit}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.qcard.open{border-color:var(--accent);background:var(--panel-2)}
+.qcard>button{appearance:none;width:100%;text-align:left;background:none;border:0;color:var(--ink);font:inherit;font-weight:650;font-size:16px;padding:14px 16px;min-height:var(--tap);cursor:pointer;display:flex;gap:12px;justify-content:space-between;align-items:center}
+.qcard .caret{flex:0 0 auto;color:var(--ink-2);font-size:20px;line-height:1}
+.qcard.open .caret{color:var(--accent)}
+.qbody{display:none;padding:0 16px 16px}
+.qcard.open .qbody{display:block}
+.ruling{color:var(--accent);font-weight:700;font-size:15.5px;border-left:3px solid var(--accent);background:var(--panel-2);background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:6px;padding:9px 12px;margin:0 0 10px}
+.qbody p{font-size:16px;margin:0 0 8px}
+.qbody p:last-child{margin-bottom:0}
+.qbody em{font-style:normal;font-weight:700;color:var(--warn)}
+mark{background:var(--accent);color:var(--accent-ink);border-radius:3px;padding:0 2px}
+.sectionhead{font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2);font-weight:800;margin:26px 0 10px}
+.empty{display:none;text-align:center;color:var(--ink-2);padding:40px 10px}
+.empty.show{display:block}
+.tracker{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0;text-align:center}
+.tracker__btn{appearance:none;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:999px;padding:0 20px;min-height:52px;font-size:16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:12px;font-family:inherit}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--line);display:inline-block}
+.dot.lit{background:var(--warn)}
+.tracker p{font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
+.gameover{display:none;background:var(--danger);color:#fff;border-radius:var(--radius-sm);padding:12px 16px;font-weight:700;margin-top:14px}
+.gameover.show{display:block}
+footer.sitefoot{border-top:1px solid var(--line);margin-top:48px;padding:22px 0 8px;color:var(--ink-2);font-size:14px;text-align:center}
+footer.sitefoot strong{color:var(--ink)}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:45;opacity:0;pointer-events:none;transition:opacity .2s ease;box-shadow:var(--shadow)}
+.totop.show{opacity:1;pointer-events:auto}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 16px;z-index:100}
+.skip:focus{left:8px;top:8px}
+@media print{.topbar,.tabs,.totop,.faqbar,.chips,.faqmeta{display:none!important}.panel[hidden]{display:block!important}.qbody{display:block!important}body{background:#fff;color:#000;font-size:11pt}}
+
+</style>
+</head>
+<body data-game="sub-terra-2">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar__in">
+    <a class="iconbtn" href="index.html" aria-label="Back to all games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+    <p class="topbar__title">Sub Terra II: Inferno's Edge</p>
+    <span class="topbar__spacer"></span>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+  <header class="hero">
+    <div class="hero__art"><svg viewBox="0 30 800 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An explorer with a headlamp at the mouth of a cave beneath an erupting volcano, lava glowing below">
+<defs><linearGradient id="stSky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#160c0a"/><stop offset=".55" stop-color="#3a1710"/><stop offset="1" stop-color="#7a2f14"/></linearGradient>
+<radialGradient id="stGlow" cx=".5" cy=".9" r=".7"><stop offset="0" stop-color="#ff9a3c" stop-opacity=".7"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient></defs>
+<rect width="800" height="300" fill="url(#stSky)"/>
+<ellipse cx="400" cy="300" rx="520" ry="150" fill="url(#stGlow)"/>
+<g fill="#e8c07a" opacity=".55"><circle cx="150" cy="60" r="2"/><circle cx="260" cy="44" r="1.6"/><circle cx="620" cy="52" r="2.2"/><circle cx="700" cy="80" r="1.6"/></g>
+<path d="M0 300 L0 150 L120 150 L230 60 L300 96 L360 40 L440 110 L520 66 L620 150 L800 150 L800 300 Z" fill="#1c100c"/>
+<path d="M300 96 L340 150 L280 150 Z" fill="#2a1610"/>
+<g stroke="#ff7a2a" stroke-width="4" stroke-linecap="round" opacity=".85"><path d="M360 40 l-10 40 14 22 -8 30"/></g>
+<g fill="#ff8a34" opacity=".9"><circle cx="352" cy="70" r="3"/><circle cx="362" cy="96" r="2.4"/><circle cx="356" cy="126" r="2"/></g>
+<path d="M0 300 L0 214 C120 200 200 220 320 214 C460 206 560 224 800 214 L800 300 Z" fill="#120a08"/>
+<path d="M0 262 C160 250 300 270 460 260 C600 252 700 268 800 260 L800 300 L0 300 Z" fill="#e5561f" opacity=".5"/>
+<path d="M0 300 C160 286 300 300 460 292 C600 286 700 298 800 292 L800 300 Z" fill="#ff7a2a" opacity=".55"/>
+<g transform="translate(150 196)"><path d="M-30 60 C-40 26 -40 4 -10 -2 L-6 -20 a10 10 0 0 1 20 0 L18 -2 C46 4 46 26 36 60 Z" fill="#0d0705"/><circle cx="4" cy="-14" r="11" fill="#1a0f0a"/><circle cx="4" cy="-14" r="6" fill="#ffd67a"/><path d="M4 -14 L70 -30" stroke="#ffd67a" stroke-width="3" opacity=".5"/><path d="M4 -14 L70 2" stroke="#ffd67a" stroke-width="16" opacity=".12"/></g>
+</svg></div>
+    <p class="eyebrow">Table Reference · Unofficial</p>
+    <h1>Sub Terra II: Inferno's Edge</h1>
+    <p class="lede">A cooperative dash into a waking volcano. Lay tiles to map the temple, gather three keys, unlock the Sanctum and steal the Artifact — then outrun the eruption back to the entrance. Includes the Typhaon Wakes expansion.</p>
+    <ul class="meta">
+      <li><b>1–6</b> players</li>
+      <li><b>60–90</b> min</li>
+      <li>Inside the Box Games (ITB)</li>
+      <li>Co-op · <b>Typhaon Wakes</b> 1-vs-many</li>
+      <li>Ages <b>10+</b></li>
+    </ul>
+  </header>
+</main>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="tabs__in" role="tablist">
+    <button class="tab" role="tab" id="tab-setup" aria-controls="panel-setup" aria-selected="true">Setup</button>
+    <button class="tab" role="tab" id="tab-play" aria-controls="panel-play" aria-selected="false">How to play</button>
+    <button class="tab" role="tab" id="tab-faq" aria-controls="panel-faq" aria-selected="false">FAQ</button>
+    <button class="tab" role="tab" id="tab-ref" aria-controls="panel-ref" aria-selected="false">Quick ref</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section class="panel" id="panel-setup" role="tabpanel" aria-labelledby="tab-setup">
+
+  <h2>Fast setup</h2>
+  <p>Sub Terra II has real setup — tiles, tokens, characters and a scenario to lay out — so this splits into lanes. The Typhaon Wakes content is folded in at the end; skip that block if you're playing the base game. Follow the scenario page in the rulebook for exact tile, guardian and key counts.</p>
+
+  <div class="callout">
+    <span class="callout__label">The one real win</span>
+    <p>Bag the components by system and keep <strong>Typhaon Wakes separate</strong>: base Temple tiles in one bag, the expansion's new tiles and guardians in another, and the Typhaon hazard deck in a third. Then adding or dropping the expansion is a one-bag decision, not a re-sort of the whole box.</p>
+  </div>
+
+  <div class="callout callout--warn">
+    <span class="callout__label">Confirm against your scenario</span>
+    <p>Starting health per character, the number on the <strong>volcano track</strong>, and how many guardians and keys start in play all depend on the scenario and player count. Those exact numbers aren't reproduced here — read them off the scenario in your rulebook and treat that as final.</p>
+  </div>
+
+  <h3>Part 1 — the one-time prep</h3>
+  <ul class="checklist" data-checklist="st-prep">
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Temple tiles shuffled into a face-down stack.</strong> The Entrance tile is set aside — note it's a large tile that counts as several spaces.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Sanctum tile set aside.</strong> It only enters once every Temple tile is placed.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Character boards, figures, health markers, danger dice and tokens sorted.</strong> Keys and item tokens in their own piles.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Typhaon Wakes (optional):</strong> new guardian figures, new tile types and the Typhaon hazard deck kept in their own bag.</span></button></li>
+  </ul>
+
+  <h3>Part 2 — setup lanes</h3>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 1</span><span class="lane__title">Board &amp; timer</span></div>
+    <p class="lane__who">One player</p>
+    <p>Place the <strong>Entrance tile</strong> in the middle. Shuffle the Temple tile stack next to it. Set the <strong>volcano track</strong> marker to the starting number your scenario specifies.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 2</span><span class="lane__title">Characters</span></div>
+    <p class="lane__who">Everyone</p>
+    <p>Each player takes a <strong>character board and figure</strong>, sets their starting health, and reads their special ability once. Place figures on the Entrance. Take your danger die.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Lane 3</span><span class="lane__title">Threats &amp; objectives</span></div>
+    <p class="lane__who">Another player</p>
+    <p>Set out the <strong>guardian figures</strong>, <strong>key tokens</strong> and any item tokens the scenario calls for, and keep the <strong>Sanctum tile</strong> within reach for later.</p>
+  </div>
+
+  <div class="callout">
+    <span class="callout__label">Typhaon Wakes — one-vs-many</span>
+    <p>Shuffle the new guardian types (volatile, ranged, eternal) and new tiles into the relevant stacks. If you're playing the antagonist mode, one player becomes <strong>Typhaon, the spirit of the mountain</strong>, and takes the Typhaon hazard deck instead of the explorers rolling a danger die. Everyone else forms the co-op team of explorers.</p>
+  </div>
+
+  <h3>Player-count &amp; difficulty</h3>
+  <p>Sub Terra II scales through the scenario, not a single dial. In general, more explorers means more guardians and a tighter clock; solo play usually means running several characters. Use your rulebook's scenario table for the exact figures rather than guessing.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Setting</th><th>Where it's defined</th></tr></thead>
+      <tbody>
+        <tr><td>Players</td><td>1–6 (solo runs multiple characters)</td></tr>
+        <tr><td>Starting health</td><td>Character board / scenario</td></tr>
+        <tr><td>Volcano track length</td><td>Scenario &amp; difficulty</td></tr>
+        <tr><td>Guardians &amp; keys in play</td><td>Scenario</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Fast teardown</h3>
+  <p>Tiles back to their bags (base vs expansion), guardians and tokens to their pouches, Typhaon deck kept separate. Keeping the three systems apart is what makes next setup quick.</p>
+
+</section>
+
+<section class="panel" id="panel-play" role="tabpanel" aria-labelledby="tab-play" hidden>
+
+  <h2>How to play — teach script</h2>
+  <p>Teach with the Entrance tile down and figures on it. Bold lines read aloud; italics are notes to you. The one thing to land hard is what changes the moment someone lifts the Artifact.</p>
+
+  <h3>0 · Buy-in <span style="color:var(--ink-2);font-weight:400">(45 sec)</span></h3>
+  <p class="say">"This is a co-op treasure heist inside a waking volcano. We explore a temple by laying tiles, hunt down three keys, unlock the inner Sanctum, steal the Artifact — and then sprint back out the way we came before the whole place erupts. We win together; there's no traitor and no scoring against each other."</p>
+  <p class="why">Frame it as Indiana Jones. The tension is the clock, not the other players.</p>
+
+  <h3>1 · How you win — and lose</h3>
+  <p class="say">"We win the moment the explorer carrying the Artifact escapes back through the Entrance. Every other explorer who also makes it out is a bonus, but only the carrier has to get home. We lose if the volcano fully erupts before we've claimed the Artifact — or if the whole party is wiped out."</p>
+  <p class="why">Stress: downed or lost explorers don't cost the win, as long as the Artifact gets out.</p>
+
+  <h3>2 · Your turn — two actions</h3>
+  <p class="say">"On your turn you take two actions. Actions include: reveal a new tile onto an open edge; explore, which reveals a tile and steps you onto it in one go; move; heal; pick up a key or item; attack a guardian; or dig through a collapsed tile. You can take a third action if you really need it — but each extra action costs you one health."</p>
+  <p class="why">Two actions, then optionally buy more with health. That trade is the core of the push-your-luck.</p>
+
+  <h3>3 · The hazard phase <span style="color:var(--ink-2);font-weight:400">— every turn ends here</span></h3>
+  <p class="say">"After your two actions, roll your danger die. Whatever it shows happens right now — a spike trap, arrows that reach across tiles, a cave-in, lava spreading, or a stumble that just costs you health. This is why you plan your actions carefully: the volcano always gets the last word on your turn."</p>
+  <p class="why">In the Typhaon Wakes antagonist mode, the Typhaon player resolves this phase from their hazard cards instead of the die.</p>
+
+  <h3>4 · Guardians &amp; the clock</h3>
+  <p class="say">"At the end of each round, the guardians wake and move toward the nearest explorer, and can hurt you if they reach you. Also at the end of each round, the volcano track ticks down by one. When that track hits zero, it flips to its eruption side — the countdown is over and the mountain is ready to blow."</p>
+
+  <h3>5 · Getting the Artifact <span style="color:var(--ink-2);font-weight:400">— teach this properly</span></h3>
+  <p class="say">"You need three keys. Bring them to the Sanctum — which is placed at the far end of the temple once every tile is down — insert them, and one explorer lifts the Artifact. The instant it's lifted, everything gets worse: from now on you roll TWO danger dice every turn instead of one, and the volcano track counts down twice as fast. Grabbing the treasure is what really starts the disaster."</p>
+  <p class="why">This is the pivot of the game. Make sure nobody lifts the Artifact until the party is ready to run.</p>
+
+  <h3>6 · Eruption &amp; the escape</h3>
+  <p class="say">"Once the volcano track is at zero, the next time anyone rolls lava, the volcano erupts. If we don't have the Artifact yet, that's game over. If we do, we run: tiles start turning to lava, and every lava roll flips every tile touching lava — it cascades. Get the Artifact carrier back to the Entrance and out."</p>
+  <p class="why">Remind them the Entrance is a big multi-space tile, so plan the final steps home.</p>
+
+  <h3>7 · When an explorer goes down</h3>
+  <p class="say">"Drop to zero health and you're down, not dead. Once per turn a downed explorer can crawl one step toward the Entrance or toward the rest of the party, and teammates can help you. So losing your footing isn't the end of your game."</p>
+
+  <div class="callout">
+    <span class="callout__label">Typhaon Wakes — the new threats</span>
+    <p><strong>Volatile guardians</strong> can explode for heavy damage. <strong>Ranged guardians</strong> attack from a distance. The <strong>eternal guardian</strong> never stops — it won't rest until every explorer has left the temple. In the one-vs-many mode, the Typhaon player builds a hand of hazard cards and chooses which of these threats and traps land at the end of each explorer's turn.</p>
+  </div>
+
+  <h3>First-game recommendations</h3>
+  <ul>
+    <li><strong>Explore, don't just reveal.</strong> Exploring (reveal + step on) is usually more efficient than revealing tiles you then have to walk onto.</li>
+    <li><strong>Split the keys.</strong> Don't put all three keys on one explorer who can be cut off; spread the risk.</li>
+    <li><strong>Do not lift the Artifact early.</strong> The moment it's up, the clock doubles and you roll two dice a turn — be positioned to run first.</li>
+    <li><strong>Keep a health buffer.</strong> Extra actions and stumbles both cost health; don't run to zero right before the escape.</li>
+    <li><strong>The rulebook won't answer everything.</strong> Agree a sensible ruling on edge cases and keep moving.</li>
+  </ul>
+
+  <h3>Defer these — do not front-load</h3>
+  <ul class="pills">
+    <li>Every character's special ability</li>
+    <li>Each hazard's exact resolution</li>
+    <li>Individual guardian behaviours</li>
+    <li>Typhaon's hand-building details</li>
+    <li>Lava cascade edge cases</li>
+  </ul>
+  <p class="why">Teach the turn and the Artifact pivot; explain each hazard, ability and guardian the first time it actually comes up on the table.</p>
+
+</section>
+
+<section class="panel" id="panel-faq" role="tabpanel" aria-labelledby="tab-faq" hidden>
+  <h2>FAQ</h2>
+  <p>The rules groups actually get wrong. Type a couple of words from the argument you're having.</p>
+  <div class="faqbar">
+    <input id="faqSearch" type="search" placeholder="Search a question or answer…" autocomplete="off" aria-label="Search the FAQ">
+    <div class="faqmeta">
+      <span class="faqcount" id="faqCount"></span>
+      <span>
+        <button class="chip" id="expandAll" type="button">Expand all</button>
+        <button class="chip" id="collapseAll" type="button">Collapse all</button>
+      </span>
+    </div>
+    <div class="chips" id="faqChips"></div>
+  </div>
+  <div id="faqResults"></div>
+  <div class="empty" id="faqEmpty">No entries match that search. Try a shorter word, or clear the topic filter above.</div>
+</section>
+
+<section class="panel" id="panel-ref" role="tabpanel" aria-labelledby="tab-ref" hidden>
+
+  <h2>Quick reference</h2>
+
+  <div class="tracker">
+    <button class="tracker__btn" id="keyBtn" type="button" aria-label="Keys collected — tap each time a key is picked up">
+      <span><span class="dot" data-i="1"></span> <span class="dot" data-i="2"></span> <span class="dot" data-i="3"></span></span>
+      <span id="keyLabel">Keys collected: 0 / 3</span>
+    </button>
+    <p>Tap as keys are picked up. Three keys unlock the Sanctum. Resets when you reload.</p>
+    <div class="gameover" id="keyReady" style="background:var(--accent);color:var(--accent-ink)">All three keys — you can unlock the Sanctum and lift the Artifact. Be ready to run first.</div>
+  </div>
+
+  <div class="tracker">
+    <button class="tracker__btn" id="artBtn" type="button" aria-label="Toggle whether the Artifact has been lifted">
+      <span class="dot" id="artDot"></span>
+      <span id="artLabel">Artifact: not yet lifted</span>
+    </button>
+    <p>Flip this when someone lifts the Artifact.</p>
+    <div class="gameover" id="artWarn">Artifact lifted — roll <strong>two</strong> danger dice every turn, and the volcano track counts down <strong>twice as fast</strong>. Get the carrier to the Entrance.</div>
+  </div>
+
+  <h3>The turn, in three lines</h3>
+  <ol class="steps">
+    <li>Take <strong>two actions</strong> (reveal / explore / move / heal / pick up / attack / dig). Extra actions cost <strong>1 health</strong> each.</li>
+    <li><strong>Hazard phase:</strong> roll the danger die (or Typhaon resolves a hazard) and apply it now.</li>
+    <li><strong>End of round:</strong> guardians advance to the nearest explorer; the volcano track ticks down one.</li>
+  </ol>
+
+  <h3>The handful that break games</h3>
+  <div class="card">
+    <ol>
+      <li><strong>Lifting the Artifact doubles the danger:</strong> two dice per turn and the clock counts down twice as fast.</li>
+      <li><strong>The volcano erupts only once the track is at zero and someone rolls lava</strong> — then lava cascades through all adjacent tiles.</li>
+      <li><strong>No Artifact when it erupts = loss.</strong> With the Artifact, you can still run for the Entrance.</li>
+      <li><strong>Only the Artifact carrier must escape</strong> to win; other escapees are a bonus.</li>
+      <li><strong>Downed explorers aren't out</strong> — once per turn they crawl toward the Entrance or the party.</li>
+      <li><strong>The Sanctum enters farthest from the Entrance</strong> once all Temple tiles are placed; the Entrance is a large multi-space tile.</li>
+      <li><strong>Typhaon Wakes:</strong> the eternal guardian never stops until the temple is empty of explorers.</li>
+    </ol>
+  </div>
+
+</section>
+
+<footer class="sitefoot">
+  <p><strong>Unofficial, player-made table aid for Sub Terra II: Inferno&#39;s Edge and the Typhaon Wakes expansion</strong> (Inside the Box Board Games / ITB).</p>
+  <p>The official rulebook and scenario sheets always win any disagreement. Exact health, timer and threat counts are scenario-specific. <a href="index.html">← All games</a></p>
+</footer>
+
+</div>
+
+<button class="iconbtn totop" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<script>
+var FAQ_DATA = [
+ {
+  "c": "Turns & actions",
+  "items": [
+   {
+    "q": "How many actions do I get per turn?",
+    "r": "Two — and you may take extra actions by paying one health point each.",
+    "a": "<p>Actions include revealing tiles, exploring, moving, healing, picking up keys or items, attacking guardians and digging through collapses. Exerting yourself for a third action (or more) costs one health per extra action.</p>"
+   },
+   {
+    "q": "What's the difference between 'reveal a tile' and 'explore'?",
+    "r": "Revealing places a new tile on an open edge; exploring reveals a tile and steps you onto it in the same action.",
+    "a": "<p>Exploring is generally the efficient way to move into unmapped temple, since it combines the reveal and the step.</p>"
+   },
+   {
+    "q": "What happens at the end of my turn?",
+    "r": "The hazard phase — roll your danger die and immediately resolve whatever it shows.",
+    "a": "<p>Hazards range from spike traps and ranged arrows to cave-ins, spreading lava and stumbles that cost health. In the Typhaon Wakes antagonist mode, the Typhaon player resolves hazards from their hand instead of the die being rolled.</p>"
+   }
+  ]
+ },
+ {
+  "c": "The clock & eruption",
+  "items": [
+   {
+    "q": "What does the volcano track do?",
+    "r": "It ticks down one at the end of every round; when it reaches zero it flips to its eruption side.",
+    "a": "<p>Reaching zero doesn't erupt the volcano by itself — it arms it. The eruption then triggers the next time someone rolls lava.</p>"
+   },
+   {
+    "q": "What changes the moment we lift the Artifact?",
+    "r": "You roll two danger dice each turn instead of one, and the volcano track counts down twice as fast.",
+    "a": "<p>Claiming the Artifact roughly doubles the danger and the speed of the clock, so only lift it when the party is ready to run.</p>"
+   },
+   {
+    "q": "Exactly when does the volcano erupt?",
+    "r": "Once the track is at zero, the first lava result rolled after that erupts it — and lava then cascades.",
+    "a": "<p>Every lava roll flips all tiles adjacent to lava, which can chain across the board. If you haven't claimed the Artifact when it erupts, you lose.</p>"
+   }
+  ]
+ },
+ {
+  "c": "Objective & winning",
+  "items": [
+   {
+    "q": "What do we actually need to do to win?",
+    "r": "Collect three keys, unlock the Sanctum, lift the Artifact, and get the carrier back out through the Entrance.",
+    "a": "<p>The Sanctum tile is added at the point farthest from the Entrance once every Temple tile has been placed. Insert the three keys there to reach the Artifact.</p>"
+   },
+   {
+    "q": "Does everyone have to escape to win?",
+    "r": "No — only the explorer carrying the Artifact must reach the Entrance. Others escaping is a bonus.",
+    "a": "<p>It's fully cooperative: downed or lost explorers don't spoil the win as long as the Artifact gets home.</p>"
+   },
+   {
+    "q": "What happens when an explorer hits zero health?",
+    "r": "They're downed, not eliminated — once per turn they can crawl one step toward the Entrance or the party, and can be helped.",
+    "a": "<p>This is a change from the original Sub Terra, where a downed explorer just waited for rescue.</p>"
+   }
+  ]
+ },
+ {
+  "c": "Typhaon Wakes expansion",
+  "items": [
+   {
+    "q": "What does Typhaon Wakes add?",
+    "r": "Three new guardian types, several new tile types, and a one-vs-many antagonist mode.",
+    "a": "<p>You can use the new guardians and tiles inside the normal co-op game, or hand control of the mountain to a Typhaon player for the versus mode.</p>"
+   },
+   {
+    "q": "What are the three new guardians?",
+    "r": "Volatile (can explode for heavy damage), ranged (attacks from afar), and the eternal guardian (never stops until you leave the temple).",
+    "a": "<p>Each changes how you route around the temple — the eternal guardian in particular keeps pressure on until the last explorer is out.</p>"
+   },
+   {
+    "q": "How does the Typhaon player work?",
+    "r": "Instead of explorers rolling the danger die, the Typhaon player uses a light hand-building mechanic to choose which hazards resolve at the end of explorer turns.",
+    "a": "<p>This hands one player deliberate control over the volcano's threats rather than leaving them to a die. Consult the expansion rules for the exact hand size and how cards are drawn and played.</p>"
+   }
+  ]
+ }
+];
+</script>
+<script>
+/* ---------- theme ---------- */
+(function () {
+  var KEY = 'tableaids-theme', root = document.documentElement, btn = document.getElementById('themeBtn');
+  var saved; try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (!saved) saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  root.setAttribute('data-theme', saved);
+  if (btn) btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(KEY, next); } catch (e) {}
+  });
+})();
+
+/* ---------- tabs ---------- */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var bar = document.querySelector('.tabs');
+  function set(id) {
+    tabs.forEach(function (t) {
+      var on = t.id === 'tab-' + id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      if (p) p.hidden = !on;
+    });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var id = t.id.replace('tab-', '');
+      set(id);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+      var y = bar.getBoundingClientRect().top + window.scrollY - 56;
+      if (window.scrollY > y) window.scrollTo(0, y);
+    });
+  });
+  var h = (location.hash || '').replace('#', '');
+  if (h && document.getElementById('tab-' + h)) set(h);
+})();
+
+/* ---------- checklists ---------- */
+(function () {
+  document.querySelectorAll('ul.checklist').forEach(function (list) {
+    var key = 'tableaids-chk-' + list.dataset.checklist;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) {}
+    Array.prototype.forEach.call(list.children, function (li, i) {
+      if (state[i]) li.classList.add('done');
+      var b = li.querySelector('button');
+      b.setAttribute('aria-pressed', state[i] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        li.classList.toggle('done');
+        var on = li.classList.contains('done');
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        state[i] = on;
+        try { localStorage.setItem(key, JSON.stringify(state)); } catch (e) {}
+      });
+    });
+  });
+})();
+
+/* ---------- FAQ ---------- */
+(function () {
+  if (typeof FAQ_DATA === 'undefined') return;
+  var chipsEl = document.getElementById('faqChips'),
+      resEl = document.getElementById('faqResults'),
+      searchEl = document.getElementById('faqSearch'),
+      countEl = document.getElementById('faqCount'),
+      emptyEl = document.getElementById('faqEmpty');
+  var active = null;
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function hi(text, term) {
+    if (!term) return text;
+    try {
+      var re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      return text.replace(re, '<mark>$1</mark>');
+    } catch (e) { return text; }
+  }
+
+  function buildChips() {
+    var all = document.createElement('button');
+    all.className = 'chip'; all.type = 'button'; all.textContent = 'All topics';
+    all.setAttribute('aria-pressed', 'true');
+    all.addEventListener('click', function () { pick(null, all); });
+    chipsEl.appendChild(all);
+    FAQ_DATA.forEach(function (sec) {
+      var c = document.createElement('button');
+      c.className = 'chip'; c.type = 'button'; c.textContent = sec.c;
+      c.setAttribute('aria-pressed', 'false');
+      c.addEventListener('click', function () { pick(sec.c, c); });
+      chipsEl.appendChild(c);
+    });
+  }
+  function pick(sec, el) {
+    active = sec;
+    Array.prototype.forEach.call(chipsEl.children, function (c) { c.setAttribute('aria-pressed', 'false'); });
+    el.setAttribute('aria-pressed', 'true');
+    render();
+  }
+
+  function render() {
+    var term = searchEl.value.trim(), tl = term.toLowerCase();
+    resEl.innerHTML = ''; var shown = 0;
+    FAQ_DATA.forEach(function (sec) {
+      if (active && sec.c !== active) return;
+      var hits = sec.items.filter(function (it) {
+        if (!tl) return true;
+        return (it.q + ' ' + it.r + ' ' + it.a).toLowerCase().indexOf(tl) !== -1;
+      });
+      if (!hits.length) return;
+      var h = document.createElement('p');
+      h.className = 'sectionhead'; h.textContent = sec.c;
+      resEl.appendChild(h);
+      hits.forEach(function (it) {
+        shown++;
+        var card = document.createElement('div');
+        card.className = 'qcard' + (tl ? ' open' : '');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerHTML = '<span>' + hi(esc(it.q), term) + '</span><span class="caret">' + (tl ? '−' : '+') + '</span>';
+        btn.addEventListener('click', function () {
+          card.classList.toggle('open');
+          btn.querySelector('.caret').textContent = card.classList.contains('open') ? '−' : '+';
+        });
+        var body = document.createElement('div');
+        body.className = 'qbody';
+        body.innerHTML = '<p class="ruling">' + hi(esc(it.r), term) + '</p>' + it.a;
+        card.appendChild(btn); card.appendChild(body);
+        resEl.appendChild(card);
+      });
+    });
+    countEl.textContent = shown + (shown === 1 ? ' entry' : ' entries') + ((tl || active) ? ' matching' : '');
+    emptyEl.classList.toggle('show', shown === 0);
+  }
+
+  document.getElementById('expandAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) {
+      c.classList.add('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '−';
+    });
+  });
+  document.getElementById('collapseAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) {
+      c.classList.remove('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '+';
+    });
+  });
+  searchEl.addEventListener('input', render);
+  buildChips(); render();
+})();
+
+
+/* ---------- sub terra ii: keys + artifact ---------- */
+(function () {
+  var kb = document.getElementById('keyBtn');
+  if (kb) {
+    var kl = document.getElementById('keyLabel'),
+        kr = document.getElementById('keyReady'),
+        kd = document.querySelectorAll('#keyBtn .dot'), k = 0;
+    kb.addEventListener('click', function () {
+      k = (k + 1) % 4;
+      kl.textContent = 'Keys collected: ' + k + ' / 3';
+      kd.forEach(function (d, i) { d.classList.toggle('lit', i < k); });
+      kr.classList.toggle('show', k === 3);
+    });
+  }
+  var ab = document.getElementById('artBtn');
+  if (ab) {
+    var al = document.getElementById('artLabel'),
+        aw = document.getElementById('artWarn'),
+        ad = document.getElementById('artDot'), lifted = false;
+    ab.addEventListener('click', function () {
+      lifted = !lifted;
+      al.textContent = 'Artifact: ' + (lifted ? 'LIFTED — everything doubles' : 'not yet lifted');
+      ad.classList.toggle('lit', lifted);
+      aw.classList.toggle('show', lifted);
+    });
+  }
+})();
+/* ---------- back to top ---------- */
+(function () {
+  var b = document.getElementById('toTop');
+  if (!b) return;
+  b.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  window.addEventListener('scroll', function () { b.classList.toggle('show', window.scrollY > 700); }, { passive: true });
+})();
+</script>
+</body>
+</html>

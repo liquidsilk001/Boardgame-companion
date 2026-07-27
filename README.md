@@ -14,6 +14,10 @@ Unofficial and player-made throughout. Each game's official rulebook wins any di
 | World Wonders | Arcane Wonders | 1–5 |
 | Heat: Pedal to the Metal | Days of Wonder | 1–6 |
 | Nemesis: Lockdown | Awaken Realms | 1–5 |
+| Skull | Lui-même · Space Cowboys | 3–6 |
+| Magical Athlete | CMYK Games | 2–6 |
+| Faraway | Catch Up Games | 2–6 |
+| Sub Terra II: Inferno's Edge | Inside the Box (ITB) | 1–6 |
 
 ## Files
 
@@ -28,6 +32,10 @@ your-repo/
 ├── world-wonders.html
 ├── heat.html
 ├── nemesis-lockdown.html
+├── skull.html
+├── magical-athlete.html
+├── faraway.html
+├── sub-terra-2.html
 └── README.md
 ```
 
@@ -36,7 +44,7 @@ Do not rename the HTML files — the pages link to each other by these exact fil
 ## Hosting on GitHub Pages
 
 1. Create a repository (public is fine; GitHub Pages needs a paid plan for private repos).
-2. Drag all five `.html` files plus this README into the repo. GitHub's web uploader accepts
+2. Drag all the `.html` files plus this README into the repo. GitHub's web uploader accepts
    a whole folder dragged at once and preserves it.
 3. Go to **Settings → Pages**, set the source to your branch (usually `main`) and the folder
    to `/ (root)`, then save.
@@ -51,7 +59,7 @@ see HTML source instead of the working page. Always use the GitHub Pages URL.
 Open the Pages URL in Safari, tap the Share icon, then **Add to Home Screen**. It launches
 full screen with no browser chrome, which is what you want on a crowded table.
 
-Everything works offline once loaded, so you can also AirDrop the five files to the Files app
+Everything works offline once loaded, so you can also AirDrop the files to the Files app
 and tap `index.html` — the links between pages work identically.
 
 ## What's in each page
@@ -64,7 +72,9 @@ and tap `index.html` — the links between pages work identically.
   open automatically with the ruling highlighted.
 - **Quick ref** — turn order, the handful of rules that break games, plus a per-game tool:
   a Winter tracker for Forest Shuffle, a Loan ledger for World Wonders, a corner-check
-  calculator for Heat, and an Event Phase caller for Nemesis: Lockdown.
+  calculator for Heat, an Event Phase caller for Nemesis: Lockdown, a bid-ceiling counter for Skull,
+  a race tracker for Magical Athlete, a round counter for Faraway, and a keys/artifact tracker for
+  Sub Terra II.
 
 ## Editing content later
 
@@ -97,6 +107,12 @@ rulebook:
   and Championship System booklet (Advanced Rules v1.1).
 - **Nemesis: Lockdown** — Awaken Realms English rulebook and the official Lockdown FAQ
   (25 March 2022).
+- **Skull** — Lui-même / Space Cowboys English rules (Skull & Roses).
+- **Magical Athlete** — CMYK Games English rulebook (2025 edition, updated by Richard Garfield).
+- **Faraway** — Catch Up Games English rulebook (designers Johannes Goupy & Corentin Lebrat).
+- **Sub Terra II: Inferno's Edge** — Inside the Box (ITB) English rulebook and scenario sheets, plus the
+  Typhaon Wakes expansion rules. Scenario-specific values (starting health, volcano-track length,
+  guardian and key counts) are deliberately left to the rulebook rather than fixed on the page.
 
 Anything that could not be confirmed from an official source is flagged in place on the page
 rather than stated as fact. There are currently two such flags, both on the Forest Shuffle

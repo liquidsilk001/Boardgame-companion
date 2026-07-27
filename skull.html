@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skull — Setup, Teach &amp; FAQ</title>
+<meta name="description" content="Unofficial table aid for Skull (Skull &amp; Roses): the 20-second setup, a teach script, and a searchable FAQ.">
+<meta name="theme-color" content="#141013">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Skull">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23141013'/><circle cx='50' cy='46' r='30' fill='%23e9e3d2'/><circle cx='40' cy='44' r='7' fill='%23141013'/><circle cx='60' cy='44' r='7' fill='%23141013'/></svg>">
+<style>
+:root{--accent:#d1495b;--accent-ink:#1b0c10;--bg:#141013;--bg-2:#1b1417;--panel:#211a1d;--panel-2:#2a2126;--line:#3d2f34;--ink:#efe9ea;--ink-2:#b6a6ab;--warn:#e0a03a;--danger:#e2574c;--radius:16px;--radius-sm:10px;--maxw:52rem;--tap:44px;--shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px rgba(0,0,0,.3)}
+html[data-theme="light"]{--bg:#f7f3f3;--bg-2:#efeaeb;--panel:#fff;--panel-2:#f4eff0;--line:#dcd4d6;--ink:#1e1418;--ink-2:#665c60;--warn:#a85b12;--danger:#b3261e;--accent:#b02a3d;--accent-ink:#fff;--shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px rgba(0,0,0,.07)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+html{background:var(--bg);-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:120px}
+body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;padding-bottom:env(safe-area-inset-bottom);transition:background .3s ease,color .3s ease}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 96px}
+a{color:var(--accent)}
+h1{font-size:clamp(28px,5.4vw,38px);margin:0 0 8px;line-height:1.15;letter-spacing:-.02em}
+h2{font-size:clamp(21px,3.4vw,26px);margin:42px 0 12px;line-height:1.25;letter-spacing:-.01em}
+h2:first-child{margin-top:26px}
+h3{font-size:18px;margin:28px 0 8px;line-height:1.3}
+p{margin:0 0 14px}
+hr{border:0;border-top:1px solid var(--line);margin:36px 0}
+code{background:var(--panel-2);border:1px solid var(--line);padding:1px 6px;border-radius:6px;font-size:.88em}
+.topbar{position:sticky;top:0;z-index:40;background:var(--bg);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.topbar__in{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 20px;min-height:56px}
+.topbar__title{font-weight:800;font-size:16px;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar__spacer{flex:1 1 auto}
+.iconbtn{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;min-height:var(--tap);min-width:var(--tap);display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 13px;font-size:14px;font-weight:650;cursor:pointer;text-decoration:none;flex:0 0 auto;font-family:inherit}
+.iconbtn:active{transform:scale(.97)}
+.iconbtn svg{width:18px;height:18px;display:block}
+.tabs{position:sticky;z-index:30;top:calc(56px + env(safe-area-inset-top));background:var(--bg);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.tabs__in{max-width:var(--maxw);margin:0 auto;padding:8px 20px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.tabs__in::-webkit-scrollbar{display:none}
+.tab{appearance:none;border:1px solid var(--line);background:var(--panel);color:var(--ink-2);border-radius:999px;padding:0 16px;min-height:40px;font-size:14.5px;font-weight:650;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;flex:0 0 auto;font-family:inherit}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.panel[hidden]{display:none}
+.hero{padding:24px 0 6px}
+.hero__art{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);margin-bottom:18px}
+.hero__art svg{display:block;width:100%;height:auto}
+.eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:800;margin:0 0 8px}
+.lede{color:var(--ink-2);font-size:17px;margin:0 0 8px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 4px;padding:0;list-style:none}
+.meta li{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 13px;font-size:13.5px;color:var(--ink-2)}
+.meta li b{color:var(--ink);font-weight:700}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0}
+.card>:first-child{margin-top:0}.card>:last-child{margin-bottom:0}
+.callout{border-left:4px solid var(--accent);background:var(--panel);border-radius:var(--radius-sm);padding:14px 18px;margin:18px 0}
+.callout--warn{border-left-color:var(--warn)}
+.callout--danger{border-left-color:var(--danger)}
+.callout>:last-child{margin-bottom:0}
+.callout__label{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:800;color:var(--accent);margin-bottom:6px}
+.callout--warn .callout__label{color:var(--warn)}
+.callout--danger .callout__label{color:var(--danger)}
+.say{background:var(--panel-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius-sm);padding:15px 18px;margin:14px 0;font-size:17.5px;font-weight:600}
+.say+.say{margin-top:-4px}
+.why{color:var(--ink-2);font-size:15px;font-style:italic;margin:8px 0 18px}
+ol.steps{counter-reset:step;list-style:none;padding:0;margin:16px 0}
+ol.steps>li{counter-increment:step;position:relative;padding:0 0 0 44px;margin:0 0 16px}
+ol.steps>li::before{content:counter(step);position:absolute;left:0;top:1px;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+ul.checklist{list-style:none;padding:0;margin:14px 0}
+ul.checklist>li{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius-sm);margin-bottom:8px}
+ul.checklist>li>button{appearance:none;background:none;border:0;color:inherit;font:inherit;text-align:left;width:100%;display:flex;gap:12px;align-items:flex-start;padding:13px 15px;min-height:var(--tap);cursor:pointer;line-height:1.5}
+ul.checklist .box{flex:0 0 auto;width:22px;height:22px;border-radius:6px;border:2px solid var(--line);margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:transparent}
+ul.checklist>li.done{border-color:var(--accent)}
+ul.checklist>li.done .box{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+ul.checklist>li.done .txt{color:var(--ink-2);text-decoration:line-through}
+.lane{border:1px solid var(--line);background:var(--panel);border-radius:var(--radius);padding:16px 18px;margin:12px 0}
+.lane__head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.lane__n{background:var(--accent);color:var(--accent-ink);font-weight:800;border-radius:8px;padding:2px 9px;font-size:13px;flex:0 0 auto}
+.lane__title{font-weight:750}
+.lane p{margin:6px 0 0}
+.lane__who{color:var(--ink-2);font-size:14.5px;font-style:italic}
+.tablewrap{overflow-x:auto;margin:16px 0;-webkit-overflow-scrolling:touch;border-radius:var(--radius);border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;font-size:15.5px;background:var(--panel)}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+thead th{background:var(--panel-2);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+tr.hl td{background:var(--panel-2);background:color-mix(in srgb,var(--accent) 16%,transparent);font-weight:700}
+.pills{display:flex;flex-wrap:wrap;gap:7px;padding:0;margin:12px 0;list-style:none}
+.pills li{background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:6px 13px;font-size:14px}
+.faqbar{margin:18px 0 6px}
+.faqbar input{width:100%;padding:13px 16px;font-size:16px;min-height:var(--tap);border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--panel);color:var(--ink);font-family:inherit}
+.faqbar input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.faqmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.faqcount{font-size:14px;color:var(--ink-2)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}
+.chip{appearance:none;background:var(--panel);border:1px solid var(--line);color:var(--ink-2);border-radius:999px;padding:0 14px;min-height:38px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;font-family:inherit}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius-sm);margin-bottom:8px;overflow:hidden}
+.qcard.open{border-color:var(--accent);background:var(--panel-2)}
+.qcard>button{appearance:none;width:100%;text-align:left;background:none;border:0;color:var(--ink);font:inherit;font-weight:650;font-size:16px;padding:14px 16px;min-height:var(--tap);cursor:pointer;display:flex;gap:12px;justify-content:space-between;align-items:center}
+.qcard .caret{flex:0 0 auto;color:var(--ink-2);font-size:20px;line-height:1}
+.qcard.open .caret{color:var(--accent)}
+.qbody{display:none;padding:0 16px 16px}
+.qcard.open .qbody{display:block}
+.ruling{color:var(--accent);font-weight:700;font-size:15.5px;border-left:3px solid var(--accent);background:var(--panel-2);background:color-mix(in srgb,var(--accent) 10%,transparent);border-radius:6px;padding:9px 12px;margin:0 0 10px}
+.qbody p{font-size:16px;margin:0 0 8px}
+.qbody p:last-child{margin-bottom:0}
+.qbody em{font-style:normal;font-weight:700;color:var(--warn)}
+mark{background:var(--accent);color:var(--accent-ink);border-radius:3px;padding:0 2px}
+.sectionhead{font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-2);font-weight:800;margin:26px 0 10px}
+.empty{display:none;text-align:center;color:var(--ink-2);padding:40px 10px}
+.empty.show{display:block}
+.tracker{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin:18px 0;text-align:center}
+.tracker__btn{appearance:none;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);border-radius:999px;padding:0 20px;min-height:52px;font-size:16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:12px;font-family:inherit}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--line);display:inline-block}
+.dot.lit{background:var(--warn)}
+.tracker p{font-size:14.5px;color:var(--ink-2);margin:12px 0 0}
+.gameover{display:none;background:var(--danger);color:#fff;border-radius:var(--radius-sm);padding:12px 16px;font-weight:700;margin-top:14px}
+.gameover.show{display:block}
+footer.sitefoot{border-top:1px solid var(--line);margin-top:48px;padding:22px 0 8px;color:var(--ink-2);font-size:14px;text-align:center}
+footer.sitefoot strong{color:var(--ink)}
+.totop{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:45;opacity:0;pointer-events:none;transition:opacity .2s ease;box-shadow:var(--shadow)}
+.totop.show{opacity:1;pointer-events:auto}
+.skip{position:absolute;left:-9999px;top:0;background:var(--accent);color:var(--accent-ink);padding:10px 16px;z-index:100}
+.skip:focus{left:8px;top:8px}
+@media print{.topbar,.tabs,.totop,.faqbar,.chips,.faqmeta{display:none!important}.panel[hidden]{display:block!important}.qbody{display:block!important}body{background:#fff;color:#000;font-size:11pt}}
+
+</style>
+</head>
+<body data-game="skull">
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <div class="topbar__in">
+    <a class="iconbtn" href="index.html" aria-label="Back to all games"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></a>
+    <p class="topbar__title">Skull</p>
+    <span class="topbar__spacer"></span>
+    <button class="iconbtn" id="themeBtn" type="button" aria-label="Switch theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+  </div>
+</div>
+
+<main id="main" class="wrap">
+  <header class="hero">
+    <div class="hero__art"><svg viewBox="0 30 800 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A bone-white skull between two red rose emblems on a dark crimson field">
+<defs><linearGradient id="skSky" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#2a1016"/><stop offset=".6" stop-color="#5a1f2b"/><stop offset="1" stop-color="#7d2b39"/></linearGradient></defs>
+<rect width="800" height="300" fill="url(#skSky)"/>
+<circle cx="400" cy="150" r="120" fill="#c94257" opacity=".12"/>
+<g transform="translate(400 138)">
+  <path d="M0 -84 C54 -84 84 -50 84 -6 C84 24 70 40 54 52 L54 74 C54 84 46 90 36 90 L-36 90 C-46 90 -54 84 -54 74 L-54 52 C-70 40 -84 24 -84 -6 C-84 -50 -54 -84 0 -84 Z" fill="#e9e3d2"/>
+  <ellipse cx="-34" cy="-4" rx="24" ry="28" fill="#241016"/><ellipse cx="34" cy="-4" rx="24" ry="28" fill="#241016"/>
+  <circle cx="-34" cy="0" r="6" fill="#c94257"/><circle cx="34" cy="0" r="6" fill="#c94257"/>
+  <path d="M0 24 l-13 26 h26 z" fill="#241016"/>
+  <g fill="#241016"><rect x="-30" y="66" width="10" height="24" rx="3"/><rect x="-14" y="66" width="10" height="24" rx="3"/><rect x="4" y="66" width="10" height="24" rx="3"/><rect x="20" y="66" width="10" height="24" rx="3"/></g>
+</g>
+<g>
+  <g transform="translate(150 150)"><circle r="46" fill="#8f2436"/><circle r="46" fill="none" stroke="#e9e3d2" stroke-width="3" opacity=".5"/>
+    <path d="M0 -20 C14 -20 20 -6 14 6 C8 18 -8 18 -14 6 C-20 -6 -12 -20 0 -20 Z M0 -8 C7 -8 8 2 0 8 C-8 2 -7 -8 0 -8 Z" fill="#e9e3d2" opacity=".85"/></g>
+  <g transform="translate(650 150)"><circle r="46" fill="#8f2436"/><circle r="46" fill="none" stroke="#e9e3d2" stroke-width="3" opacity=".5"/>
+    <path d="M0 -20 C14 -20 20 -6 14 6 C8 18 -8 18 -14 6 C-20 -6 -12 -20 0 -20 Z M0 -8 C7 -8 8 2 0 8 C-8 2 -7 -8 0 -8 Z" fill="#e9e3d2" opacity=".85"/></g>
+</g>
+<g fill="#e9e3d2" opacity=".22"><circle cx="250" cy="70" r="3"/><circle cx="560" cy="66" r="2.4"/><circle cx="470" cy="52" r="2"/><circle cx="330" cy="240" r="2.4"/><circle cx="520" cy="244" r="2"/></g>
+</svg></div>
+    <p class="eyebrow">Table Reference · Unofficial</p>
+    <h1>Skull</h1>
+    <p class="lede">The quintessential bluffing game: three roses, one skull, and a bet you can flip discs face-up without hitting bone. No luck, no cards to draw — the whole game is played in the other players' heads.</p>
+    <ul class="meta">
+      <li><b>3–6</b> players</li>
+      <li><b>15–45</b> min</li>
+      <li>Lui-même · Space Cowboys</li>
+      <li>Designer: <b>Hervé Marly</b></li>
+      <li>Guides written for <b>4–6 players</b></li>
+    </ul>
+  </header>
+</main>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="tabs__in" role="tablist">
+    <button class="tab" role="tab" id="tab-setup" aria-controls="panel-setup" aria-selected="true">Setup</button>
+    <button class="tab" role="tab" id="tab-play" aria-controls="panel-play" aria-selected="false">How to play</button>
+    <button class="tab" role="tab" id="tab-faq" aria-controls="panel-faq" aria-selected="false">FAQ</button>
+    <button class="tab" role="tab" id="tab-ref" aria-controls="panel-ref" aria-selected="false">Quick ref</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section class="panel" id="panel-setup" role="tabpanel" aria-labelledby="tab-setup">
+
+  <h2>Fast setup</h2>
+  <p>Skull is the fastest setup on this site — about 20 seconds. There's nothing to bag, sort or scale, so this is deliberately short. The only thing worth getting right is that every player starts with the correct four discs.</p>
+
+  <div class="callout">
+    <span class="callout__label">The one real win</span>
+    <p>At teardown, keep each player's <strong>coloured set of 4 discs clipped or bagged together</strong>. They all look different by colour, so a loose pile means someone re-sorts 16–24 discs by hand next time. Bag them by colour and setup becomes "grab a set."</p>
+  </div>
+
+  <h3>Part 1 — the one-time prep</h3>
+  <p>There is no folder of punch-out work here. Skull is a handful of discs (or cards, in older printings) and one mat per player. Nothing is player-count dependent.</p>
+  <ul class="checklist" data-checklist="sk-prep">
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Each set is 4 discs: 3 roses + 1 skull.</strong> Confirm every player's set has exactly one skull before the first round.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Mats start "not won" side up.</strong> The mat gets flipped only when you win a challenge.</span></button></li>
+    <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Nothing to pre-build or remove.</strong> There is no scaling, no deck, no tokens.</span></button></li>
+  </ul>
+
+  <h3>Part 2 — setup lanes</h3>
+  <p>There's not much to split. Hand each player their mat and their four matching discs, everyone checks their set, and pick a start player. That's the whole setup.</p>
+
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">All</span><span class="lane__title">Take a set &amp; a mat</span></div>
+    <p class="lane__who">Everyone at once</p>
+    <p>Each player takes one colour's <strong>4 discs</strong> (3 roses, 1 skull) and the matching <strong>mat</strong>, placed in front of them, plain side up.</p>
+  </div>
+  <div class="lane">
+    <div class="lane__head"><span class="lane__n">Once</span><span class="lane__title">Pick a start player</span></div>
+    <p class="lane__who">Any method</p>
+    <p>Choose a starting player any way you like. After the first round, the start player is always <strong>whoever issued the last challenge</strong> (win or lose).</p>
+  </div>
+
+  <h3>Player-count quick reference</h3>
+  <p>Nothing about a player's own kit changes with the count — everyone always has the same 4 discs. The only thing that scales is how many discs can be on the table, which sets the ceiling on a bid.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Players</th><th>Max discs in play (a full round)</th></tr></thead>
+      <tbody>
+        <tr><td>3</td><td>12</td></tr>
+        <tr><td>4</td><td>16</td></tr>
+        <tr><td>5</td><td>20</td></tr>
+        <tr class="hl"><td>6</td><td>24</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>In practice almost no round reaches the ceiling — someone challenges long before every disc is down. The number just caps the highest legal bid.</p>
+
+  <h3>Fast teardown</h3>
+  <p>Bag or clip each colour's 4 discs together, drop the mats on top, done. There is no sorting to undo.</p>
+
+</section>
+
+<section class="panel" id="panel-play" role="tabpanel" aria-labelledby="tab-play" hidden>
+
+  <h2>How to play — teach script</h2>
+  <p>Teach with a set of discs in your hand so you can demo a placement. The bold lines are written to be read aloud; the italics are notes to you, the teacher.</p>
+
+  <h3>0 · Buy-in <span style="color:var(--ink-2);font-weight:400">(20 sec)</span></h3>
+  <p class="say">"This is pure bluffing — no luck, no cards to draw, nothing random. Everything happens in your heads and your faces. You each have three roses and one skull. You'll be betting that you can flip a bunch of discs face-up and find only roses. Flip a skull and you fail."</p>
+  <p class="why">Set expectations: it's short, it's psychological, and the whole game is reading people.</p>
+
+  <h3>1 · How you win</h3>
+  <p class="say">"First player to win two challenges wins the game. You can also win by being the last person with any discs left — everyone else gets knocked out."</p>
+  <p class="why">Two wins, not one. Say it twice; people forget and stop at one.</p>
+
+  <h3>2 · Starting a round</h3>
+  <p class="say">"Every round starts the same way: everyone secretly picks one disc and places it face-down on their mat, all at once."</p>
+  <p class="why">That first placement is simultaneous and mandatory — nobody bids on the opening beat.</p>
+
+  <h3>3 · Going around <span style="color:var(--ink-2);font-weight:400">— the choice on your turn</span></h3>
+  <p class="say">"After that, we go clockwise. On your turn you do ONE of two things: add another disc face-down on top of your stack, or start a challenge. If you've already placed all four of your discs, you can't add another, so you must challenge."</p>
+  <ul>
+    <li><strong>Add a disc</strong> — place it face-down, slightly offset so everyone can see how many you've played.</li>
+    <li><strong>Challenge</strong> — you may do this on your turn even if you could still add a disc.</li>
+  </ul>
+  <p class="why">The tension: more discs down means more of your own roses are locked in and known to you — but it also means you'll owe a bigger bid if you're the one who challenges.</p>
+
+  <h3>4 · The challenge — the core loop <span style="color:var(--ink-2);font-weight:400">— teach this properly</span></h3>
+  <p class="say">"A challenge is a bid: 'I can flip THIS MANY discs face-up, from anywhere on the table, without hitting a skull.' Going clockwise, everyone else either raises the bid higher or passes for the rest of the round. Once you pass, you're out until next round. When everyone but one has passed, that last, highest bidder is the Challenger."</p>
+  <p class="say">"The bid can never be higher than the total number of discs actually on the table this round."</p>
+  <p class="why">This is the whole game. Bidding is public; passing is permanent for the round.</p>
+
+  <h3>5 · Revealing</h3>
+  <p class="say">"The Challenger now flips discs face-up, one at a time, counting toward their bid. You MUST start with your own stack, flipping from the top down. After your own are done, you can flip any other player's discs, in any order you like — but always from the top of that player's stack downward."</p>
+  <ul>
+    <li><strong>All roses, bid reached →</strong> success. You win the challenge: flip your mat to its won side. That's one win.</li>
+    <li><strong>A skull appears →</strong> instant fail. Stop flipping immediately.</li>
+  </ul>
+  <p class="why">"Own stack first" is the rule people miss — and it's why baiting works: a player can sit on their own skull hoping you overbid.</p>
+
+  <h3>6 · What failing costs</h3>
+  <p class="say">"If you fail, the player whose skull you flipped takes one of your discs at random and removes it from the game — you don't get to pick, and you don't get to see which one it was. Lose all four discs and you're eliminated."</p>
+  <p class="why">Because the removed disc is secret, nobody — including you — knows for sure whether you still have your skull. That uncertainty is a weapon.</p>
+
+  <h3>7 · "The game changes now" moments</h3>
+  <ul>
+    <li><strong>You win your first challenge:</strong> you're now one win from taking the game. Everyone will target your bids.</li>
+    <li><strong>You lose a disc to a failed challenge:</strong> you have fewer discs to bluff with — and might have lost your skull without knowing.</li>
+    <li><strong>You're down to one disc:</strong> one more failed challenge and you're out.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="callout__label">Not applicable here</span>
+    <p><strong>No hidden setup, no variable powers, no luck.</strong> Every player has the identical kit. There is nothing to draft, draw, or randomise — only what you choose to place and what you choose to say.</p>
+  </div>
+
+  <h3>First-game recommendations</h3>
+  <ul>
+    <li><strong>Bid low and safe early.</strong> Your first couple of wins can come from small, certain bids on your own two roses.</li>
+    <li><strong>Watch who adds discs vs. who challenges.</strong> A player piling on discs may be building a safe bid — or hiding a skull.</li>
+    <li><strong>Remember you flip your own stack first.</strong> Don't challenge past your own hidden skull.</li>
+    <li><strong>Talk.</strong> Banter, misdirection and table talk are the game. Silent Skull is a worse game.</li>
+  </ul>
+
+  <h3>Defer these — do not front-load</h3>
+  <ul class="pills">
+    <li>Optimal bidding math</li>
+    <li>When to bait with your own skull</li>
+    <li>Tells and counter-tells</li>
+    <li>Elimination endgame tactics</li>
+  </ul>
+  <p class="why">All of this emerges after one round. Teach the loop, play a hand, and the strategy explains itself.</p>
+
+</section>
+
+<section class="panel" id="panel-faq" role="tabpanel" aria-labelledby="tab-faq" hidden>
+  <h2>FAQ</h2>
+  <p>The rules groups actually get wrong. Type a couple of words from the argument you're having.</p>
+  <div class="faqbar">
+    <input id="faqSearch" type="search" placeholder="Search a question or answer…" autocomplete="off" aria-label="Search the FAQ">
+    <div class="faqmeta">
+      <span class="faqcount" id="faqCount"></span>
+      <span>
+        <button class="chip" id="expandAll" type="button">Expand all</button>
+        <button class="chip" id="collapseAll" type="button">Collapse all</button>
+      </span>
+    </div>
+    <div class="chips" id="faqChips"></div>
+  </div>
+  <div id="faqResults"></div>
+  <div class="empty" id="faqEmpty">No entries match that search. Try a shorter word, or clear the topic filter above.</div>
+</section>
+
+<section class="panel" id="panel-ref" role="tabpanel" aria-labelledby="tab-ref" hidden>
+
+  <h2>Quick reference</h2>
+
+  <div class="tracker">
+    <button class="tracker__btn" id="bidMinus" type="button" aria-label="One fewer disc on the table">−</button>
+    <span id="bidLabel" style="min-width:210px">Discs on the table: 0</span>
+    <button class="tracker__btn" id="bidPlus" type="button" aria-label="One more disc on the table">+</button>
+    <p>Tap as discs go down. The number shown is the <strong>highest legal bid</strong> anyone can make this round. Resets when you reload.</p>
+  </div>
+
+  <h3>The round, in five lines</h3>
+  <ol class="steps">
+    <li>Everyone places <strong>one disc face-down</strong> at the same time.</li>
+    <li>Clockwise, each player either <strong>adds a disc</strong> face-down or <strong>issues a challenge</strong>. Out of discs? You must challenge.</li>
+    <li>A challenge is a <strong>bid</strong> (≤ total discs on the table). Others raise or pass; passing is out for the round.</li>
+    <li>The last, highest bidder is the <strong>Challenger</strong>: flip <strong>own stack first</strong> (top-down), then any stacks top-down, until you reach the bid in roses.</li>
+    <li>All roses = <strong>win</strong> (flip mat; two wins take the game). A skull = <strong>fail</strong> (lose a disc at random).</li>
+  </ol>
+
+  <h3>The handful that break games</h3>
+  <div class="card">
+    <ol>
+      <li><strong>First to TWO wins</strong> — not one. Or be the last player with discs.</li>
+      <li><strong>The Challenger always reveals their own discs first.</strong> Your own hidden skull fails you instantly.</li>
+      <li><strong>A bid can never exceed the total discs on the table.</strong></li>
+      <li><strong>Discs flip top-down within a stack.</strong> You choose the stack, never the individual disc.</li>
+      <li><strong>A failed challenge costs one disc at random, chosen and hidden by the skull's owner.</strong> You may lose your skull without knowing.</li>
+      <li><strong>Passing during bidding is permanent</strong> for that round.</li>
+      <li><strong>The Challenger starts the next round</strong>, win or lose.</li>
+    </ol>
+  </div>
+
+</section>
+
+<footer class="sitefoot">
+  <p><strong>Unofficial, player-made table aid for Skull</strong> (Lui-même / Space Cowboys, designer Hervé Marly).</p>
+  <p>The official rulebook always wins any disagreement. <a href="index.html">← All games</a></p>
+</footer>
+
+</div>
+
+<button class="iconbtn totop" id="toTop" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+
+<script>
+var FAQ_DATA = [
+ {
+  "c": "Placing & the round",
+  "items": [
+   {
+    "q": "Does everyone place a disc at the very start of each round?",
+    "r": "Yes — one disc each, face-down, simultaneously, before anyone can challenge.",
+    "a": "<p>The opening placement is mandatory and simultaneous. Only after it do turns pass clockwise, where you may add a disc or challenge.</p>"
+   },
+   {
+    "q": "On my turn, can I challenge instead of adding a disc, even if I still have discs to play?",
+    "r": "Yes — challenging is always available on your turn.",
+    "a": "<p>You're never forced to keep adding discs. The only time challenging is <em>compulsory</em> is when you've already placed all four of your discs and can't add another.</p>"
+   },
+   {
+    "q": "Should discs be stacked so people can see how many I've played?",
+    "r": "Yes — place each new disc slightly offset so every stack's count is visible at a glance.",
+    "a": "<p>The number of discs each player has down is open information. Only the faces (rose vs skull) are hidden.</p>"
+   }
+  ]
+ },
+ {
+  "c": "The bid",
+  "items": [
+   {
+    "q": "Is there a maximum I can bid?",
+    "r": "Yes — you can never bid higher than the total number of discs on the table this round.",
+    "a": "<p>Count every disc placed by every player; that total is the ceiling. You cannot promise to flip more discs than physically exist in the round.</p>"
+   },
+   {
+    "q": "What are my options when someone has already bid?",
+    "r": "Raise the bid to a higher number, or pass. There is no matching.",
+    "a": "<p>Passing is permanent for the rest of that round — you sit out until the next round. Bidding continues clockwise until all but one player has passed.</p>"
+   },
+   {
+    "q": "Who becomes the Challenger?",
+    "r": "The last player still in the bidding after everyone else has passed — the highest bidder.",
+    "a": "<p>That player must now try to make good on their bid by flipping discs.</p>"
+   }
+  ]
+ },
+ {
+  "c": "Revealing discs",
+  "items": [
+   {
+    "q": "Which discs do I flip first?",
+    "r": "Your own — always. You must reveal your entire stack (top-down) before touching anyone else's.",
+    "a": "<p>If your own hidden disc is a skull, you fail immediately, before you ever reach an opponent. This is why players sometimes place a skull and then overbid to bait you.</p>"
+   },
+   {
+    "q": "Once my own discs are done, how do I choose the rest?",
+    "r": "Freely — pick any player's stack, but always flip that stack from the top downward.",
+    "a": "<p>You choose which stack to draw from and can switch between stacks between flips. You just can't dig into the middle of a stack; it's strictly top-down per player.</p>"
+   },
+   {
+    "q": "Do I have to flip all of a player's discs once I start on them?",
+    "r": "No — you can stop and switch to another stack whenever you like.",
+    "a": "<p>You're never forced to keep going on one player. You only ever need to reach your bid total in roses.</p>"
+   },
+   {
+    "q": "What exactly happens the moment a skull is revealed?",
+    "r": "You stop immediately and fail the challenge — no more discs are flipped.",
+    "a": "<p>The round ends there. Only the failure penalty is applied.</p>"
+   }
+  ]
+ },
+ {
+  "c": "Winning, losing & elimination",
+  "items": [
+   {
+    "q": "How many challenges do I need to win the game?",
+    "r": "Two successful challenges. First to two wins outright.",
+    "a": "<p>Flip your mat to its winning side after your first success so everyone can see you're one away.</p>"
+   },
+   {
+    "q": "What's the penalty for a failed challenge?",
+    "r": "The owner of the skull you flipped removes one of your discs at random, out of the game.",
+    "a": "<p>You don't choose which disc, and you don't see which one leaves — so you may lose your skull without knowing it. If <em>you</em> flipped your own skull, you still lose a disc at random from your own set.</p>"
+   },
+   {
+    "q": "When is a player eliminated?",
+    "r": "When they lose their last disc. With zero discs, they're out.",
+    "a": "<p>If eliminations reduce the table to a single remaining player, that player wins even without two challenge wins.</p>"
+   },
+   {
+    "q": "Who starts the next round?",
+    "r": "The Challenger from the round just played — whether they won or lost.",
+    "a": "<p>Everyone first takes their placed discs back into hand, then the new round's simultaneous placement begins with that player.</p>"
+   }
+  ]
+ }
+];
+</script>
+<script>
+/* ---------- theme ---------- */
+(function () {
+  var KEY = 'tableaids-theme', root = document.documentElement, btn = document.getElementById('themeBtn');
+  var saved; try { saved = localStorage.getItem(KEY); } catch (e) {}
+  if (!saved) saved = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+  root.setAttribute('data-theme', saved);
+  if (btn) btn.addEventListener('click', function () {
+    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(KEY, next); } catch (e) {}
+  });
+})();
+
+/* ---------- tabs ---------- */
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  var bar = document.querySelector('.tabs');
+  function set(id) {
+    tabs.forEach(function (t) {
+      var on = t.id === 'tab-' + id;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      var p = document.getElementById(t.getAttribute('aria-controls'));
+      if (p) p.hidden = !on;
+    });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      var id = t.id.replace('tab-', '');
+      set(id);
+      if (history.replaceState) history.replaceState(null, '', '#' + id);
+      var y = bar.getBoundingClientRect().top + window.scrollY - 56;
+      if (window.scrollY > y) window.scrollTo(0, y);
+    });
+  });
+  var h = (location.hash || '').replace('#', '');
+  if (h && document.getElementById('tab-' + h)) set(h);
+})();
+
+/* ---------- checklists ---------- */
+(function () {
+  document.querySelectorAll('ul.checklist').forEach(function (list) {
+    var key = 'tableaids-chk-' + list.dataset.checklist;
+    var state = {};
+    try { state = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) {}
+    Array.prototype.forEach.call(list.children, function (li, i) {
+      if (state[i]) li.classList.add('done');
+      var b = li.querySelector('button');
+      b.setAttribute('aria-pressed', state[i] ? 'true' : 'false');
+      b.addEventListener('click', function () {
+        li.classList.toggle('done');
+        var on = li.classList.contains('done');
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        state[i] = on;
+        try { localStorage.setItem(key, JSON.stringify(state)); } catch (e) {}
+      });
+    });
+  });
+})();
+
+/* ---------- FAQ ---------- */
+(function () {
+  if (typeof FAQ_DATA === 'undefined') return;
+  var chipsEl = document.getElementById('faqChips'),
+      resEl = document.getElementById('faqResults'),
+      searchEl = document.getElementById('faqSearch'),
+      countEl = document.getElementById('faqCount'),
+      emptyEl = document.getElementById('faqEmpty');
+  var active = null;
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function hi(text, term) {
+    if (!term) return text;
+    try {
+      var re = new RegExp('(' + term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      return text.replace(re, '<mark>$1</mark>');
+    } catch (e) { return text; }
+  }
+
+  function buildChips() {
+    var all = document.createElement('button');
+    all.className = 'chip'; all.type = 'button'; all.textContent = 'All topics';
+    all.setAttribute('aria-pressed', 'true');
+    all.addEventListener('click', function () { pick(null, all); });
+    chipsEl.appendChild(all);
+    FAQ_DATA.forEach(function (sec) {
+      var c = document.createElement('button');
+      c.className = 'chip'; c.type = 'button'; c.textContent = sec.c;
+      c.setAttribute('aria-pressed', 'false');
+      c.addEventListener('click', function () { pick(sec.c, c); });
+      chipsEl.appendChild(c);
+    });
+  }
+  function pick(sec, el) {
+    active = sec;
+    Array.prototype.forEach.call(chipsEl.children, function (c) { c.setAttribute('aria-pressed', 'false'); });
+    el.setAttribute('aria-pressed', 'true');
+    render();
+  }
+
+  function render() {
+    var term = searchEl.value.trim(), tl = term.toLowerCase();
+    resEl.innerHTML = ''; var shown = 0;
+    FAQ_DATA.forEach(function (sec) {
+      if (active && sec.c !== active) return;
+      var hits = sec.items.filter(function (it) {
+        if (!tl) return true;
+        return (it.q + ' ' + it.r + ' ' + it.a).toLowerCase().indexOf(tl) !== -1;
+      });
+      if (!hits.length) return;
+      var h = document.createElement('p');
+      h.className = 'sectionhead'; h.textContent = sec.c;
+      resEl.appendChild(h);
+      hits.forEach(function (it) {
+        shown++;
+        var card = document.createElement('div');
+        card.className = 'qcard' + (tl ? ' open' : '');
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.innerHTML = '<span>' + hi(esc(it.q), term) + '</span><span class="caret">' + (tl ? '−' : '+') + '</span>';
+        btn.addEventListener('click', function () {
+          card.classList.toggle('open');
+          btn.querySelector('.caret').textContent = card.classList.contains('open') ? '−' : '+';
+        });
+        var body = document.createElement('div');
+        body.className = 'qbody';
+        body.innerHTML = '<p class="ruling">' + hi(esc(it.r), term) + '</p>' + it.a;
+        card.appendChild(btn); card.appendChild(body);
+        resEl.appendChild(card);
+      });
+    });
+    countEl.textContent = shown + (shown === 1 ? ' entry' : ' entries') + ((tl || active) ? ' matching' : '');
+    emptyEl.classList.toggle('show', shown === 0);
+  }
+
+  document.getElementById('expandAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) {
+      c.classList.add('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '−';
+    });
+  });
+  document.getElementById('collapseAll').addEventListener('click', function () {
+    document.querySelectorAll('.qcard').forEach(function (c) {
+      c.classList.remove('open'); var m = c.querySelector('.caret'); if (m) m.textContent = '+';
+    });
+  });
+  searchEl.addEventListener('input', render);
+  buildChips(); render();
+})();
+
+
+/* ---------- skull: bid ceiling counter ---------- */
+(function () {
+  var minus = document.getElementById('bidMinus'), plus = document.getElementById('bidPlus'),
+      label = document.getElementById('bidLabel'), n = 0;
+  if (!label) return;
+  function draw(){ label.textContent = 'Discs on the table: ' + n; }
+  plus.addEventListener('click', function(){ if (n < 24) n++; draw(); });
+  minus.addEventListener('click', function(){ if (n > 0) n--; draw(); });
+  draw();
+})();
+/* ---------- back to top ---------- */
+(function () {
+  var b = document.getElementById('toTop');
+  if (!b) return;
+  b.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  window.addEventListener('scroll', function () { b.classList.toggle('show', window.scrollY > 700); }, { passive: true });
+})();
+</script>
+</body>
+</html>
