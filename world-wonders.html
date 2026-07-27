@@ -373,7 +373,7 @@ footer.sitefoot strong{color:var(--ink)}
     <li>Everyone starts the round with 7 Gold (up to 9 with a Loan).</li>
     <li>In turn order, each player buys exactly one item — Road / Building / Tower / Pedestal / Monument — plus an optional free Loan action.</li>
     <li>Buying a Monument spends all remaining Gold and ends that player's round on the spot; otherwise a round ends once they've spent down to 0.</li>
-    <li>Once everyone's round is over: discard unbought tiles, reveal new ones, refill Roads and the Tower per player count, reset Gold to 0, re-sort Turn Order by Population (lowest first, Pedestal-holders exempted).</li>
+    <li>Once everyone's round is over, do all six reset steps: discard unbought Building Tiles → reveal a new tile from each stack → replace purchased Roads per player count → replace the Tower if bought → re-sort Turn Order and return any purchased Pedestals to the Main Board → reset every Gold Marker to 0. <strong>Population and Resource markers stay exactly where they are.</strong></li>
     <li>The game ends after round 10, or immediately at the end of the round in which any player's Population hits the final space.</li>
   </ol>
 
@@ -396,7 +396,7 @@ footer.sitefoot strong{color:var(--ink)}
       <tbody>
         <tr><td>Population</td><td>1 point per ring your marker reached or passed</td></tr>
         <tr class="hl"><td>Least-produced resource</td><td>Points equal to your <strong>lowest</strong> of Food / Ceramics / Gears</td></tr>
-        <tr><td>Monuments</td><td>As printed on each Monument card</td></tr>
+        <tr><td>Monuments</td><td>1 point per Ring shown on your Monument Cards</td></tr>
         <tr><td>Natural Resources</td><td>1 point per <strong>visible</strong> Natural Resource adjacent to a piece you placed</td></tr>
         <tr><td>City Districts</td><td>Each Building Tile with no side touching open green space</td></tr>
         <tr><td>Loans</td><td><strong>−2</strong> per unpaid Loan</td></tr>
@@ -429,7 +429,7 @@ var FAQ_DATA = [
    {q:"How many Monument Cards are revealed at setup?", r:"3 face up, for a standard game.", a:"<p>Solo Play only reveals 2 Monument Cards instead of 3 — everything else about setup for a 2-player game applies to solo, with that one exception.</p>"}
  ]},
  {c:"Turn & gold economy", items:[
-   {q:"How much Gold does everyone get at the start of a round?", r:"7 Gold, or up to 9 if they've taken out a Loan.", a:"<p>Every round resets each player's Gold to 0 at the reset step, then effectively refills to the 7 (or 9) they get to spend as the round begins.</p>"},
+   {q:"How much Gold does everyone get at the start of a round?", r:"7 Gold, or up to 9 if they've taken out a Loan.", a:"<p>Worth knowing how the board actually works: your Gold Marker is a <em>spending</em> tracker, not a pile of coins. It starts each round at 0 and advances as you buy things, and your round ends when it reaches 7 (or 9 with a Loan). That's why the reset step returns every Gold Marker to 0.</p>"},
    {q:"Do I have to spend all my Gold in a single turn?", r:"No — you spend only what your one required action costs, then it's the next player's turn.", a:"<p>Play continues around the table, each player taking one action per turn, until everyone has spent all their Gold for the round.</p>"},
    {q:"What happens once I've spent all my Gold?", r:"You're automatically out of the round and stop taking turns until it resets.", a:"<p>Other players keep taking turns without you until they, too, run out — the round only ends once <em>everyone</em> is out of Gold.</p>"},
    {q:"If I run out of Gold early, does the round end right then for everyone?", r:"No — the round only ends once every player has spent all their Gold.", a:"<p>Being 'out' just means you personally stop taking actions; the table keeps going.</p>"},
@@ -454,11 +454,12 @@ var FAQ_DATA = [
  ]},
  {c:"Loans", items:[
    {q:"How much extra Gold does taking a Loan give me?", r:"2 extra Gold for that round — up to 9 total instead of 7.", a:"<p>This lets you take more or bigger actions in a single round than your base 7 Gold would allow.</p>"},
-   {q:"How much does it cost to repay a Loan?", r:"3 Gold, paid on a later turn.", a:"<p>You're paying back more than you borrowed — 3 back for 2 borrowed. It's a real cost, not a wash.</p>"},
+   {q:"How much does it cost to repay a Loan, and when?", r:"3 Gold, and only in a LATER round — not the round you took it out.", a:"<p>The rulebook is specific: 'A loan can be paid off in a later round at a cost of 3 Gold.' You're paying back more than you borrowed — 3 back for 2 borrowed — and you can't take one and clear it in the same round.</p>"},
+   {q:"When during a round can I take out a Loan?", r:"On any turn before you have spent all of your Gold.", a:"<p>So you can't wait until you're tapped out and then borrow your way into one more purchase. Decide while you still have Gold on the track.</p>"},
    {q:"Is repaying a Loan a free action, or does it use my turn?", r:"It's free, but if you still have Gold left afterward you must also make your turn's required purchase.", a:"<p>The only way repaying a Loan <em>is</em> your whole turn is if it uses up every last bit of Gold you had.</p>"},
    {q:"What happens if I never pay off a Loan?", r:"−2 Victory Points at final scoring, per unpaid Loan.", a:"<p>The classic delayed, easy-to-forget penalty — it doesn't hurt until the very last tally, so remind your table before scoring, not after.</p>"},
-   {q:"Can I take out more than one Loan over the course of the game?", r:"The rulebook doesn't cap it — each Loan is tracked by its own face-down tile.", a:"<p>Nothing in the printed rules explicitly forbids stacking multiple Loans across different rounds; treat each one independently unless your specific printing says otherwise.</p>"},
-   {q:"Do I have to repay an existing Loan before taking out a new one?", r:"Not stated as a restriction in the rulebook we sourced.", a:"<p><em>Flagged as uncertain.</em> This isn't explicitly addressed either way in the rules text we verified. If it matters to your group, agree on a house ruling before it comes up, and check your printing's FAQ if one exists.</p>"}
+   {q:"Can I hold more than one Loan at a time?", r:"In practice no — one Loan per player.", a:"<p>The rulebook doesn't say it in a single sentence, but two things settle it: the box contains exactly <strong>5 Loan Tiles for 5 players</strong>, one each, and a Loan raises your round's ceiling to 9 Gold rather than 7 — not to 11. A second simultaneous Loan would give you nothing and there'd be no tile to mark it with.</p>"},
+   {q:"How is a Loan physically tracked?", r:"You take a Loan Tile face down when you borrow, and return it face up to the pile when you repay.", a:"<p>Which makes unpaid Loans easy to spot at scoring time — anyone still holding a face-down tile takes the penalty.</p>"}
  ]},
  {c:"Turn order", items:[
    {q:"How is turn order decided at the very start of the game?", r:"Randomly — draw Player Markers and line up in that order.", a:"<p>The rulebook suggests putting less-experienced players toward the front for a first game, but the draw itself is random.</p>"},
@@ -481,7 +482,8 @@ var FAQ_DATA = [
    {q:"If someone hits max Population mid-round, does the game stop right then?", r:"No — the current round finishes first, then the game ends.", a:"<p>Every player still gets to finish out their turns for that round before scoring begins.</p>"},
    {q:"Do we need to manually track rounds to know when we've hit 10?", r:"Not really — the game naturally runs out of Building Tiles to reveal at that point.", a:"<p>The board itself signals the end; you don't need a separate round counter unless you want one for pacing.</p>"},
    {q:"What's the very first thing we do at final scoring?", r:"Flip the Main Board to its reverse (scoring) side and tally each of the five categories per player.", a:"<p>Population, least-produced Resource, Monuments, Natural Resources and City Districts — add them all up per player, then subtract 2 per unpaid Loan.</p>"},
-   {q:"Are Public Objective Cards part of a standard game?", r:"No — they're an Advanced Play option layered on top of the base rules.", a:"<p>If you want them, shuffle the 15-card deck, reveal the top 3 at setup, and score them at game end alongside the normal five categories. Skip this entirely for a standard game.</p>"},
+   {q:"Are Public Objective Cards part of a standard game?", r:"No — they're an Advanced Play option layered on top of the base rules.", a:"<p>If you want them, shuffle the 15-card deck, reveal the top 3 alongside the Main Board at setup, and return the rest to the box. Skip this entirely for a standard game.</p>"},
+   {q:"How do Public Objective Cards score?", r:"They're competitive — points go to whoever best fulfils each objective, not to everyone who meets a condition.", a:"<p>Each card shows the Victory Points for 1st and 2nd place. If two or more players tie for 1st, add the 1st- and 2nd-place points together and split them evenly, rounded up. If two or more tie for 2nd, each of them gets 1 Victory Point.</p>"},
    {q:"Does the Automaton / Solo Play material apply to our 5-player game?", r:"No — that's exclusively for solo play.", a:"<p>Ignore all Automaton cards, easy/hard mode scoring, and solo-specific setup differences in any multiplayer game.</p>"}
  ]}
 ];

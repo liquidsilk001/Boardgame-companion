@@ -87,12 +87,18 @@ the choice is remembered per device.
 
 ## Sources
 
-- **Forest Shuffle** — Lookout Games English rulebook and publisher FAQ.
-- **World Wonders** — Arcane Wonders English rulebook.
+Every ruling on these pages has been checked line by line against the publisher's own
+rulebook:
+
+- **Forest Shuffle** — Lookout Games English rulebook (rev. 260209) and the publisher FAQ
+  on lookout-spiele.de.
+- **World Wonders** — Arcane Wonders English rulebook (rev. 1).
 - **Heat: Pedal to the Metal** — Days of Wonder base Rules booklet, plus the Advanced Play
-  and Championship System booklet.
+  and Championship System booklet (Advanced Rules v1.1).
 - **Nemesis: Lockdown** — Awaken Realms English rulebook and the official Lockdown FAQ
   (25 March 2022).
 
 Anything that could not be confirmed from an official source is flagged in place on the page
-rather than stated as fact.
+rather than stated as fact. There are currently two such flags, both on the Forest Shuffle
+page and both about tree Saplings — the rulebook never states whether playing one costs
+cards or whether it triggers the usual "flip a card into the Clearing" rule.

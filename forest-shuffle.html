@@ -190,7 +190,8 @@ footer.sitefoot strong{color:var(--ink)}
   </div>
 
   <h3>Part 1 — the one-time prep</h3>
-  <p>There is no folder full of bagging work here. Forest Shuffle has no map sides, no factions, no per-player decks — just one shuffled 180-card deck and five identical Cave cards.</p>
+  <p>There is no folder full of bagging work here. Forest Shuffle has no map sides, no factions, no per-player decks — just one shuffled deck and five identical Cave cards.</p>
+  <p style="color:var(--ink-2);font-size:15.5px">The box says 180 cards, but that total includes the 3 Winter cards, the 5 Caves and the 14 reference cards. The deck you actually shuffle is <strong>158 cards</strong>: 66 trees, 48 top/bottom split cards and 44 left/right split cards.</p>
 
   <ul class="checklist" data-checklist="fs-prep">
     <li><button type="button"><span class="box">✓</span><span class="txt"><strong>Winter cards clipped at teardown.</strong> Three cards, one paperclip, sitting on top of the insert.</span></button></li>
@@ -210,7 +211,7 @@ footer.sitefoot strong{color:var(--ink)}
   <div class="lane">
     <div class="lane__head"><span class="lane__n">Lane 2</span><span class="lane__title">Deck build</span></div>
     <p class="lane__who">One or two other players</p>
-    <p><strong>Steps 3–6.</strong> Set aside the 3 Winter cards (already clipped, if you did Part 1). Shuffle the remaining 180 cards. Split into 3 roughly even piles. Shuffle 2 Winter cards into one pile and cap that pile with the 3rd. Stack all three piles together and place the deck beside the Clearing.</p>
+    <p><strong>Steps 3–6.</strong> Set aside the 3 Winter cards (already clipped, if you did Part 1). Shuffle the remaining 158 cards, then return cards to the box unseen for your player count — <strong>none at 5 players</strong>, see the table below. Split what's left into 3 roughly even piles. Shuffle 2 Winter cards into one pile and cap that pile with the 3rd. Stack the other two piles on top of it and place the deck beside the Clearing.</p>
   </div>
 
   <div class="callout">
@@ -344,12 +345,13 @@ footer.sitefoot strong{color:var(--ink)}
     <div class="gameover" id="winterOver">❄ Third Winter card revealed — the game has ended. No one finishes their turn.</div>
   </div>
 
-  <h3>The turn, in four lines</h3>
+  <h3>The turn, in five lines</h3>
   <ol class="steps">
     <li>Choose ONE: draw 2 cards (deck and/or Clearing) — <strong>or</strong> — play 1 card (pay from hand → place in forest → effect → bonus).</li>
+    <li><strong>Hand limit is 10.</strong> At 9 cards you may draw only 1; at 10 you cannot take the draw action at all.</li>
     <li>Played a tree? Flip the top deck card face-up into the Clearing.</li>
-    <li>Clearing at 10+ cards? Empty it into the box.</li>
-    <li>Pass clockwise. The game ends the instant the 3rd Winter card is revealed.</li>
+    <li>Clearing at 10+ cards at the end of your turn? Empty it into the box.</li>
+    <li>Pass clockwise — unless an effect or bonus gives you another full turn. The game ends the instant the 3rd Winter card is revealed.</li>
   </ol>
 
   <h3>The handful that break games</h3>
@@ -361,6 +363,7 @@ footer.sitefoot strong{color:var(--ink)}
       <li><strong>Playing a tree always flips a card into the Clearing</strong> — every single time, no exceptions.</li>
       <li><strong>The Clearing empties completely once it hits 10+ cards</strong> at the end of a turn. Those cards are gone for the game.</li>
       <li><strong>Hidden halves of split cards never count for anything</strong> — not for scoring, not for effects, ever.</li>
+      <li><strong>There is a 10-card hand limit.</strong> Most groups miss this entirely. With 9 cards you draw only 1; with 10 you can't take the draw action.</li>
     </ol>
   </div>
 
@@ -404,7 +407,10 @@ var FAQ_DATA = [
    {q:"When I play a split card, does the hidden half do anything at all?", r:"No — only the visible half you place counts, permanently.", a:"<p>The unused half slides underneath the tree and is irrelevant for the rest of the game, including scoring and effects.</p>"},
    {q:"Can I play a card face-down as a generic tree (a Sapling)?", r:"Yes — any card in your hand can be played face down as a Sapling instead of its printed identity.", a:"<p>A Sapling gives you the same four card slots a tree does, but it never counts as one of the 8 named tree species for cards that check tree type.</p>"},
    {q:"Do Saplings score any points?", r:"No — they only provide placement slots, worth zero points themselves.", a:"<p>Cards that score 'per tree' generally do still count Saplings as trees for counting purposes (e.g. the Woodpecker), but the Sapling itself never scores.</p>"},
-   {q:"Once a card is played face-down as a Sapling, can it be revealed later?", r:"No — it stays a Sapling for the rest of the game.", a:"<p>There's no mechanism to flip a Sapling back over. The choice is permanent the moment you play it face down.</p>"}
+   {q:"Once a card is played face-down as a Sapling, can it be revealed later?", r:"No — it stays a Sapling for the rest of the game.", a:"<p>There's no mechanism to flip a Sapling back over. The choice is permanent the moment you play it face down.</p>"},
+   {q:"Is there a hand limit?", r:"Yes — 10 cards. With 9 in hand you may draw only 1; with 10 you cannot take the draw action at all.", a:"<p>This is printed in the rulebook and missed by almost every group. It also caps card-drawing effects: if a card would draw you past 10, you simply stop at 10.</p>"},
+   {q:"Does playing a card face-down as a Sapling cost anything?", r:"No — playing a Sapling is free.", a:"<p>The card's printed cost is irrelevant, since you're playing it face down as a generic tree rather than as itself. <em>Note:</em> the rulebook states this only by implication — it says you may play any card face down 'instead of playing a tree' and never assigns a cost. If your group wants it in writing, it isn't.</p>"},
+   {q:"Does playing a Sapling flip a card into the Clearing, like a tree does?", r:"Treat it as a tree and flip a card — but the rulebook does not spell this out.", a:"<p>The rulebook's flip rule says 'whenever you play a tree', and a Sapling provides tree slots and counts as a tree for cards that count trees. Board Game Arena's implementation treats Saplings as trees here. <em>Flagged as not explicitly stated</em> — agree on it before it comes up.</p>"}
  ]},
  {c:"Trees & slots", items:[
    {q:"How many card slots does a tree have?", r:"Always exactly four — top, bottom, left and right.", a:"<p>This is the same for every tree species and for Saplings alike.</p>"},
@@ -412,7 +418,9 @@ var FAQ_DATA = [
    {q:"Does a split card need to match its tree's species to be played there?", r:"No — any open slot on any of your trees works, unless the card's own text says otherwise.", a:"<p>Some cards do have their own placement requirements printed on them (for example, needing to be on a specific tree type for a bonus) — read those individually as they come up.</p>"},
    {q:"Can two players share a tree, or place cards on someone else's forest?", r:"No — every player builds a completely separate forest.", a:"<p>There is no shared tableau. Trees, slots and Caves all belong to one player only.</p>"},
    {q:"Do split cards physically need to slide under the tree card?", r:"Yes — that's how the game shows which half is hidden.", a:"<p>The unused half of the split card tucks underneath the tree it's attached to, leaving only the played half visible.</p>"},
-   {q:"Can I move a card to a different slot after I've placed it?", r:"No — once placed, a card stays exactly where it is for the rest of the game.", a:"<p>There's no rearranging your forest. Plan the slot before you commit the card.</p>"}
+   {q:"Can I move a card to a different slot after I've placed it?", r:"No — once placed, a card stays exactly where it is for the rest of the game.", a:"<p>There's no rearranging your forest. Plan the slot before you commit the card.</p>"},
+   {q:"Can two cards ever share the same slot?", r:"Only one card per slot — unless that card's own text says otherwise.", a:"<p>Two base-game species break the rule and both say so on the card. <strong>European Hares</strong> may share a slot with any number of other European Hares. <strong>Common Toads</strong> may share a slot with at most one other Common Toad — and each Toad only scores if it is sharing with another Toad.</p>"},
+   {q:"Do Saplings count as trees for cards that count trees or tree species?", r:"They count for 'how many trees', but never for 'how many tree species'.", a:"<p>The Great Spotted Woodpecker and Moss both explicitly include Saplings when counting trees. The Oak, which needs all 8 different tree species in your forest, explicitly does not — a Sapling is not a species.</p>"}
  ]},
  {c:"Effects & bonuses", items:[
    {q:"What's the actual difference between a card's effect and its bonus?", r:"An effect triggers just from playing the card; a bonus only triggers if you paid with matching-colour cards.", a:"<p>When a card has both, you always resolve the effect first, then the bonus.</p>"},
@@ -444,7 +452,8 @@ var FAQ_DATA = [
    {q:"What's the Cave card actually for?", r:"It's a place certain cards let you tuck hand cards under, worth 1 point each at game's end.", a:"<p>You can't put cards there voluntarily — only specific card effects (Brown Bear, Raccoon) let you place cards into your Cave.</p>"},
    {q:"Can I put any card I want face down into my Cave?", r:"No — only through the specific effects that explicitly say so.", a:"<p>Outside of Bear and Raccoon-style effects, the Cave sits empty and does nothing.</p>"},
    {q:"What happens if two or more players tie for the most points?", r:"It's a shared victory — no tiebreaker is applied.", a:"<p>The rulebook explicitly calls this out: enjoy the shared win rather than looking for a deciding factor.</p>"},
-   {q:"If I only have one card from a 'set' species, do I still score anything?", r:"Usually not — most set-scoring species score 0 for a single card and only pay off from 2 or more.", a:"<p>Check the specific card's printed scale — sets like butterflies and Fire Salamanders list their exact point value per count (e.g. 1/2/3 salamanders = 5/15/25 points), and a lone card is often worth nothing on its own.</p>"}
+   {q:"If I only have one card from a 'set' species, do I still score anything?", r:"It depends on the species — some pay from the first card, others score zero until you have two.", a:"<p>Always read the card's own printed scale. Examples from the rulebook: <strong>Fire Salamanders</strong> score 5/15/25 for 1/2/3, so one is already worth 5. <strong>Butterflies</strong> score 0/3/6/12/20 for 1/2/3/4/5 <em>different</em> species, so a lone butterfly is worth nothing. <strong>Fireflies</strong> score 0/10/15/20 for 1/2/3/4 — again nothing for one. <strong>Horse Chestnuts</strong> score 1/4/9/16/25/36/49 for 1 through 7+.</p>"},
+   {q:"Can a single card be part of two different butterfly sets?", r:"No — you can have several sets, but each card counts toward only one of them.", a:"<p>Printed on the butterfly cards themselves. Butterfly sets also count <em>different</em> species, not duplicates.</p>"}
  ]}
 ];
 </script>
