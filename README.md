@@ -18,6 +18,8 @@ Unofficial and player-made throughout. Each game's official rulebook wins any di
 | Magical Athlete | CMYK Games | 2–6 |
 | Faraway | Catch Up Games | 2–6 |
 | Sub Terra II: Inferno's Edge | Inside the Box (ITB) | 1–6 |
+| Long Shot: The Dice Game | Perplext | 1–8 |
+| King of Tokyo: Monster Box | IELLO | 2–6 |
 
 ## Files
 
@@ -36,6 +38,8 @@ your-repo/
 ├── magical-athlete.html
 ├── faraway.html
 ├── sub-terra-2.html
+├── long-shot.html
+├── king-of-tokyo.html
 └── README.md
 ```
 
@@ -73,8 +77,8 @@ and tap `index.html` — the links between pages work identically.
 - **Quick ref** — turn order, the handful of rules that break games, plus a per-game tool:
   a Winter tracker for Forest Shuffle, a Loan ledger for World Wonders, a corner-check
   calculator for Heat, an Event Phase caller for Nemesis: Lockdown, a bid-ceiling counter for Skull,
-  a race tracker for Magical Athlete, a round counter for Faraway, and a keys/artifact tracker for
-  Sub Terra II.
+  a race tracker for Magical Athlete, a round counter for Faraway, a keys/artifact tracker for
+  Sub Terra II, a finish-line counter for Long Shot, and a three-roll counter for King of Tokyo.
 
 ## Editing content later
 
@@ -113,6 +117,11 @@ rulebook:
 - **Sub Terra II: Inferno's Edge** — Inside the Box (ITB) English rulebook and scenario sheets, plus the
   Typhaon Wakes expansion rules. Scenario-specific values (starting health, volcano-track length,
   guardian and key counts) are deliberately left to the rulebook rather than fixed on the page.
+- **Long Shot: The Dice Game** — Perplext English rulebook (designer Chris Handy). Horse special powers and
+  payout odds depend on which horse-card sets are in play, so they're described in general rather than listed.
+- **King of Tokyo: Monster Box** — IELLO English rulebooks for the base game (2nd edition), the Power Up!
+  expansion (Evolution cards) and the Halloween collector pack (Costume cards). Individual monster, Evolution
+  and Costume card wording takes precedence over the summaries on the page.
 
 Anything that could not be confirmed from an official source is flagged in place on the page
 rather than stated as fact. There are currently two such flags, both on the Forest Shuffle
